@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "twoSum", "leetcode.vcxproj", "{63886823-14A6-4209-974B-5BC59D14BE71}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Median of Two Sorted Arrays", "..\Median of Two Sorted Arrays\Median of Two Sorted Arrays.vcxproj", "{3F3FB1D5-7FDD-4BB1-A413-828B7C002CC9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63886823-14A6-4209-974B-5BC59D14BE71}.Debug|Win32.ActiveCfg = Debug|Win32
+		{63886823-14A6-4209-974B-5BC59D14BE71}.Debug|Win32.Build.0 = Debug|Win32
+		{63886823-14A6-4209-974B-5BC59D14BE71}.Release|Win32.ActiveCfg = Release|Win32
+		{63886823-14A6-4209-974B-5BC59D14BE71}.Release|Win32.Build.0 = Release|Win32
+		{3F3FB1D5-7FDD-4BB1-A413-828B7C002CC9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3F3FB1D5-7FDD-4BB1-A413-828B7C002CC9}.Debug|Win32.Build.0 = Debug|Win32
+		{3F3FB1D5-7FDD-4BB1-A413-828B7C002CC9}.Release|Win32.ActiveCfg = Release|Win32
+		{3F3FB1D5-7FDD-4BB1-A413-828B7C002CC9}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
