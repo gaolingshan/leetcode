@@ -5,6 +5,7 @@ using namespace std;
 
 class Solution {
 public:
+<<<<<<< HEAD
 	//int findkth(int A[], int Alen, int B[], int Blen, int k)
 	//{
 	//	if(Alen==0) return B[k-1];
@@ -56,18 +57,28 @@ public:
 		if(Alen==0) return B[Bstart+k-1];
 		if(Blen==0) return A[Astart+k-1];
 		if(k==1) return A[Astart]<B[Bstart]?A[Astart]:B[Bstart];
+=======
+	int BinarySearch(int A[], int start, int from, int data)
+	{
+		int i=start, j=from;
+		while(i<j)
+		{
+			int mid = (i + j) / 2;
+			if(data <= A[mid]) j=mid-1;
+			if(data > A[mid]) i=mid+1;
+		}
+		return i;
+>>>>>>> parent of eeb1a16... 2/151
 	}
 
 	double findMedianSortedArrays(int A[], int m, int B[], int n) {
-		if((m+n)%2 == 0)
-			return ((double)findkth(A,m,B,n,(m+n)/2) + (double)findkth(A,m,B,n,(m+n)/2+1))/2;
-		else
-			return findkth(A,m,B,n,(m+n)/2+1);
+		
 	}
 };
 
 int main()
 {
+<<<<<<< HEAD
 	Solution *s = new Solution();
 	int A[] = {4,5,6,7};
 	int B[] = {1,2,10};
@@ -75,5 +86,7 @@ int main()
 	//cout << s->findMedianSortedArrays(A,4,B,3) << endl;
 	//cout << (int)((double)2*1/3-1) << endl;
 	system("pause");
+=======
+>>>>>>> parent of eeb1a16... 2/151
 	return 0;
 }
