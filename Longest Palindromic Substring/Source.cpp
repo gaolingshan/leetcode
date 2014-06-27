@@ -38,7 +38,7 @@ public:
 					}
 				}
 			}
-		return s.substr(ansi,ansj);
+			return s.substr(ansi,ansj);
 	}
 };
 

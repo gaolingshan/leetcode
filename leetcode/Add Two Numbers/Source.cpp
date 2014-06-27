@@ -27,7 +27,7 @@ public:
 		ListNode *last = new ListNode(0);
 		ListNode *res = last;
 		int plus = 0;
-		
+
 		while(l1 != NULL || l2 != NULL)
 		{
 			int a=(l1!=NULL)?l1->val:0;
