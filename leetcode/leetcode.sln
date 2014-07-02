@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Longest Palindromic Substri
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZigZag Conversion", "..\ZigZag Conversion\ZigZag Conversion.vcxproj", "{C47C8497-DB57-4606-9214-AEED014EC8E3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Reverse Integer", "..\Reverse Integer\Reverse Integer.vcxproj", "{9ED4C6C2-6385-46DE-B4BB-1E2E4F9B0783}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -43,6 +45,10 @@ Global
 		{C47C8497-DB57-4606-9214-AEED014EC8E3}.Debug|Win32.Build.0 = Debug|Win32
 		{C47C8497-DB57-4606-9214-AEED014EC8E3}.Release|Win32.ActiveCfg = Release|Win32
 		{C47C8497-DB57-4606-9214-AEED014EC8E3}.Release|Win32.Build.0 = Release|Win32
+		{9ED4C6C2-6385-46DE-B4BB-1E2E4F9B0783}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9ED4C6C2-6385-46DE-B4BB-1E2E4F9B0783}.Debug|Win32.Build.0 = Debug|Win32
+		{9ED4C6C2-6385-46DE-B4BB-1E2E4F9B0783}.Release|Win32.ActiveCfg = Release|Win32
+		{9ED4C6C2-6385-46DE-B4BB-1E2E4F9B0783}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
