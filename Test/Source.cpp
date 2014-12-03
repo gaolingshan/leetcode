@@ -11,11 +11,23 @@ using namespace std;
 template <class T>
 int sum(T a, T b) {return a+b;}
 
+struct cmp{
+	bool operator ()(const int &a, const int &b)
+	{
+		return a<b;
+	}
+}cmp_obj;	
+
 int main()
 {
+
 	const int* foo;
 	int a = 1;
 	const int b = 3;
+
+	cmp cmp_obj2;
+	bool tmp = cmp_obj2.operator()(a,b);
+
 	int *const bar = &a;
 	foo = &b;
 
