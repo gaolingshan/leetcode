@@ -51,6 +51,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Implement strStr()", "..\Im
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Divide Two Integers", "..\Divide Two Integers\Divide Two Integers.vcxproj", "{21A4B0D3-875C-4BAB-9BB6-F0A6E0C2D137}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Substring with Concatenation of All Words", "..\Substring with Concatenation of All Words\Substring with Concatenation of All Words.vcxproj", "{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -311,6 +313,16 @@ Global
 		{21A4B0D3-875C-4BAB-9BB6-F0A6E0C2D137}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{21A4B0D3-875C-4BAB-9BB6-F0A6E0C2D137}.Release|Win32.ActiveCfg = Release|Win32
 		{21A4B0D3-875C-4BAB-9BB6-F0A6E0C2D137}.Release|Win32.Build.0 = Release|Win32
+		{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}.Debug|Win32.Build.0 = Debug|Win32
+		{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}.Release|Any CPU.ActiveCfg = Release|Win32
+		{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}.Release|Win32.ActiveCfg = Release|Win32
+		{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
