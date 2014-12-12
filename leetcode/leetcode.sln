@@ -53,6 +53,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Divide Two Integers", "..\D
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Substring with Concatenation of All Words", "..\Substring with Concatenation of All Words\Substring with Concatenation of All Words.vcxproj", "{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Next Permutation", "..\Next Permutation\Next Permutation.vcxproj", "{AF7C9600-321F-42F8-9FCF-6B73020F2830}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Longest Valid Parentheses", "..\Longest Valid Parentheses\Longest Valid Parentheses.vcxproj", "{8C022A42-E6E3-4236-99E9-49D0E7292356}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -323,6 +327,26 @@ Global
 		{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}.Release|Win32.ActiveCfg = Release|Win32
 		{E77DB9CD-2BDF-4268-9B8E-CEDAFD56CACB}.Release|Win32.Build.0 = Release|Win32
+		{AF7C9600-321F-42F8-9FCF-6B73020F2830}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{AF7C9600-321F-42F8-9FCF-6B73020F2830}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{AF7C9600-321F-42F8-9FCF-6B73020F2830}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{AF7C9600-321F-42F8-9FCF-6B73020F2830}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AF7C9600-321F-42F8-9FCF-6B73020F2830}.Debug|Win32.Build.0 = Debug|Win32
+		{AF7C9600-321F-42F8-9FCF-6B73020F2830}.Release|Any CPU.ActiveCfg = Release|Win32
+		{AF7C9600-321F-42F8-9FCF-6B73020F2830}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{AF7C9600-321F-42F8-9FCF-6B73020F2830}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{AF7C9600-321F-42F8-9FCF-6B73020F2830}.Release|Win32.ActiveCfg = Release|Win32
+		{AF7C9600-321F-42F8-9FCF-6B73020F2830}.Release|Win32.Build.0 = Release|Win32
+		{8C022A42-E6E3-4236-99E9-49D0E7292356}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{8C022A42-E6E3-4236-99E9-49D0E7292356}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{8C022A42-E6E3-4236-99E9-49D0E7292356}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{8C022A42-E6E3-4236-99E9-49D0E7292356}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8C022A42-E6E3-4236-99E9-49D0E7292356}.Debug|Win32.Build.0 = Debug|Win32
+		{8C022A42-E6E3-4236-99E9-49D0E7292356}.Release|Any CPU.ActiveCfg = Release|Win32
+		{8C022A42-E6E3-4236-99E9-49D0E7292356}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{8C022A42-E6E3-4236-99E9-49D0E7292356}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{8C022A42-E6E3-4236-99E9-49D0E7292356}.Release|Win32.ActiveCfg = Release|Win32
+		{8C022A42-E6E3-4236-99E9-49D0E7292356}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
