@@ -63,6 +63,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Search in Rotated Sorted Ar
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Search in Rotated Sorted Array II", "..\Search in Rotated Sorted Array II\Search in Rotated Sorted Array II.vcxproj", "{406B1AE7-0615-424C-A70E-9066C5217C4C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Search Insert Position", "..\Search Insert Position\Search Insert Position.vcxproj", "{05333B9A-663D-4804-A58A-DCDF8438E443}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -383,6 +385,16 @@ Global
 		{406B1AE7-0615-424C-A70E-9066C5217C4C}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{406B1AE7-0615-424C-A70E-9066C5217C4C}.Release|Win32.ActiveCfg = Release|Win32
 		{406B1AE7-0615-424C-A70E-9066C5217C4C}.Release|Win32.Build.0 = Release|Win32
+		{05333B9A-663D-4804-A58A-DCDF8438E443}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{05333B9A-663D-4804-A58A-DCDF8438E443}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{05333B9A-663D-4804-A58A-DCDF8438E443}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{05333B9A-663D-4804-A58A-DCDF8438E443}.Debug|Win32.ActiveCfg = Debug|Win32
+		{05333B9A-663D-4804-A58A-DCDF8438E443}.Debug|Win32.Build.0 = Debug|Win32
+		{05333B9A-663D-4804-A58A-DCDF8438E443}.Release|Any CPU.ActiveCfg = Release|Win32
+		{05333B9A-663D-4804-A58A-DCDF8438E443}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{05333B9A-663D-4804-A58A-DCDF8438E443}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{05333B9A-663D-4804-A58A-DCDF8438E443}.Release|Win32.ActiveCfg = Release|Win32
+		{05333B9A-663D-4804-A58A-DCDF8438E443}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
