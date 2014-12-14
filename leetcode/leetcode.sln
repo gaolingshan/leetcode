@@ -87,6 +87,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Combination Sum", "..\Combi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "First Missing Positive", "..\First Missing Positive\First Missing Positive.vcxproj", "{8F08299F-9114-492C-8CFC-A9F1F700D366}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Trapping Rain Water", "..\Trapping Rain Water\Trapping Rain Water.vcxproj", "{5376C029-38B0-4620-9D00-CE294415A6B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -527,6 +529,16 @@ Global
 		{8F08299F-9114-492C-8CFC-A9F1F700D366}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{8F08299F-9114-492C-8CFC-A9F1F700D366}.Release|Win32.ActiveCfg = Release|Win32
 		{8F08299F-9114-492C-8CFC-A9F1F700D366}.Release|Win32.Build.0 = Release|Win32
+		{5376C029-38B0-4620-9D00-CE294415A6B8}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{5376C029-38B0-4620-9D00-CE294415A6B8}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{5376C029-38B0-4620-9D00-CE294415A6B8}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{5376C029-38B0-4620-9D00-CE294415A6B8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5376C029-38B0-4620-9D00-CE294415A6B8}.Debug|Win32.Build.0 = Debug|Win32
+		{5376C029-38B0-4620-9D00-CE294415A6B8}.Release|Any CPU.ActiveCfg = Release|Win32
+		{5376C029-38B0-4620-9D00-CE294415A6B8}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{5376C029-38B0-4620-9D00-CE294415A6B8}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{5376C029-38B0-4620-9D00-CE294415A6B8}.Release|Win32.ActiveCfg = Release|Win32
+		{5376C029-38B0-4620-9D00-CE294415A6B8}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
