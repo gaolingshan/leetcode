@@ -109,6 +109,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "N-Queens", "..\N-Queens\N-Q
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "N-Queens II", "..\N-Queens II\N-Queens II.vcxproj", "{21ABDD7E-027F-4D25-98E4-5C43D81D4B49}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pow(x, n)", "..\Pow(x, n)\Pow(x, n).vcxproj", "{15121A9B-D7C0-4946-8AD0-68C2372CDF97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -659,6 +661,16 @@ Global
 		{21ABDD7E-027F-4D25-98E4-5C43D81D4B49}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{21ABDD7E-027F-4D25-98E4-5C43D81D4B49}.Release|Win32.ActiveCfg = Release|Win32
 		{21ABDD7E-027F-4D25-98E4-5C43D81D4B49}.Release|Win32.Build.0 = Release|Win32
+		{15121A9B-D7C0-4946-8AD0-68C2372CDF97}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{15121A9B-D7C0-4946-8AD0-68C2372CDF97}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{15121A9B-D7C0-4946-8AD0-68C2372CDF97}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{15121A9B-D7C0-4946-8AD0-68C2372CDF97}.Debug|Win32.ActiveCfg = Debug|Win32
+		{15121A9B-D7C0-4946-8AD0-68C2372CDF97}.Debug|Win32.Build.0 = Debug|Win32
+		{15121A9B-D7C0-4946-8AD0-68C2372CDF97}.Release|Any CPU.ActiveCfg = Release|Win32
+		{15121A9B-D7C0-4946-8AD0-68C2372CDF97}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{15121A9B-D7C0-4946-8AD0-68C2372CDF97}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{15121A9B-D7C0-4946-8AD0-68C2372CDF97}.Release|Win32.ActiveCfg = Release|Win32
+		{15121A9B-D7C0-4946-8AD0-68C2372CDF97}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
