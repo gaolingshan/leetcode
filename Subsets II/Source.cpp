@@ -1,6 +1,6 @@
-// Subsets
+// Subsets II
 //   Author: flashhack
-//   Update: 2014-12-21
+//   Update: 2014-12-23
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,8 +16,8 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<int> > subsets(vector<int> &S) {
-		vector<vector<int> > res;
+    vector<vector<int> > subsetsWithDup(vector<int> &S) {
+  		vector<vector<int> > res;
 		int len=S.size();
 		if(len==0) 
 		{
@@ -42,7 +42,7 @@ public:
 		auto it = unique(res.begin(),res.end());
 		res.resize(distance(res.begin(),it));
 
-		return res;
+		return res;      
     }
 };
 
@@ -52,13 +52,12 @@ int main()
 	int A[]={1,2,2};
 	vector<int> data(A,A+sizeof(A)/sizeof(int));
 
-	vector<vector<int> > res = s->subsets(data);
+	vector<vector<int> > res = s->subsetsWithDup(data);
 	for(auto it : res)
 	{
 		for(auto it2 : it) cout<<it2<<" ";
 		cout<<endl;
 	}
-
 
 
 	system("pause");

@@ -14,7 +14,9 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+
+//longer code 92ms
+class Solution_old {
 public:
     int largestRectangleArea(vector<int> &height) {
         vector<int> st;
@@ -46,11 +48,43 @@ public:
     }
 };
 
+
+//refracting code. code shorter but got 104ms..
+class Solution {
+public:
+    int largestRectangleArea(vector<int> &height) {
+        vector<int> st;
+		int res=0;
+		height.push_back(0);
+		int top=0,h=0;
+		for(int i=0;i<height.size();i++)
+		{
+			if(st.empty() || height[i] >= height[st.back()])
+			{
+				st.push_back(i);
+			}
+			else
+			{
+				top=st.back();
+				while(!st.empty() && height[st.back()] > height[i])
+				{
+					//trick here. real horizontal distance is after pop+1~top, height is still before pop, so record h 
+					h = height[st.back()];
+					st.pop_back();
+					res = max(res, h*(st.empty()?top + 1:top - st.back()));
+				}
+				st.push_back(i);
+			}
+		}
+		return res;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
-	int A[] = {2,1,5,6,2,3};
-	//int A[] = {2,1,2};
+	//int A[] = {2,1,5,6,2,3};
+	int A[] = {2,1,2};
 	vector<int> data(A,A+sizeof(A)/sizeof(int));
 
 	cout<<s->largestRectangleArea(data)<<endl;
