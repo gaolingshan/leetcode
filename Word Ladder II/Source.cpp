@@ -139,17 +139,14 @@ public:
 		visited_now.insert(word_now);
 		if(len==len_target*len_word)
 		{
-			if(word_now==target)
+			vector<string> v;
+			int i=0;
+			while(i<len)
 			{
-				vector<string> v;
-				int i=0;
-				while(i<len)
-				{
-					v.push_back(now.substr(i,len_word));
-					i+=len_word;
-				}
-				res.push_back(v);
+				v.push_back(now.substr(i,len_word));
+				i+=len_word;
 			}
+			res.push_back(v);
 			return;
 		}
 		string tmp=word_now;
