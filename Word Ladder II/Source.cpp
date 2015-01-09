@@ -31,27 +31,37 @@ public:
 
 	void backfill(vector<vector<string>> &res, int head1, int head2)
 	{
-		vector<string> v;
-		int p=head1;
-		while(p!=-1) 
+		vector<string> v,now;
+		vector<vector<string>> positive,negative;
+		backfill_dfs(positive,now,q1,prev1,head1);
+		backfill_dfs(negative,now,q2,prev2,head2);
+		for(auto it1:positive)
+			for(auto it2:negative)
+			{
+				v.assign(it1.begin(),it1.end());
+				reverse(v.begin(),v.end());
+				v.insert(v.end(),it2.begin(),it2.end());
+				res.push_back(v);
+			}
+	}
+
+	void backfill_dfs(vector<vector<string>> &res, vector<string> &now, vector<string> &queue, vector<vector<int>> &prev, int head)
+	{
+		if(head==-1)
 		{
-			v.push_back(q1[p]);
-			p=prev1[p];
+			res.push_back(now);
+			return;
 		}
-		reverse(v.begin(),v.end());
-		p=head2;
-		//if(v[v.size()-1]==q2[p])
-		//	p=prev2[p]; 
-		while(p!=-1)
+		now.push_back(queue[head]);
+		for(int i=0;i<prev[head].size();i++)
 		{
-			v.push_back(q2[p]);
-			p=prev2[p];
+			backfill_dfs(res,now,queue,prev,prev[head][i]);
 		}
-		res.push_back(v);
+		now.pop_back();
 	}
 
 	vector<string> q1, q2;
-	vector<int> prev1, prev2;	// for back-tracking
+	vector<vector<int> > prev1, prev2;	// for back-tracking
 	//傻叉了，这个prev不能只是简单地记录int！而是要记录一个list，因为判重的原因，有些visited了就不添加进queue，但是其实在back-track的时候是一条可能的track通道
 	//在判重的时候，实际是判断不能往前走，往后走的话，prev数组要相应增加
 	//所以有了这个双层prev数组，此时才用dfs来back-fill所有可能的解
@@ -63,10 +73,10 @@ public:
 		int len=start.length();
 		unordered_map<string,int> visited1,visited2;	//here need to record the position in the queue
 		q1.push_back(start);
-		prev1.push_back(-1);
+		prev1.push_back(vector<int>(1,-1));
 		visited1[start]=0;
 		q2.push_back(end);
-		prev2.push_back(-1);
+		prev2.push_back(vector<int>(1,-1));
 		visited2[end]=0;
 		int head1=0,tail1=0,head2=0,tail2=0,flag1=0,flag2=0;
 		bool finished=false;
@@ -80,8 +90,6 @@ public:
 				while(head1<=flag1)
 				{
 					string tmp=q1[head1];
-					if(tmp=="marry"||tmp=="merry")
-						a=1;
 					if(check(tmp,end))	
 					{
 						// got it. Stop at this level
@@ -99,19 +107,27 @@ public:
 								// back track to fill result
 								backfill(res,head1,visited2[word]);
 							}
+
 							if(visited1.find(word)==visited1.end())
 							{
 								tail1++;
 								visited1[word]=tail1;
 								q1.push_back(word);
-								prev1.push_back(head1);
+								prev1.push_back(vector<int>(1,head1));
+							}
+							// big trick here! even if it's visited, but it's new node in next level(pos > flag1), then need to add in prev 
+							else
+							{
+								//trick here, it's > flag1 in the next level, not head1
+								if(visited1[word]>flag1)
+								{
+									prev1[visited1[word]].push_back(head1);
+								}
 							}
 						}
 					}
 					head1++;
 				}
-				//big trick here!
-				//if stop and finished. q1 stops, then q2 still need expand!!! cannot just break here. but can stop growth.
 				//if not do next level, set flag
 				if(finished) break;
 				flag1=tail1;
@@ -124,8 +140,6 @@ public:
 					while(head2<=flag2)
 					{
 						string tmp=q2[head2];
-						if(tmp=="marry"||tmp=="merry")
-							a=1;
 
 						if(check(tmp,start))	
 						{
@@ -149,8 +163,15 @@ public:
 									tail2++;
 									visited2[word]=tail2;
 									q2.push_back(word);
-									prev2.push_back(head2);
+									prev2.push_back(vector<int>(1,head2));
 								}								
+								else
+								{
+									if(visited2[word]>flag2)
+									{
+										prev2[visited2[word]].push_back(head2);
+									}
+								}
 							}
 						}	
 						head2++;
@@ -162,9 +183,10 @@ public:
 					break;
 			}
 		}
-		//sort(res.begin(),res.end());
-		//auto it=unique(res.begin(),res.end());
-		//res.resize(distance(res.begin(),it));
+		sort(res.begin(),res.end());
+		auto it=unique(res.begin(),res.end());
+		res.resize(distance(res.begin(),it));
+
 		return res;
 	}
 };
@@ -182,7 +204,7 @@ int main()
 	//cout<<s->ladderLength("hit","cog",dict)<<endl;
 	//cout<<s->ladderLength("cet","ism",dict)<<endl;
 	//vector<vector<string>> res=s->findLadders("qa","sq",dict);
-	//vector<vector<string>> res=s->findLadders("hit","hit",dict);
+	//vector<vector<string>> res=s->findLadders("hit","cog",dict);
 	//vector<vector<string>> res=s->findLadders("cet","ism",dict);
 	vector<vector<string>> res=s->findLadders("magic","pearl",dict);
 	for(auto it:res)
