@@ -289,6 +289,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Reorder List", "..\Reorder 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LRU Cache", "..\LRU Cache\LRU Cache.vcxproj", "{44EC44D5-707C-46F3-B6A8-95F4F4665C14}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Insertion Sort List", "..\Insertion Sort List\Insertion Sort List.vcxproj", "{D1AA7D8D-AF89-4A61-AB9C-D6C99C2F076F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sort List", "..\Sort List\Sort List.vcxproj", "{2655AC40-6AF2-493C-A404-DD68E46C5DBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1739,6 +1743,26 @@ Global
 		{44EC44D5-707C-46F3-B6A8-95F4F4665C14}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{44EC44D5-707C-46F3-B6A8-95F4F4665C14}.Release|Win32.ActiveCfg = Release|Win32
 		{44EC44D5-707C-46F3-B6A8-95F4F4665C14}.Release|Win32.Build.0 = Release|Win32
+		{D1AA7D8D-AF89-4A61-AB9C-D6C99C2F076F}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{D1AA7D8D-AF89-4A61-AB9C-D6C99C2F076F}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{D1AA7D8D-AF89-4A61-AB9C-D6C99C2F076F}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{D1AA7D8D-AF89-4A61-AB9C-D6C99C2F076F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D1AA7D8D-AF89-4A61-AB9C-D6C99C2F076F}.Debug|Win32.Build.0 = Debug|Win32
+		{D1AA7D8D-AF89-4A61-AB9C-D6C99C2F076F}.Release|Any CPU.ActiveCfg = Release|Win32
+		{D1AA7D8D-AF89-4A61-AB9C-D6C99C2F076F}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{D1AA7D8D-AF89-4A61-AB9C-D6C99C2F076F}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{D1AA7D8D-AF89-4A61-AB9C-D6C99C2F076F}.Release|Win32.ActiveCfg = Release|Win32
+		{D1AA7D8D-AF89-4A61-AB9C-D6C99C2F076F}.Release|Win32.Build.0 = Release|Win32
+		{2655AC40-6AF2-493C-A404-DD68E46C5DBA}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{2655AC40-6AF2-493C-A404-DD68E46C5DBA}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{2655AC40-6AF2-493C-A404-DD68E46C5DBA}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{2655AC40-6AF2-493C-A404-DD68E46C5DBA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2655AC40-6AF2-493C-A404-DD68E46C5DBA}.Debug|Win32.Build.0 = Debug|Win32
+		{2655AC40-6AF2-493C-A404-DD68E46C5DBA}.Release|Any CPU.ActiveCfg = Release|Win32
+		{2655AC40-6AF2-493C-A404-DD68E46C5DBA}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{2655AC40-6AF2-493C-A404-DD68E46C5DBA}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{2655AC40-6AF2-493C-A404-DD68E46C5DBA}.Release|Win32.ActiveCfg = Release|Win32
+		{2655AC40-6AF2-493C-A404-DD68E46C5DBA}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
