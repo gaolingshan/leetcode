@@ -335,6 +335,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Valid Number", "..\Valid Nu
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dungeon Game", "..\Dungeon Game\Dungeon Game.vcxproj", "{DC2DCCAD-FFF9-473D-A6AE-9AF3F1C61C59}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Two Sum III - Data structure design", "..\Two Sum III - Data structure design\Two Sum III - Data structure design.vcxproj", "{2815EC67-8C51-49A3-B1A0-7F97B3F5D113}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Two Sum II - Input array is sorted", "..\Two Sum II - Input array is sorted\Two Sum II - Input array is sorted.vcxproj", "{93F7C359-DA54-4625-84DE-22EEC903803C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Missing Ranges", "..\Missing Ranges\Missing Ranges.vcxproj", "{3E41A8C1-27D1-467E-88E1-72B6DD112C56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2015,6 +2021,36 @@ Global
 		{DC2DCCAD-FFF9-473D-A6AE-9AF3F1C61C59}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{DC2DCCAD-FFF9-473D-A6AE-9AF3F1C61C59}.Release|Win32.ActiveCfg = Release|Win32
 		{DC2DCCAD-FFF9-473D-A6AE-9AF3F1C61C59}.Release|Win32.Build.0 = Release|Win32
+		{2815EC67-8C51-49A3-B1A0-7F97B3F5D113}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{2815EC67-8C51-49A3-B1A0-7F97B3F5D113}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{2815EC67-8C51-49A3-B1A0-7F97B3F5D113}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{2815EC67-8C51-49A3-B1A0-7F97B3F5D113}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2815EC67-8C51-49A3-B1A0-7F97B3F5D113}.Debug|Win32.Build.0 = Debug|Win32
+		{2815EC67-8C51-49A3-B1A0-7F97B3F5D113}.Release|Any CPU.ActiveCfg = Release|Win32
+		{2815EC67-8C51-49A3-B1A0-7F97B3F5D113}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{2815EC67-8C51-49A3-B1A0-7F97B3F5D113}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{2815EC67-8C51-49A3-B1A0-7F97B3F5D113}.Release|Win32.ActiveCfg = Release|Win32
+		{2815EC67-8C51-49A3-B1A0-7F97B3F5D113}.Release|Win32.Build.0 = Release|Win32
+		{93F7C359-DA54-4625-84DE-22EEC903803C}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{93F7C359-DA54-4625-84DE-22EEC903803C}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{93F7C359-DA54-4625-84DE-22EEC903803C}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{93F7C359-DA54-4625-84DE-22EEC903803C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{93F7C359-DA54-4625-84DE-22EEC903803C}.Debug|Win32.Build.0 = Debug|Win32
+		{93F7C359-DA54-4625-84DE-22EEC903803C}.Release|Any CPU.ActiveCfg = Release|Win32
+		{93F7C359-DA54-4625-84DE-22EEC903803C}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{93F7C359-DA54-4625-84DE-22EEC903803C}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{93F7C359-DA54-4625-84DE-22EEC903803C}.Release|Win32.ActiveCfg = Release|Win32
+		{93F7C359-DA54-4625-84DE-22EEC903803C}.Release|Win32.Build.0 = Release|Win32
+		{3E41A8C1-27D1-467E-88E1-72B6DD112C56}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{3E41A8C1-27D1-467E-88E1-72B6DD112C56}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{3E41A8C1-27D1-467E-88E1-72B6DD112C56}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{3E41A8C1-27D1-467E-88E1-72B6DD112C56}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3E41A8C1-27D1-467E-88E1-72B6DD112C56}.Debug|Win32.Build.0 = Debug|Win32
+		{3E41A8C1-27D1-467E-88E1-72B6DD112C56}.Release|Any CPU.ActiveCfg = Release|Win32
+		{3E41A8C1-27D1-467E-88E1-72B6DD112C56}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{3E41A8C1-27D1-467E-88E1-72B6DD112C56}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{3E41A8C1-27D1-467E-88E1-72B6DD112C56}.Release|Win32.ActiveCfg = Release|Win32
+		{3E41A8C1-27D1-467E-88E1-72B6DD112C56}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
