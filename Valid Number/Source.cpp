@@ -18,38 +18,31 @@ class Solution {
 public:
     bool isNumber(const char *s) {
         string str(s);
-		bool isInt=true;
-		bool isFloat=true;
-		try
-		{
-			int tmp=stoi(str);
-			cout<<tmp<<endl;
-			cout<<str<<endl;
-		}
-		catch(exception e)
-		{
-			isInt=false;
-		}
+		if(str.length()==0) return false;
+		while(str[0]==' ' && str.length()>0) str=str.substr(1,str.length()-1);
+		if(str.length()==0) return false;
+		while(str[str.length()-1]==' ' && str.length()>0) str=str.substr(0,str.length()-1);
+		if(str.length()==0) return false;
+		//eleminate trailing and preling zeros.
 
-		try
-		{
-			double tmp=stod(str);
-			cout<<tmp<<endl;
-			cout<<str<<endl;
-		}
-		catch(exception e)
-		{
-			isFloat=false;
-		}
-		return isInt & isFloat;
+		char* pEnd;
+		double tmp = strtod(str.c_str(),&pEnd);
+		if(pEnd!=NULL && string(pEnd)!="") return false;
+		return true;
     }
 };
 
 int main()
 {
 	Solution *s = new Solution();
-	cout<<s->isNumber("2 . 1")<<endl;;
-	//cout<<s->isNumber("2e10")<<endl;;
+	//cout<<s->isNumber("-2.e1")<<endl;
+	//cout<<s->isNumber("2e10")<<endl;
+	//cout<<s->isNumber("078332e437")<<endl;
+	//cout<<s->isNumber("06020e6073")<<endl;
+	//cout<<s->isNumber("e")<<endl;
+	//cout<<s->isNumber(" 005047e+6")<<endl;
+	//cout<<s->isNumber("92e1740e91")<<endl;
+	//cout<<s->isNumber("3")<<endl;
 
 
 	system("pause");

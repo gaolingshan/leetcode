@@ -15,9 +15,25 @@
 #include <stack>
 using namespace std;
 
-
+string data="";
+int now;
 // Forward declaration of the read4 API.
-int read4(char *buf);
+int read4(char *buf)
+{
+	if(now+3<data.length())
+	{
+		for(int i=0;i<4;i++) buf[i]=data[now+i];
+		now=now+4;
+		return 4;
+	}
+	else
+	{
+		int i=0;
+		while(now<data.length()) buf[i++]=data[now++];
+		return i;
+	}
+}
+
 class Solution {
 public:
     /**
@@ -25,27 +41,37 @@ public:
      * @param n   Maximum number of characters to read
      * @return    The number of characters read
      */
-    int read(char *buf, int n) {
+    int read(char *buf, int n) 
+	{
         int pos=0;
-		int cnt=0;
-		while(pos+4<=n)
-		{
-			cnt = read4(buf+pos);
-			pos+=cnt;
-			if(cnt<4) break;
-		}
-		if(pos==n || cnt<4) return pos;
 		char *buff=new char[10];
-		cnt=min(read4(buff),n-pos);
-		for(int i=0;i<cnt;i++)buf[pos++]=buff[i];
-		delete(buff);
-		return pos;
+		while(1)
+		{
+			int cnt = read4(buff);
+			if(cnt==0) return pos;
+			if(pos+cnt<=n)
+			{
+				for(int i=0;i<cnt;i++) buf[pos++]=buff[i];
+				continue;
+			}
+			cnt=n-pos;
+			for(int i=0;i<cnt;i++) buf[pos++]=buff[i];
+			return pos;
+		}
     }
 };
 
 int main()
 {
-	//Solution *s = new Solution();
+	Solution *s = new Solution();
+	
+	//data="a";
+	data="hGBfyEfMOCxdLIIBeHCScmXupglxlLPLWDkAxxOHPSzBzibLqypQRIiNgCzWsqATwvXYdwZnrqvsTjMnyvYmCoukwgOHHcWfAUvbRbWZnlhnmmIIulLrepgUXzaUHyAbmoBBZKIdKlTAoriOjwjUSsiJAiCwiKkodimbihRoNrGJeITllNYfmzfZljFhpBqjJeQQWJFvdkaULBNgKgVeQWXNxLROhfcTZqaqlngNYfHRjlldiHRBnMSZbiZBAzVaXOisJpItWWFiMUNndAThbfQUcLRoFPFfDwADDOKJcWTavTTOHwQNKPmjxNrpHuJyscxEsGVZYJdjlNnNJQGtrJtJYLVnzDouhhIrFRmUwNCaDQvuyTfjnlDLMvdUacWzzeeTrtNYHQqvwNwsIeNHfdlvXHziCroXHMeDZfKIoAulkYQYdwJTivzEveTNUCKnOVLiMPjecvZzvHGvfugnjIzaWXhqbMVGzvEzNkwoIPLUiwNhetnz";
+	int n=507;
+	char * res= new char[n];
+	memset(res,0,sizeof(char)*n);
+	s->read(res,507);
+	cout<<res<<endl;
 
 	system("pause");
 	return 0;
