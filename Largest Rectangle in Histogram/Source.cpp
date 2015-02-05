@@ -50,7 +50,7 @@ public:
 
 
 //refracting code. code shorter but got 104ms..
-class Solution {
+class Solution_old2 {
 public:
     int largestRectangleArea(vector<int> &height) {
         vector<int> st;
@@ -77,6 +77,37 @@ public:
 			}
 		}
 		return res;
+    }
+};
+
+
+//2nd pass: 2015-02-04
+class Solution {
+public:
+    int largestRectangleArea(vector<int> &height) {
+        vector<int> st;
+        height.push_back(0);
+        int ans=0;
+        for(int i=0;i<height.size();i++)
+        {
+            if(st.empty() || height[i]>height[st.back()])
+            {
+                st.push_back(i);
+                continue;
+            }
+			//problem here. the area is
+			int tmp;
+			while(!st.empty())
+            {
+                if(height[i]>height[st.back()])break;
+				tmp=st.back();
+				st.pop_back();
+				int start=(st.empty())?0:st.back()+1;
+                ans = max(ans, height[tmp] * (i-start));
+            }
+            st.push_back(i);
+        }
+        return ans;
     }
 };
 

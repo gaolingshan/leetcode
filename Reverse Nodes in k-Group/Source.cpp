@@ -18,7 +18,7 @@ struct ListNode {
 };
 
 
-class Solution {
+class Solution_old {
 public:
     ListNode *reverseKGroup(ListNode *head, int k) {
 		ListNode * newHead = new ListNode(0);
@@ -57,6 +57,50 @@ public:
     }
 };
 
+//2nd pass: 2015-02-04
+class Solution {
+public:
+    ListNode *reverseKGroup(ListNode *head, int k) {
+        if(head==NULL || k<=1) return head;
+        ListNode newHead(0);
+        newHead.next = head;
+        ListNode *st_prev=&newHead, *st=head, *st_next, *ed, *ed_next;
+        int cnt=0;
+        while(st!=NULL)
+        {
+            ed=st;
+			cnt=1;
+            while(ed!=NULL)
+            {
+                ed=ed->next;
+                if(ed!=NULL) cnt++;
+                if(cnt==k) break;
+            }
+            if(cnt!=k) break;
+            ed_next=ed->next;
+            
+            while(st->next != ed_next)  //keep reversing until reach end
+            {
+                st_next=st->next;
+                if(st_next != NULL)
+                {
+                    st->next = st_next->next;
+                    st_next->next=NULL;
+                    
+                    ListNode* tmp = st_prev->next;
+                    st_prev->next=st_next;
+                    st_next->next=tmp;
+                }
+            }
+            
+            //reversing k group done, reload and do next counting
+            st_prev = st;
+            st=ed_next;
+        }
+        return newHead.next;
+    }
+};
+
 
 void print(ListNode *l)
 {
@@ -85,7 +129,7 @@ int main()
 	d.next = &e;
 	e.next = &f;
 
-	print(s->reverseKGroup(&a, 1));
+	print(s->reverseKGroup(&a, 7));
 	
 	system("pause");
 	return 0;

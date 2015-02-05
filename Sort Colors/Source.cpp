@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     void sortColors(int A[], int n) {
 		if(n==0 || n==1)return;
@@ -47,12 +47,43 @@ public:
     }
 };
 
+//2nd pass 2015-02-04
+class Solution {
+public:
+    void sortColors(int A[], int n) {
+        int i=0,j=n-1,k=0;
+        while(1)
+        {
+            while(i<n && A[i]==0) i++;
+            while(j>=0 && A[j]==2) j--;
+            if(i>=j) break;
+            if(A[i]==2)
+            {
+                swap(A[i],A[j]);
+                j--;
+                continue;
+            }
+            if(A[j]==0)
+            {
+                swap(A[i],A[j]);
+                i++;
+                continue;
+            }
+            k=i+1;
+            while(k<n&&A[k]==1)k++;
+            if(k>=j) break;
+            swap(A[i],A[k]);
+        }
+    }
+};
+
+
 int main()
 {
 	Solution *s = new Solution();
 
-	//int A[] = {0,1,0,1,0,1};
-	int A[] = {2,0,1,1,2,0};
+	int A[] = {0,1,0,1,0,1};
+	//int A[] = {2,0,1,1,2,0};
 	int n=6;
 	s->sortColors(A,n);
 

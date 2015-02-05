@@ -43,7 +43,7 @@ vector<int> inorderTraversal(TreeNode *root) {
 	return res;
 }
 
-class Solution {
+class Solution_old {
 public:
 	void recoverTree(TreeNode *root) {
 		vector<TreeNode*> st;
@@ -96,12 +96,56 @@ public:
 	}
 };
 
+//2nd pass: 2015-02-04
+class Solution {
+public:
+    void recoverTree(TreeNode *root) {
+        vector<TreeNode*> st;
+        TreeNode *now=root, *a=NULL, *b=NULL, *c=NULL;
+        TreeNode *prev=NULL;
+        while(1)
+        {
+            if(now!=NULL)
+            {
+                st.push_back(now);
+                now=now->left;
+                continue;
+            }
+            if(st.empty()) break;
+            if(prev==NULL)
+            {
+                prev=st.back();
+            }
+            else
+            {
+                if(prev->val > st.back()->val)
+                {
+                    if(a==NULL)
+                    {
+                        a=prev;
+                        b=st.back();
+                    }
+                    else
+                    {
+                        c=st.back();
+                    }
+                }
+            }
+            now=st.back()->right;
+            prev=st.back();
+            st.pop_back();
+        }
+        if(c==NULL) swap(a->val, b->val);
+        else swap(a->val,c->val);
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
-	TreeNode a(2);
-	TreeNode b(3);
-	TreeNode c(1);
+	TreeNode a(3);
+	TreeNode b(1);
+	TreeNode c(2);
 	a.left=&b;
 	a.right=&c;
 	vector<int> tmp = inorderTraversal(&a);

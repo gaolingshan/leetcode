@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     string addBinary(string a, string b) {
 		reverse(a.begin(),a.end());
@@ -47,11 +47,38 @@ public:
 };
 
 //Need improve, more compact
+//2nd Pass: 2015-02-04
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        string res="";
+        int lenA=a.length();
+        int lenB=b.length();
+        if(lenB>lenA) 
+        {
+            swap(a,b);
+            swap(lenA,lenB);
+        }
+        int i=lenA-1,j=lenB-1;
+        int numA=0,numB=0,numC=0;
+        while(i>=0)
+        {
+            numA=a[i]-'0';
+            numB=(j>=0)?b[j]-'0':0;
+            int tmp=numA+numB+numC;
+            res.insert(res.begin(),'0'+tmp%2);
+            numC=tmp/2;
+            i--;j--;
+        }
+        if(numC!=0) res.insert(res.begin(),'0'+numC);
+        return res;
+    }
+};
 
 int main()
 {
 	Solution *s = new Solution();
-	cout << s->addBinary("1","111101")<<endl;
+	cout << s->addBinary("1","11")<<endl;
 
 
 	system("pause");

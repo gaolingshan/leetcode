@@ -30,7 +30,7 @@ void print(ListNode *l)
 	cout<<endl;
 }
 
-class Solution {
+class Solution_old {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
         ListNode *p=head;
@@ -72,6 +72,50 @@ public:
     }
 };
 
+//2nd pass 2015-02-04
+class Solution {
+public:
+    void deleteNodes(ListNode *p)
+    {
+        while(p!=NULL)
+        {
+            ListNode* tmp=p->next;
+            delete p;
+            p=tmp;
+        }
+    }
+    ListNode *deleteDuplicates(ListNode *head) {
+        if(head==NULL) return NULL;
+        ListNode newHead(0);
+        newHead.next=head;
+        ListNode* start=head, *start_prev=&newHead, *now=head->next, *prev=head;
+        while(1)    //problem here. what if start->end are duplicates?
+        {
+            if(now==NULL || now->val != start->val) //modify here. now is the end of list case
+            {
+                if(start!=prev) //need remove nodes
+                {
+                    start_prev->next = now;
+                    prev->next=NULL;
+                    //deleteNodes(start);
+                    prev=start_prev;
+                }
+                if(now==NULL) break;
+                start=now;
+                start_prev=prev;
+                prev=now;
+                now=now->next;
+            }
+            else
+            {
+                prev=now;
+                now=now->next;
+            }
+        }
+        return newHead.next;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
@@ -89,6 +133,7 @@ int main()
 	//d.next = &e;
 	//e.next = &f;
 	//f.next = &g;
+
 	//ListNode a(1);
 	//ListNode b(1);
 	//ListNode c(1);
