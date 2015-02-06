@@ -21,7 +21,7 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-class Solution {
+class Solution_old {
 public:
     void flatten(TreeNode *root) {
 		if(root==NULL) return;
@@ -36,6 +36,36 @@ public:
 			root->left=NULL;	//fuck! forget to nullify the left child. got wierd RTE. Maybe it's the judge's bug
 			p->right=tmp;
 		}
+    }
+};
+
+
+//2nd pass: 2015-02-05
+class Solution {
+public:
+    pair<TreeNode*,TreeNode*> dfs(TreeNode* root)
+    {
+        if(root==NULL)return make_pair<TreeNode*,TreeNode*>(NULL,NULL);
+        auto res1 = dfs(root->left);
+        auto res2 = dfs(root->right);
+        root->left=NULL;
+        root->right=NULL;
+        if(res1.first != NULL) 
+        {
+            root->right=res1.first;
+            res1.second->right=res2.first;
+            return make_pair(root, res2.first==NULL?res1.second:res2.second);
+        }
+        else if(res2.first != NULL) 
+        {
+            root->right=res2.first;
+            return make_pair(root, res2.second);
+        }
+        return make_pair(root,root);
+    }
+
+    void flatten(TreeNode *root) {
+        dfs(root);
     }
 };
 

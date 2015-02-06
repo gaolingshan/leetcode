@@ -20,7 +20,7 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution {
+class Solution_old {
 public:
 	ListNode* Merge(ListNode* p1, ListNode* p2)
 	{
@@ -101,6 +101,79 @@ void print(ListNode *l)
 	cout<<endl;
 }
 
+//2nd pass: 2015-02-05
+class Solution {
+public:
+    ListNode* move(ListNode* p, int pos)
+    {
+        while(p && pos>0)
+        {
+            p=p->next;
+            pos--;
+        }
+        return p;
+    }
+    ListNode *sortList(ListNode *head) {
+        ListNode *p=head;
+        int len=0;
+        while(p)
+        {
+            len++;
+            p=p->next;
+        }
+        ListNode *newHead=new ListNode(0);
+        newHead->next=head;
+        for(int step=1;step<len;step*=2)
+        {
+            ListNode *slow=newHead->next, *fast=newHead->next, *prev=newHead;
+            int scount=0,fcount=0;
+            while(slow)
+            {
+				fast=move(fast,step);
+				if(fast==NULL) break;
+				//merge
+				scount=0; fcount=0;
+				while(fcount<step && fast !=NULL && scount<step && slow!=NULL)
+				{
+					if(slow->val < fast->val)
+					{
+						prev->next=slow;
+						prev=slow;
+						slow=slow->next;
+						scount++;
+					}
+					else
+					{
+						prev->next=fast;
+						prev=fast;
+						fast=fast->next;
+						fcount++;
+					}
+				}
+				while(fcount<step && fast!=NULL)
+				{
+					prev->next=fast;
+					prev=fast;
+					fast=fast->next;
+					fcount++;
+				}
+				while(scount<step && slow!=NULL)
+				{
+					prev->next=slow;
+					prev=slow;
+					slow=slow->next;
+					scount++;
+				}
+                prev->next=fast;
+                slow=fast;
+            }
+        }
+        ListNode *res=newHead->next;
+        delete(newHead);
+        return res;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
@@ -111,11 +184,11 @@ int main()
 	ListNode d(4);
 	ListNode e(15);
 	ListNode f(16);
-	//a.next = &b;
-	//b.next = &c;
-	//c.next = &d;
-	//d.next = &e;
-	//e.next = &f;
+	a.next = &b;
+	b.next = &c;
+	c.next = &d;
+	d.next = &e;
+	e.next = &f;
 
 	print(&a);
 	print(s->sortList(&a));

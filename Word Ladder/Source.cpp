@@ -15,7 +15,7 @@
 using namespace std;
 
 //bi-direction bfs. only 75ms pass
-class Solution {
+class Solution_old {
 public:
     int ladderLength(string start, string end, unordered_set<string> &dict) {
 		if(start==end) return 1;
@@ -111,21 +111,76 @@ public:
     }
 };
 
+
+//2nd pass
+class Solution {
+public:
+    inline bool checkWord(string s1, string s2)
+    {
+        int count=0;
+        for(int i=0;i<s1.length();i++)
+        {
+            if(s1[i]!=s2[i]) count++;
+            if(count>1) return false;
+        }
+        if(count==1) return true; else return false;
+    }
+    int ladderLength(string start, string end, unordered_set<string> &dict) {
+        vector<string> queue_now,queue_next;
+        unordered_set<string> table(dict);
+        int level=1;
+        queue_now.push_back(start);
+        while(!queue_now.empty())
+        {
+            for(string now:queue_now)
+            {
+                if(checkWord(now,end)) return level+1;    
+
+				string tmp;
+				for(int i=0;i<now.length();i++)
+					for(char c='a';c<='z';c++)
+					{
+						if(now[i]!=c)
+						{
+							tmp=now;
+							tmp[i]=c;
+							if(table.count(tmp) != 0)
+							{
+		    					queue_next.push_back(tmp);
+								table.erase(tmp);
+							}
+						}
+					}
+            }
+            queue_now=queue_next;
+            queue_next.clear();
+            level++;
+        }
+        return 0;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
 	unordered_set<string> dict;
-	string A[] = {"si","go","se","cm","so","ph","mt","db","mb","sb","kr","ln","tm","le","av","sm","ar","ci","ca","br","ti","ba","to","ra","fa","yo","ow","sn","ya","cr","po","fe","ho","ma","re","or","rn","au","ur","rh","sr","tc","lt","lo","as","fr","nb","yb","if","pb","ge","th","pm","rb","sh","co","ga","li","ha","hz","no","bi","di","hi","qa","pi","os","uh","wm","an","me","mo","na","la","st","er","sc","ne","mn","mi","am","ex","pt","io","be","fm","ta","tb","ni","mr","pa","he","lr","sq","ye"};
-	for(auto str:A) dict.insert(str);
-	//dict.insert("hot");
-	//dict.insert("dot");
-	//dict.insert("dog");
-	//dict.insert("lot");
-	//dict.insert("log");
-	//cout<<s->ladderLength("hit","cog",dict)<<endl;
+	//string A[] = {"dose","ends","dine","jars","prow","soap","guns","hops","cray","hove","ella","hour","lens","jive","wiry","earl","mara","part","flue","putt","rory","bull","york","ruts","lily","vamp","bask","peer","boat","dens","lyre","jets","wide","rile","boos","down","path","onyx","mows","toke","soto","dork","nape","mans","loin","jots","male","sits","minn","sale","pets","hugo","woke","suds","rugs","vole","warp","mite","pews","lips","pals","nigh","sulk","vice","clod","iowa","gibe","shad","carl","huns","coot","sera","mils","rose","orly","ford","void","time","eloy","risk","veep","reps","dolt","hens","tray","melt","rung","rich","saga","lust","yews","rode","many","cods","rape","last","tile","nosy","take","nope","toni","bank","jock","jody","diss","nips","bake","lima","wore","kins","cult","hart","wuss","tale","sing","lake","bogy","wigs","kari","magi","bass","pent","tost","fops","bags","duns","will","tart","drug","gale","mold","disk","spay","hows","naps","puss","gina","kara","zorn","boll","cams","boas","rave","sets","lego","hays","judy","chap","live","bahs","ohio","nibs","cuts","pups","data","kate","rump","hews","mary","stow","fang","bolt","rues","mesh","mice","rise","rant","dune","jell","laws","jove","bode","sung","nils","vila","mode","hued","cell","fies","swat","wags","nate","wist","honk","goth","told","oise","wail","tels","sore","hunk","mate","luke","tore","bond","bast","vows","ripe","fond","benz","firs","zeds","wary","baas","wins","pair","tags","cost","woes","buns","lend","bops","code","eddy","siva","oops","toed","bale","hutu","jolt","rife","darn","tape","bold","cope","cake","wisp","vats","wave","hems","bill","cord","pert","type","kroc","ucla","albs","yoko","silt","pock","drub","puny","fads","mull","pray","mole","talc","east","slay","jamb","mill","dung","jack","lynx","nome","leos","lade","sana","tike","cali","toge","pled","mile","mass","leon","sloe","lube","kans","cory","burs","race","toss","mild","tops","maze","city","sadr","bays","poet","volt","laze","gold","zuni","shea","gags","fist","ping","pope","cora","yaks","cosy","foci","plan","colo","hume","yowl","craw","pied","toga","lobs","love","lode","duds","bled","juts","gabs","fink","rock","pant","wipe","pele","suez","nina","ring","okra","warm","lyle","gape","bead","lead","jane","oink","ware","zibo","inns","mope","hang","made","fobs","gamy","fort","peak","gill","dino","dina","tier"};
+	//for(auto str:A) dict.insert(str);
+	//cout<<s->ladderLength("nape","mild",dict)<<endl;
+
+	//string A[] = {"si","go","se","cm","so","ph","mt","db","mb","sb","kr","ln","tm","le","av","sm","ar","ci","ca","br","ti","ba","to","ra","fa","yo","ow","sn","ya","cr","po","fe","ho","ma","re","or","rn","au","ur","rh","sr","tc","lt","lo","as","fr","nb","yb","if","pb","ge","th","pm","rb","sh","co","ga","li","ha","hz","no","bi","di","hi","qa","pi","os","uh","wm","an","me","mo","na","la","st","er","sc","ne","mn","mi","am","ex","pt","io","be","fm","ta","tb","ni","mr","pa","he","lr","sq","ye"};
+	//for(auto str:A) dict.insert(str);
+	//cout<<s->ladderLength("qa","sq",dict)<<endl;
+
+
+	dict.insert("hot");
+	dict.insert("dot");
+	dict.insert("dog");
+	dict.insert("lot");
+	dict.insert("log");
+	cout<<s->ladderLength("hit","cog",dict)<<endl;
 	//cout<<s->ladderLength("hit","zzz",dict)<<endl;
 	//cout<<s->ladderLength("hit","hot",dict)<<endl;
-	cout<<s->ladderLength("qa","sq",dict)<<endl;
 	system("pause");
 	return 0;
 }

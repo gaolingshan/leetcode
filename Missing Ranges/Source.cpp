@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     vector<string> findMissingRanges(int A[], int n, int lower, int upper) {
 		vector<string> res;
@@ -36,6 +36,39 @@ public:
 			i++;
 		}
 		return res;
+    }
+};
+
+//2nd pass: 2015-02-05
+class Solution {
+public:
+    vector<string> findMissingRanges(int A[], int n, int lower, int upper) {
+        vector<string> res;
+        int i=0;
+        for(int x=lower;x<=upper;x++)
+        {
+            if(i<n && x==A[i])
+            {
+                i++;
+                continue;
+            }
+            if(i==n)
+            {
+                if(x<=upper)
+                {
+                    string tmp=(x==upper)?to_string(x):to_string(x)+"->"+to_string(upper);
+                    res.push_back(tmp);
+                }
+                break;
+            }
+            if(x<A[i])
+            {
+                string tmp=(x==A[i]-1)?to_string(x):to_string(x)+"->"+to_string(A[i]-1);
+                res.push_back(tmp);
+                x=A[i]-1;
+            }
+        }
+        return res;
     }
 };
 

@@ -355,6 +355,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Text Justification", "..\Te
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Reverse Words in a String II", "..\Reverse Words in a String II\Reverse Words in a String II.vcxproj", "{BF40A0B4-F090-4C37-9E8C-ADCD2919FB25}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Repeated DNA Sequences", "..\Repeated DNA Sequences\Repeated DNA Sequences.vcxproj", "{89DFDB68-6CA3-4010-B3AF-74132387F113}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2135,6 +2137,16 @@ Global
 		{BF40A0B4-F090-4C37-9E8C-ADCD2919FB25}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{BF40A0B4-F090-4C37-9E8C-ADCD2919FB25}.Release|Win32.ActiveCfg = Release|Win32
 		{BF40A0B4-F090-4C37-9E8C-ADCD2919FB25}.Release|Win32.Build.0 = Release|Win32
+		{89DFDB68-6CA3-4010-B3AF-74132387F113}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{89DFDB68-6CA3-4010-B3AF-74132387F113}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{89DFDB68-6CA3-4010-B3AF-74132387F113}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{89DFDB68-6CA3-4010-B3AF-74132387F113}.Debug|Win32.ActiveCfg = Debug|Win32
+		{89DFDB68-6CA3-4010-B3AF-74132387F113}.Debug|Win32.Build.0 = Debug|Win32
+		{89DFDB68-6CA3-4010-B3AF-74132387F113}.Release|Any CPU.ActiveCfg = Release|Win32
+		{89DFDB68-6CA3-4010-B3AF-74132387F113}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{89DFDB68-6CA3-4010-B3AF-74132387F113}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{89DFDB68-6CA3-4010-B3AF-74132387F113}.Release|Win32.ActiveCfg = Release|Win32
+		{89DFDB68-6CA3-4010-B3AF-74132387F113}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,7 +30,7 @@ void print(ListNode *l)
 	cout<<endl;
 }
 
-class Solution {
+class Solution_old {
 public:
 
     void reorderList(ListNode *head) {
@@ -77,6 +77,63 @@ public:
     }
 };
 
+class Solution {
+public:
+    ListNode* reverseList(ListNode *head)
+    {
+        ListNode *q = NULL, *p_next;
+        ListNode *p=head;
+        while(p!=NULL)
+        {
+            p_next=p->next;
+            p->next=q;
+            q=p;
+            p=p_next;
+        }
+        return q;
+    }
+    void reorderList(ListNode *head) {
+        if(head==NULL) return;
+        //break the list into two, and make list1 longer
+        ListNode* head1, *head2;
+        int count=0;
+        ListNode* p=head;
+        while(p!=NULL)
+        {
+            count++;
+            p=p->next;
+        }
+        if(count%2) count++;    //make list1 longer;
+        count/=2;
+        int cnt=1;
+        p=head;
+        while(p!=NULL)
+        {
+            if(cnt==count)
+            {
+                head2=p->next;
+                p->next=NULL;
+                break;
+            }
+            cnt++;
+            p=p->next;
+        }
+        //reverse list2
+        head2=reverseList(head2);
+        //merge list1&list2
+        p=head;
+        while(head2!=NULL)
+        {
+            ListNode* tmp1=p->next;
+            ListNode* tmp2=head2->next;
+            p->next=head2;
+            head2->next=tmp1;
+            p=tmp1;
+            head2=tmp2;
+        }
+    }
+};
+
 
 
 int main()
@@ -89,12 +146,12 @@ int main()
 	ListNode e(5);
 	ListNode f(6);
 	ListNode g(7);
-	//a.next=&b;
-	//b.next=&c;
-	//c.next=&d;
-	//d.next=&e;
-	//e.next=&f;
-	//f.next=&g;
+	a.next=&b;
+	b.next=&c;
+	c.next=&d;
+	d.next=&e;
+	e.next=&f;
+	f.next=&g;
 	s->reorderList(&a);
 	print(&a);
 

@@ -21,7 +21,7 @@ struct RandomListNode {
     RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
 };
 
-class Solution {
+class Solution_old {
 public:
 	unordered_map<RandomListNode*,RandomListNode*> table;
     RandomListNode *copyRandomList(RandomListNode *head) {
@@ -43,6 +43,56 @@ public:
 			p=p->next;
 		}
 		return newHead;
+    }
+};
+
+//2nd pass: 2015-02-05
+/**
+ * Definition for singly-linked list with a random pointer.
+ * struct RandomListNode {
+ *     int label;
+ *     RandomListNode *next, *random;
+ *     RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    RandomListNode *copyRandomList(RandomListNode *head) {
+        if(head==NULL) return head;
+        //1st pass, copy node
+        RandomListNode *p = head, *p2;
+        while(p!=NULL)
+        {
+            RandomListNode* tmp=p->next;
+            RandomListNode *pp = new RandomListNode(p->label);
+            p->next=pp;
+            pp->next=tmp;
+            p=tmp;
+        }
+        
+        //2nd pass, create random link
+        p=head;
+        while(p!=NULL)
+        {
+            if(p->random != NULL)
+                p->next->random = p->random->next;
+            p=p->next->next;
+        }
+        
+        //3rd pass, break link between copied node and original nodes
+        p=head; p2=head->next;
+        RandomListNode *res = p2;
+        while(p!=NULL)
+        {
+            p->next=p2->next;
+            p=p2->next;
+            if(p!=NULL) 
+            {
+                p2->next=p->next;
+                p2=p->next;
+            }
+        }
+        return res;
     }
 };
 
