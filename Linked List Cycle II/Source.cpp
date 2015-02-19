@@ -20,7 +20,7 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution {
+class Solution_1st {
 public:
     ListNode *detectCycle(ListNode *head) {
 		ListNode* fast=head;
@@ -42,6 +42,28 @@ public:
 			}
 		}
 		return NULL;        
+    }
+};
+
+//2nd pass: 2015-02-19
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        if(head==NULL) return NULL;
+        ListNode* slow=head, *fast=head;
+        do
+        {
+            slow=slow->next;
+            fast=(fast->next!=NULL)?fast->next->next:NULL;
+            if(fast==NULL) return NULL;
+        }while(slow!=fast);
+        fast=head;
+		while(slow!=fast)
+		{
+            slow=slow->next;
+            fast=fast->next;
+        }
+        return slow;
     }
 };
 

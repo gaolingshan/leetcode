@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     int titleToNumber(string s) {
 		reverse(s.begin(),s.end());
@@ -25,6 +25,20 @@ public:
 			base*=26;
 		}
 		return res;
+    }
+};
+
+//2nd pass
+class Solution {
+public:
+    int titleToNumber(string s) {
+        int res=0, base=1;
+        for(int i=s.length()-1;i>=0;i--)
+        {
+            res+=(s[i]-'A'+1)*base;
+            base*=26;
+        }
+        return res;
     }
 };
 

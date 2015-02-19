@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class MinStack {
+class MinStack_old {
 public:
 	stack<int> st_main;
 	stack<int> st_min;
@@ -42,18 +42,47 @@ public:
     }
 };
 
+//2nd pass: 2015-02-07
+class MinStack {
+public:
+    stack<int> main_stack;
+    stack<int> min_stack;
+    void push(int x) {
+        main_stack.push(x);
+        if(min_stack.empty() || x<=min_stack.top()) min_stack.push(x);
+    }
+
+    void pop() {
+        if(main_stack.empty()) return;
+        int value=main_stack.top();
+        if(!min_stack.empty() && min_stack.top() == value) min_stack.pop();
+        main_stack.pop();
+    }
+
+    int top() {
+        if(main_stack.empty()) return 0;
+        return main_stack.top();
+    }
+
+    int getMin() {
+        if(min_stack.empty()) return 0;
+        return min_stack.top();
+    }
+};
+
 int main()
 {
 	MinStack *s = new MinStack();
 	s->push(0);
 	s->push(1);
-	s->push(0);
+	s->push(2);
 	//s->push(1);
 	cout<<s->getMin()<<endl;
 	s->pop();
 	cout<<s->getMin()<<endl;
 	s->pop();
-
+	s->pop();
+	cout<<s->top()<<endl;
 
 	system("pause");
 	return 0;

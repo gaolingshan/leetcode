@@ -58,7 +58,7 @@ public:
 };
 
 //2nd pass: 2015-02-04
-class Solution {
+class Solution_2nd {
 public:
     ListNode *reverseKGroup(ListNode *head, int k) {
         if(head==NULL || k<=1) return head;
@@ -101,6 +101,52 @@ public:
     }
 };
 
+//3rd pass: 2015-02-06
+class Solution {
+public:
+    pair<ListNode*, ListNode*> reverse(ListNode* head)
+    {
+        ListNode* prev=NULL;
+        ListNode *p=head;
+        while(p)
+        {
+            ListNode* p_next = p->next;
+            p->next=prev;
+            prev=p;
+            p=p_next;
+        }
+        return make_pair(prev,head);
+    }
+    ListNode *reverseKGroup(ListNode *head, int k) {
+		if(head==NULL || k<=1) return head;
+        ListNode* newHead= new ListNode(0);
+        newHead->next=head;
+        
+        ListNode *p=head, *prev=newHead, *post;
+        int cnt=1;
+        while(p)
+        {
+            if(cnt%k==0)
+            {
+                post=p->next;
+                p->next=NULL;
+                auto it=reverse(prev->next);
+                prev->next=it.first;
+                it.second->next=post;
+                prev=it.second;
+                p=post;
+                cnt=1;
+                continue;
+            }
+            cnt++;
+            p=p->next;
+        }
+        ListNode*res = newHead->next;
+        delete(newHead);
+        return res;
+    }
+};
+
 
 void print(ListNode *l)
 {
@@ -129,7 +175,7 @@ int main()
 	d.next = &e;
 	e.next = &f;
 
-	print(s->reverseKGroup(&a, 7));
+	print(s->reverseKGroup(&a, 4));
 	
 	system("pause");
 	return 0;

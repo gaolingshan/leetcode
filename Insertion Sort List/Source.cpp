@@ -20,7 +20,7 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution {
+class Solution_old {
 public:
     ListNode *insertionSortList(ListNode *head) {
 		ListNode *newHead=new ListNode(0);
@@ -57,6 +57,46 @@ public:
 			}
 		}
 		return newHead->next;
+    }
+};
+
+//2nd pass: 2015-02-06
+class Solution {
+public:
+    ListNode *insertionSortList(ListNode *head) {
+        if(head==NULL) return head;
+        ListNode* newHead=new ListNode(0);
+        newHead->next=head;
+        ListNode *p=head, *p_prev=newHead;
+        while(p)
+        {
+            ListNode *q=newHead->next;
+            ListNode *q_prev=newHead;
+            bool inserted=false;
+            while(q!=p)
+            {
+                if(p->val<q->val)
+                {
+                    ListNode* p_next=p->next;
+                    q_prev->next=p;
+                    p->next=q;
+                    p_prev->next=p_next;
+                    p=p_next;
+                    inserted=true;
+                    break;
+                }
+                q_prev=q;
+                q=q->next;
+            }
+            if(!inserted)
+            {
+                p_prev=p;
+                p=p->next;
+            }
+        }
+        ListNode*res=newHead->next;
+        delete(newHead);
+        return res;
     }
 };
 

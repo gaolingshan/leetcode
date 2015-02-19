@@ -77,7 +77,7 @@ public:
     }
 };
 
-class Solution {
+class Solution_2nd {
 public:
     ListNode* reverseList(ListNode *head)
     {
@@ -134,6 +134,46 @@ public:
     }
 };
 
+//3rd pass: 2015-02-19
+class Solution {
+public:
+    void reorderList(ListNode *head) {
+        if(head==NULL) return;
+        //split the list in two. 1st longer
+        ListNode *slow=head, *fast=head, *prev=NULL;
+        while(fast)
+        {
+			prev=slow;
+            slow=slow->next;
+            fast=(fast->next)?fast->next->next:NULL;
+        }
+		prev->next=NULL;
+        ListNode *head2=slow;
+        //reverse second list
+        ListNode *p=head2;
+		prev=NULL;
+        while(p)
+        {
+            ListNode* p_next=p->next;
+            p->next=prev;
+            prev=p;
+            p=p_next;
+        }
+        head2=prev;
+        //merge two lists
+        p=head;
+        ListNode* q=head2;
+        while(q)    //since p is longer and always not NULL
+        {
+            ListNode* p_next=p->next, *q_next=q->next;
+            p->next=q;
+            q->next=p_next;
+            p=p_next;
+            q=q_next;
+        }
+    }
+};
+
 
 
 int main()
@@ -146,12 +186,12 @@ int main()
 	ListNode e(5);
 	ListNode f(6);
 	ListNode g(7);
-	a.next=&b;
-	b.next=&c;
-	c.next=&d;
-	d.next=&e;
-	e.next=&f;
-	f.next=&g;
+	//a.next=&b;
+	//b.next=&c;
+	//c.next=&d;
+	//d.next=&e;
+	//e.next=&f;
+	//f.next=&g;
 	s->reorderList(&a);
 	print(&a);
 

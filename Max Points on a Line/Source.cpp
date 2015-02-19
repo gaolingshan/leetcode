@@ -22,7 +22,7 @@ struct Point {
 };
  
 
-class Solution {
+class Solution_old {
 public:
 	unordered_map<double,int> table;				
     int maxPoints(vector<Point> &points) {
@@ -60,6 +60,40 @@ public:
 				}
 		}
 		return ans;
+    }
+};
+
+//2nd pass: 2015-02-07
+class Solution {
+public:
+    int maxPoints(vector<Point> &points) {
+        unordered_map<double,int> table;
+        int ans=0;
+        for(int i=0;i<points.size();i++)
+        {
+            Point a=points[i];
+            int count=0,same=0;
+            for(auto p:points)if(p.x==a.x && p.y==a.y) same++;
+			count=same;
+			ans=max(ans,same);
+            table.clear();
+            for(auto p:points)
+            {
+                if(p.x==a.x && p.y!=a.y) 
+                {
+                    count++;
+                    ans=max(ans,count);
+                }
+                else
+                {
+                    double intercept=(double)(p.y-a.y)/(p.x-a.x);
+					if(table.count(intercept)==0) table[intercept]=same+1; else
+                    table[intercept]++;
+                    ans=max(ans,table[intercept]);
+                }
+            }
+        }
+        return ans;
     }
 };
 

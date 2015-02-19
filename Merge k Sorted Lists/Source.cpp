@@ -25,7 +25,7 @@ struct ListNode {
 };
 
 
-class Solution {
+class Solution_old {
 public:
 	struct cmp{
 		bool operator ()(const ListNode * a, const ListNode * b)
@@ -61,6 +61,35 @@ void print(ListNode *l)
 	}
 	cout<<endl;
 }
+
+//2nd pass: 2015-02-07
+class Solution {
+public:
+    struct cmp
+    {
+        bool operator ()(const ListNode *a, const ListNode *b)
+        {
+            return a->val > b->val;
+        }
+    };
+    ListNode *mergeKLists(vector<ListNode *> &lists) {
+        priority_queue<ListNode*,vector<ListNode*>,cmp> pq;
+        for(auto p:lists) if(p)pq.push(p);
+        ListNode*newHead = new ListNode(0),*p=newHead;
+        while(!pq.empty())
+        {
+            p->next=pq.top();
+            p=pq.top();
+            ListNode* next=pq.top()->next;
+            pq.pop();
+            if(next)pq.push(next);
+            p->next=NULL;
+        }
+        ListNode* res=newHead->next;
+        delete(newHead);
+        return res;
+    }
+};
 
 int main()
 {

@@ -21,7 +21,7 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-class Solution {
+class Solution_old {
 public:
     vector<int> postorderTraversal(TreeNode *root) {
 		vector<int> res;        
@@ -70,14 +70,62 @@ public:
     }
 };
 
+//2nd pass: 2015-02-08
+/*
+	1
+   / \
+  2   3
+	   \
+	    4
+
+post: 
+stack: 1   3 4
+now:   1 2 3 4
+res:     2 4 3 1
+if stack top has right && now != right -> now=right; else print stack top, pop
+
+*/
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode *root) {
+		vector<int> res;
+		stack<TreeNode*> st;
+		TreeNode* now=root;
+		while(1)
+		{
+			if(now==NULL && st.empty()) break;
+			if(now!=NULL)
+			{
+				st.push(now);
+				now=now->left;
+			}
+			else
+			{
+				while(!st.empty() && (st.top()->right == NULL || st.top()->right == now))
+				{
+					res.push_back(st.top()->val);
+					now=st.top();
+					st.pop();
+				}
+				if(st.empty()) break;
+				now=st.top()->right;
+			}
+		}
+		return res;
+	}
+};
+
 int main()
 {
-	Solution *s = new Solution();
+	//Solution *s = new Solution();
+	Solution_old *s = new Solution_old();
 	TreeNode a(1);
 	TreeNode b(2);
 	TreeNode c(3);
-	a.right=&b;
-	b.left=&c;
+	TreeNode d(4);
+	a.left=&b;
+	a.right=&c;
+	c.right=&d;
 	vector<int> res = s->postorderTraversal(&a);
 	for(auto it:res) cout<<it<<" ";
 	cout<<endl;

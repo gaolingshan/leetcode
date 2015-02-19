@@ -73,7 +73,7 @@ public:
 };
 
 //2nd pass 2015-02-04
-class Solution {
+class Solution_2nd {
 public:
     void deleteNodes(ListNode *p)
     {
@@ -113,6 +113,50 @@ public:
             }
         }
         return newHead.next;
+    }
+};
+
+//3rd pass: 2015-02-06
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *deleteDuplicates(ListNode *head) {
+        if(head==NULL) return head;
+        ListNode *newHead = new ListNode(INT_MIN);
+        newHead->next=head;
+        
+        ListNode *p=head, *prev=newHead;
+        bool find=false;
+        while(p)
+        {
+            if(p->next!=NULL && p->val==p->next->val)
+            {
+                find=true;
+                p=p->next;
+                continue;
+            }
+            if(find)
+            {
+                prev->next=p->next;
+                p=p->next;
+                find=false;
+            }
+            else
+            {
+                prev=p;
+                p=p->next;
+            }
+        }
+		ListNode* res=newHead->next;
+		delete(newHead);
+		return res;
     }
 };
 

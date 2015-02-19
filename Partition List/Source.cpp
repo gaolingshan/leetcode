@@ -30,7 +30,7 @@ void print(ListNode *l)
 	cout<<endl;
 }
 
-class Solution {
+class Solution_old {
 public:
     ListNode *partition(ListNode *head, int x) {
 		ListNode *l1 = new ListNode(0),*p1=l1;
@@ -68,6 +68,37 @@ public:
     }
 };
 
+//2nd_pass
+class Solution {
+public:
+    ListNode *partition(ListNode *head, int x) {
+        if(head==NULL) return head;
+        ListNode*p=head;
+        ListNode *L1_head=new ListNode(0), *L2_head=new ListNode(0), *L1=L1_head, *L2=L2_head;
+        while(p)
+        {
+            ListNode*p_next=p->next;
+            if(p->val < x)
+            {
+                L1->next=p;
+                p->next=NULL;
+                L1=p;
+            }
+            else
+            {
+                L2->next=p;
+                p->next=NULL;
+                L2=p;
+            }
+            p=p_next;
+        }
+        L1->next=L2_head->next;
+        ListNode*res=L1_head->next;
+        delete(L1_head); delete(L2_head);
+        return res;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
@@ -83,7 +114,7 @@ int main()
 	d.next = &e;
 	e.next = &f;
 	print(&a);
-	print(s->partition(&a,6));
+	print(s->partition(&a,1));
 
 
 	system("pause");

@@ -3,7 +3,7 @@
 #include <map>
 using namespace std;
 
-class Solution {
+class Solution_1st {
 public:
 	int findkth(int A[], int Alen, int B[], int Blen, int k)
 	{
@@ -23,6 +23,26 @@ public:
 		else
 			return findkth(A,m,B,n,(m+n)/2+1);
 	}
+};
+
+//2nd pass: 2015-02-18
+class Solution {
+public:
+    int findKth(int A[], int Alen, int B[], int Blen, int k)
+    {
+        if(Alen==0) return B[k-1];
+        if(Blen==0) return A[k-1];
+        if(k==1) return min(A[0],B[0]);
+        int Amid=(double)k*Alen/(Alen+Blen)-1;
+        int Bmid=k-Amid-2; 
+        if(A[Amid]==B[Bmid]) return A[Amid];
+        if(A[Amid]<B[Bmid]) return findKth(A+Amid+1,Alen-Amid-1,B,Bmid+1,k-Amid-1);
+        else return findKth(A,Amid+1,B+Bmid+1,Blen-Bmid-1,k-Bmid-1);
+    }
+    double findMedianSortedArrays(int A[], int m, int B[], int n) {
+        if((m+n)%2) return findKth(A,m,B,n,(m+n)/2+1);
+        else return ((double)findKth(A,m,B,n,(m+n)/2) + (double)findKth(A,m,B,n,(m+n)/2+1))/2;
+    }
 };
 
 int main()

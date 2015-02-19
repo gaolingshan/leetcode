@@ -18,7 +18,7 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution {
+class Solution_old {
 
 public:
 
@@ -50,6 +50,50 @@ public:
 		if(plus!=0)last->val=plus; else lastlast->next=NULL;
 		return res;
 	}
+};
+
+
+//2nd pass
+
+class Solution {
+public:
+    ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
+        ListNode*newHead=new ListNode(0),*p=newHead;
+        int tmp=0;
+        while(l1!=NULL && l2!=NULL)
+        {
+            int num=l1->val+l2->val+tmp;
+            tmp=num/10;
+            num%=10;
+            p->next=new ListNode(num);
+            p=p->next;
+            l1=l1->next;
+            l2=l2->next;
+        }
+        while(l1!=NULL)
+        {
+            int num=l1->val+tmp;
+            tmp=num/10;
+            num%=10;
+            p->next=new ListNode(num);
+            p=p->next;
+            l1=l1->next;
+        }
+        while(l2!=NULL)
+        {
+            int num=l2->val+tmp;
+            tmp=num/10;
+            num%=10;
+            p->next=new ListNode(num);
+            p=p->next;
+            l2=l2->next;
+        }
+        if(tmp!=0)
+            p->next=new ListNode(tmp);
+        ListNode*res=newHead->next;
+        delete(newHead);
+        return res;
+    }
 };
 
 void print(ListNode *l)

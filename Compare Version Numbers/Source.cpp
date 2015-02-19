@@ -37,7 +37,7 @@ public:
     }
 };
 
-class Solution {
+class Solution_old {
 public:
     int compareVersion(string version1, string version2) {
 		istringstream ss1(version1);
@@ -66,6 +66,47 @@ public:
 			if(a<b) return -1;		
 		}
 		return 0;
+    }
+};
+
+//2nd pass: 2015-02-07
+class Solution {
+public:
+    int compareVersion(string version1, string version2) {
+        istringstream ss1(version1);
+        istringstream ss2(version2);
+        string tmp1,tmp2;
+        bool b1,b2;
+        while(1)
+        {
+            b1=getline(ss1,tmp1,'.');
+            b2=getline(ss2,tmp2,'.');
+            if(b1&&b2)
+            {
+                int num1=stoi(tmp1), num2=stoi(tmp2);
+                if(num1<num2) return -1;
+                if(num1>num2) return 1;
+                continue;            
+            }
+            if(b1)
+            {
+                int num1=stoi(tmp1);
+                int num2=0;
+                if(num1<num2) return -1;
+                if(num1>num2) return 1;
+                continue;            
+            }
+            if(b2)
+            {
+                int num1=0;
+                int num2=stoi(tmp2);
+                if(num1<num2) return -1;
+                if(num1>num2) return 1;
+                continue;            
+            }
+            break;
+        }
+        return 0;
     }
 };
 

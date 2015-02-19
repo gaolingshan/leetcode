@@ -48,7 +48,7 @@ public:
 };
 
 //2nd pass 2015-02-04
-class Solution {
+class Solution_2nd {
 public:
     void sortColors(int A[], int n) {
         int i=0,j=n-1,k=0;
@@ -77,13 +77,41 @@ public:
     }
 };
 
+//3rd pass: 2015-02-09
+class Solution {
+public:
+    void sortColors(int A[], int n) {
+        int i=0,left=0,right=n-1;
+        while(i<=right)
+        {
+            if(A[i]==0)
+            {
+                swap(A[i],A[left]);
+                i++;
+                left++;
+                continue;
+            }
+            if(A[i]==1)
+            {
+                i++;
+                continue;
+            }
+            if(A[i]==2)
+            {
+                swap(A[i],A[right]);
+                right--;
+            }
+        }
+    }
+};
+
 
 int main()
 {
 	Solution *s = new Solution();
 
-	int A[] = {0,1,0,1,0,1};
-	//int A[] = {2,0,1,1,2,0};
+	//int A[] = {0,1,0,1,0,1};
+	int A[] = {2,0,1,1,2,0};
 	int n=6;
 	s->sortColors(A,n);
 

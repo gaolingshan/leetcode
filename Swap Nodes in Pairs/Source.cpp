@@ -16,7 +16,7 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution {
+class Solution_old {
 public:
     ListNode *swapPairs(ListNode *head) {
 		ListNode * newHead = new ListNode(0);
@@ -50,6 +50,38 @@ public:
 };
 
 
+//2nd pass: 2015-02-06
+class Solution {
+public:
+    ListNode *swapPairs(ListNode *head) {
+        if(head==NULL) return head;
+        ListNode* newHead=new ListNode(0);
+        newHead->next=head;
+        
+        ListNode* p=head, *prev=newHead, *q=p->next;
+        while(p)
+        {
+            if(q!=NULL)
+            {
+                ListNode* q_next=q->next;
+                prev->next=q;
+                q->next=p;
+                p->next=q_next;
+
+                prev=p;
+                p=q_next;
+                if(p!=NULL)q=p->next;
+            }
+			else
+				p=NULL;
+        }
+        ListNode*res=newHead->next;
+        delete(newHead);
+        return res;
+    }
+};
+
+
 void print(ListNode *l)
 {
 	while(l!=NULL)
@@ -71,13 +103,13 @@ int main()
 	ListNode d(4);
 	ListNode e(15);
 	ListNode f(16);
-	//a.next = &b;
-	//b.next = &c;
-	//c.next = &d;
-	//d.next = &e;
-	//e.next = &f;
+	a.next = &b;
+	b.next = &c;
+	c.next = &d;
+	d.next = &e;
+	e.next = &f;
 
-	print(s->swapPairs(NULL));
+	print(s->swapPairs(&a));
 	
 	system("pause");
 	return 0;

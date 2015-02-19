@@ -357,6 +357,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Reverse Words in a String I
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Repeated DNA Sequences", "..\Repeated DNA Sequences\Repeated DNA Sequences.vcxproj", "{89DFDB68-6CA3-4010-B3AF-74132387F113}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Kth Largest Element", "..\Kth Largest Element\Kth Largest Element.vcxproj", "{F62D5D3F-F2B3-4508-A249-3D47418EA389}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lowest Common Ancestor", "..\Lowest Common Ancestor\Lowest Common Ancestor.vcxproj", "{EE8944B1-F223-444E-AE78-32BB460D2570}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2147,6 +2151,26 @@ Global
 		{89DFDB68-6CA3-4010-B3AF-74132387F113}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{89DFDB68-6CA3-4010-B3AF-74132387F113}.Release|Win32.ActiveCfg = Release|Win32
 		{89DFDB68-6CA3-4010-B3AF-74132387F113}.Release|Win32.Build.0 = Release|Win32
+		{F62D5D3F-F2B3-4508-A249-3D47418EA389}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{F62D5D3F-F2B3-4508-A249-3D47418EA389}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{F62D5D3F-F2B3-4508-A249-3D47418EA389}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{F62D5D3F-F2B3-4508-A249-3D47418EA389}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F62D5D3F-F2B3-4508-A249-3D47418EA389}.Debug|Win32.Build.0 = Debug|Win32
+		{F62D5D3F-F2B3-4508-A249-3D47418EA389}.Release|Any CPU.ActiveCfg = Release|Win32
+		{F62D5D3F-F2B3-4508-A249-3D47418EA389}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{F62D5D3F-F2B3-4508-A249-3D47418EA389}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{F62D5D3F-F2B3-4508-A249-3D47418EA389}.Release|Win32.ActiveCfg = Release|Win32
+		{F62D5D3F-F2B3-4508-A249-3D47418EA389}.Release|Win32.Build.0 = Release|Win32
+		{EE8944B1-F223-444E-AE78-32BB460D2570}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{EE8944B1-F223-444E-AE78-32BB460D2570}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{EE8944B1-F223-444E-AE78-32BB460D2570}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{EE8944B1-F223-444E-AE78-32BB460D2570}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EE8944B1-F223-444E-AE78-32BB460D2570}.Debug|Win32.Build.0 = Debug|Win32
+		{EE8944B1-F223-444E-AE78-32BB460D2570}.Release|Any CPU.ActiveCfg = Release|Win32
+		{EE8944B1-F223-444E-AE78-32BB460D2570}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{EE8944B1-F223-444E-AE78-32BB460D2570}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{EE8944B1-F223-444E-AE78-32BB460D2570}.Release|Win32.ActiveCfg = Release|Win32
+		{EE8944B1-F223-444E-AE78-32BB460D2570}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

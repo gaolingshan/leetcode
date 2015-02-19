@@ -55,7 +55,7 @@ public:
     }
 };
 
-class Solution {
+class Solution_old {
 public:
 	TreeNode* dfs(ListNode* &p, int left, int right)
 	{
@@ -82,10 +82,48 @@ public:
 };
 
 
+//2nd pass: 2015-02-07
+class Solution {
+public:
+    TreeNode* dfs(ListNode* &head, int size)
+    {
+        if(head==NULL || size==0) return NULL;
+        TreeNode* left=dfs(head,size/2);
+        TreeNode* root=new TreeNode(head->val);
+		head=head->next;
+        TreeNode* right=dfs(head,size-1-size/2);
+        root->left=left;
+        root->right=right;
+        return root;
+    }
+    TreeNode *sortedListToBST(ListNode *head) {
+        int len=0;
+        ListNode*p=head;
+        while(p)
+        {
+            len++;
+            p=p->next;
+        }
+        return dfs(head,len);
+    }
+};
+
+
 int main()
 {
-	//Solution *s = new Solution();
-
+	Solution *s = new Solution();
+	ListNode a(1);
+	ListNode b(2);
+	ListNode c(3);
+	ListNode d(4);
+	ListNode e(5);
+	ListNode f(6);
+	a.next = &b;
+	b.next = &c;
+	c.next = &d;
+	d.next = &e;
+	e.next = &f;
+	s->sortedListToBST(&a);
 
 	system("pause");
 	return 0;

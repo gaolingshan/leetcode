@@ -21,7 +21,7 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-class Solution {
+class Solution_old {
 public:
     vector<int> preorderTraversal(TreeNode *root) {
 		vector<int> res;        
@@ -45,6 +45,46 @@ public:
 		return res;
     }
 };
+
+//2nd pass: 2015-02-08
+/*
+	1
+   / \
+  2   3
+	   \
+	    4
+
+pre: 1 2 3  print right now
+post: 
+stack: 1 2
+if stack top has right && now != right -> now=right; else print stack top, pop
+
+*/
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode *root) {
+		vector<int> res;
+		stack<TreeNode*> st;
+		TreeNode* now=root;
+		while(1)
+		{
+			if(now==NULL && st.empty()) break;
+			if(now==NULL)
+			{
+				now=st.top()->right;
+				st.pop();
+			}
+			else
+			{
+				res.push_back(now->val);
+				st.push(now);
+				now=now->left;
+			}
+		}
+		return res;
+	}
+};
+
 
 int main()
 {

@@ -29,7 +29,7 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution {
+class Solution_old {
 public:
     ListNode *rotateRight(ListNode *head, int k) {
         int total=0;
@@ -72,6 +72,42 @@ public:
     }
 };
 
+//2nd pass: 2015-02-06
+
+class Solution {
+public:
+    ListNode *rotateRight(ListNode *head, int k) {
+        if(head==NULL) return head;
+        int len=0;
+        ListNode*p=head;
+        while(p)
+        {
+            len++;
+            p=p->next;
+        }
+        
+        k=k%len;
+        if(k==0) return head;
+        int cnt=1;
+        p=head;
+        while(cnt!=len-k)
+        {
+            cnt++;
+            p=p->next;
+        }
+        ListNode*p_next=p->next;
+        p->next=NULL;
+        p=p_next;
+        ListNode*res=p;
+        while(p->next)
+        {
+            p=p->next;
+        }
+        p->next=head;
+        return res;
+    }
+};
+
 
 void print(ListNode *l)
 {
@@ -97,8 +133,8 @@ int main()
 	c.next=&d;
 	d.next=&e;
 
-	//print(s->rotateRight(&a,5));
-	print(s->rotateRight(NULL,0));
+	print(s->rotateRight(&a,6));
+	//print(s->rotateRight(NULL,0));
 
 	system("pause");
 	return 0;

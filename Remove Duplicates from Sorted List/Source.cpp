@@ -29,7 +29,7 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution {
+class Solution_old {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
         ListNode * p=head,* q=head;
@@ -51,6 +51,27 @@ public:
 			}
 		}
 		if(p!=NULL) p->next=q;	//trick here!
+		return head;
+    }
+};
+
+
+//2nd pass: 2015-02-06
+class Solution {
+public:
+    ListNode *deleteDuplicates(ListNode *head) {
+        ListNode *p=head,*prev=NULL;
+        while(p)
+        {
+            if(prev!=NULL && prev->val==p->val)
+            {
+                prev->next=p->next;
+                p=p->next;
+                continue;
+            }
+            prev=p;
+            p=p->next;
+        }
 		return head;
     }
 };

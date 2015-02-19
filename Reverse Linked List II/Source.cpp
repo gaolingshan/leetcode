@@ -31,7 +31,7 @@ void print(ListNode *l)
 }
 
 
-class Solution {
+class Solution_old {
 public:
     ListNode *reverseBetween(ListNode *head, int m, int n) {
 		if(m==n) return head;
@@ -60,6 +60,82 @@ public:
     }
 };
 
+/**
+ * Definition of singly-linked-list:
+ * 
+ * class ListNode {
+ * public:
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int val) {
+ *        this->val = val;
+ *        this->next = NULL;
+ *     }
+ * }
+ */
+class Solution {
+public:
+    /**
+     * @param head: The head of linked list.
+     * @param m: The start position need to reverse.
+     * @param n: The end position need to reverse.
+     * @return: The new head of partial reversed linked list.
+     */
+    pair<ListNode*,ListNode*> reverse(ListNode *head)
+    {
+        ListNode* prev=NULL, *tail=head;
+        ListNode* p=head;
+        while(p)
+        {
+            ListNode* p_next = p->next;
+            p->next = prev;
+            prev=p;
+            p=p_next;
+        }
+        return make_pair(prev,tail);
+    }
+    ListNode *reverseBetween(ListNode *head, int m, int n) {
+        // write your code here
+        ListNode *prev, *post, *p=head;
+        ListNode *start, *end;
+        ListNode *newHead = new ListNode(0);
+        newHead->next = head;
+        prev=newHead;
+        int cnt=1;
+        while(p)
+        {
+            if(cnt==m)
+            {
+                start=p;
+                break;
+            }
+            prev=p;
+            p=p->next;
+            cnt++;
+        }
+        while(p)
+        {
+            if(cnt==n)
+            {
+                end=p;
+                post=p->next;
+                break;
+            }
+            p=p->next;
+            cnt++;
+        }
+        end->next=NULL;
+        
+        auto it = reverse(start);
+        prev->next = it.first;
+        it.second->next = post;
+        ListNode* res = newHead->next;
+        delete(newHead);
+        return res;
+    }
+};
+
+
 
 int main()
 {
@@ -78,7 +154,7 @@ int main()
 	e.next = &f;
 
 	print(&a);
-	print(s->reverseBetween(&a,1,6));
+	print(s->reverseBetween(&a,6,6));
 
 
 	system("pause");

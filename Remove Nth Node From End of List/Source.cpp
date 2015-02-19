@@ -23,7 +23,7 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution {
+class Solution_old {
 public:
 
 	ListNode *removeNthFromEnd(ListNode *head, int n) {
@@ -53,6 +53,35 @@ public:
 	}
 };
 
+//2nd pass: 2015-02-06
+class Solution {
+public:
+    ListNode *removeNthFromEnd(ListNode *head, int n) {
+        if(head==NULL) return head;
+        if(n==0)return head;
+        ListNode*newHead=new ListNode(0);
+        newHead->next=head;
+        
+        ListNode *p=head,*q=head,*prev=newHead;
+        int cnt=n;
+        while(cnt)
+        {
+            q=q->next;
+            cnt--;
+        }
+        while(q)
+        {
+            prev=p;
+            p=p->next;
+            q=q->next;
+        }
+        prev->next=p->next;
+        ListNode*res=newHead->next;
+        delete(newHead);
+        return res;
+    }
+};
+
 void print(ListNode *l)
 {
 	while(l!=NULL)
@@ -75,13 +104,13 @@ int main()
 	ListNode e(5);
 	ListNode f(6);
 	a.next = &b;
-	//b.next = &c;
-	//c.next = &d;
-	//d.next = &e;
-	//e.next = &f;
+	b.next = &c;
+	c.next = &d;
+	d.next = &e;
+	e.next = &f;
 	print(&a);
 
-	print(s->removeNthFromEnd(&a,2));
+	print(s->removeNthFromEnd(&a,6));
 	
 
 	system("pause");

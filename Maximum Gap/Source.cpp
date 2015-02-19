@@ -15,7 +15,7 @@
 using namespace std;
 
 //radix sort
-class Solution {	
+class Solution_old {	
 public:
 	void countingSort(vector<int> &num, int base)
 	{
@@ -47,6 +47,36 @@ public:
 		int ans=0;
 		for(int i=1;i<num.size();i++) ans=max(ans,num[i]-num[i-1]);
 		return ans;
+    }
+};
+
+//2nd pass: 2015-02-07
+class Solution {
+public:
+    void countingSort(vector<int> &num, int base)
+    {
+        vector<int> count(10,0);
+        vector<int> output(num.size(),0);
+        for(int i=0;i<num.size();i++)
+            count[(num[i]/base)%10]++;
+        for(int i=1;i<10;i++)
+            count[i]+=count[i-1];
+        for(int i=num.size()-1;i>=0;i--)
+            output[--count[(num[i]/base)%10]]=num[i];
+        num=output;
+    }
+    int maximumGap(vector<int> &num) {
+        if(num.size()<2) return 0;
+        int max_num=*max_element(num.begin(),num.end());
+        int base=1;
+        while(base<=max_num)
+        {
+            countingSort(num,base);
+            base*=10;
+        }
+        int ans=0;
+        for(int i=1;i<num.size();i++) ans=max(ans,num[i]-num[i-1]);
+        return ans;
     }
 };
 
