@@ -57,13 +57,34 @@ public:
 
 
 //2nd pass: 2015-02-06
-class Solution {
+class Solution_2nd {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
         ListNode *p=head,*prev=NULL;
         while(p)
         {
             if(prev!=NULL && prev->val==p->val)
+            {
+                prev->next=p->next;
+                p=p->next;
+                continue;
+            }
+            prev=p;
+            p=p->next;
+        }
+		return head;
+    }
+};
+
+//3rd pass: 2015-02-18
+class Solution {
+public:
+    ListNode *deleteDuplicates(ListNode *head) {
+        if(head==NULL) return head;
+        ListNode *prev=head, *p=head->next;
+        while(p)
+        {
+            if(prev->val == p->val) 
             {
                 prev->next=p->next;
                 p=p->next;

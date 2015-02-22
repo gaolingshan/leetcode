@@ -125,7 +125,7 @@ public:
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-class Solution {
+class Solution_3rd {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
         if(head==NULL) return head;
@@ -160,23 +160,48 @@ public:
     }
 };
 
+//4th pass: 2015-02-19
+class Solution {
+public:
+    ListNode *deleteDuplicates(ListNode *head) {
+        ListNode *newHead=new ListNode(0), *prev=newHead, *p=head;
+        newHead->next=head;
+        while(p&&p->next)
+        {
+            if(p->val != p->next->val)
+            {
+                prev=p;
+                p=p->next;
+            }else
+            {
+                while(p->next && p->val==p->next->val) p=p->next;
+                prev->next=p->next;
+                p=p->next;
+            }
+        }
+        ListNode*res=newHead->next;
+        delete(newHead);
+        return res;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
 
-	//ListNode a(1);
-	//ListNode b(2);
-	//ListNode c(3);
-	//ListNode d(3);
-	//ListNode e(4);
-	//ListNode f(4);
-	//ListNode g(5);
-	//a.next = &b;
-	//b.next = &c;
-	//c.next = &d;
-	//d.next = &e;
-	//e.next = &f;
-	//f.next = &g;
+	ListNode a(1);
+	ListNode b(2);
+	ListNode c(3);
+	ListNode d(3);
+	ListNode e(4);
+	ListNode f(4);
+	ListNode g(5);
+	a.next = &b;
+	b.next = &c;
+	c.next = &d;
+	d.next = &e;
+	e.next = &f;
+	f.next = &g;
 
 	//ListNode a(1);
 	//ListNode b(1);
@@ -192,11 +217,11 @@ int main()
 	//ListNode b(1);
 	//a.next = &b;
 
-	ListNode a(1);
-	ListNode b(2);
-	ListNode c(2);
-	a.next = &b;
-	b.next = &c;
+	//ListNode a(1);
+	//ListNode b(2);
+	//ListNode c(2);
+	//a.next = &b;
+	//b.next = &c;
 
 	print(&a);
 	print(s->deleteDuplicates(&a));

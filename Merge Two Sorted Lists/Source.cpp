@@ -103,7 +103,7 @@ void print(ListNode *l)
 }
 
 //2nd pass: 2015-02-07
-class Solution {
+class Solution_2nd {
 public:
     ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
         ListNode*newHead=new ListNode(0), *p=newHead;
@@ -143,6 +143,53 @@ public:
             l2=next;
         }
         ListNode*res=newHead->next;
+        delete(newHead);
+        return res;
+    }
+};
+
+//3rd pass: 2015-02-19
+class Solution_recur {
+public:
+    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+        if(l1==NULL) return l2;
+        if(l2==NULL) return l1;
+        if(l1->val < l2->val)
+        {
+            l1->next=mergeTwoLists(l1->next,l2);
+            return l1;
+        }
+        else
+        {
+            l2->next=mergeTwoLists(l1,l2->next);
+            return l2;
+        }
+    }
+};
+
+class Solution {
+public:
+    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+        ListNode* newHead=new ListNode(0), *p=newHead;
+        while(l1 && l2)
+        {
+            if(l1->val<l2->val)
+            {
+                p->next=l1;
+                p=l1;
+                l1=l1->next;
+                p->next=NULL;
+            }
+            else
+            {
+                p->next=l2;
+                p=l2;
+                l2=l2->next;
+                p->next=NULL;
+            }
+        }
+        if(l1) p->next=l1; else p->next=l2;
+        ListNode *res=newHead->next;
         delete(newHead);
         return res;
     }

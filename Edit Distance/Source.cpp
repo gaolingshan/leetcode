@@ -15,7 +15,7 @@
 using namespace std;
 
 //DP with rotating array
-class Solution {
+class Solution_old {
 public:
     int minDistance(string word1, string word2) {
 		int Alen=word1.length();
@@ -44,10 +44,37 @@ public:
     }
 };
 
+//2nd pass: 2015-02-21
+/*
+f[i][j] S:1~i, T:1~j
+f[0][j]=j;
+f[i][0]=i;
+f[i][j]=f[i-1][j-1]     S[i]==T[j]
+        f[i-1][j-1]+1   S[i]!=T[j]
+        f[i-1][j]     
+        f[i][j-1]
+*/
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
+        int lenS=word1.length(), lenT=word2.length();
+        vector<vector<int>> f(lenS+1,vector<int>(lenT+1,0));
+        for(int i=0;i<=lenS;i++)f[i][0]=i;
+        for(int i=0;i<=lenT;i++)f[0][i]=i;
+        for(int i=1;i<=lenS;i++)
+            for(int j=1;j<=lenT;j++)
+            {
+                f[i][j]=min(f[i][j-1],f[i-1][j])+1;
+                f[i][j]=min(f[i][j],f[i-1][j-1]+((word1[i-1]==word2[j-1])?0:1));
+            }
+        return f[lenS][lenT];
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
-	cout<<s->minDistance("a","b")<<endl;;
+	cout<<s->minDistance("a","ab")<<endl;;
 
 	system("pause");
 	return 0;

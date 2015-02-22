@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     string minWindow(string S, string T) {
 		int lenS=S.length(), lenT=T.length();
@@ -67,12 +67,42 @@ public:
     }
 };
 
+//2nd pass: 2015-02-21
+class Solution {
+public:
+	int dict[256],table[256];
+	string minWindow(string S, string T) {
+        int lenS=S.length(), lenT=T.length();
+        if(lenT==0||lenS==0) return "";
+        for(char c:T) dict[c]++;
+        int j=0,min_length=INT_MAX,min_j=0,table_sum=0;
+        for(int i=0;i<lenS;i++)
+        {
+            if(dict[S[i]]==0) continue;
+            if(++table[S[i]] <= dict[S[i]]) table_sum++;
+			if(table_sum<lenT) continue;
+            while(dict[S[j]]==0 || table[S[j]]>dict[S[j]])
+            {
+                if(table[S[j]]>dict[S[j]]) table[S[j]]--;
+                j++;
+            }
+            if(i-j+1<min_length) 
+            {
+                min_length=i-j+1;
+                min_j=j;
+            }
+        }
+		return (min_length==INT_MAX)?"":S.substr(min_j,min_length);
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
 	//cout<<s->minWindow("ADOBECODEBANC","ABC")<<endl;
 	//cout<<s->minWindow("AAAAABC","ABC")<<endl;
-	cout<<s->minWindow("a","b")<<endl;
+	//cout<<s->minWindow("a","b")<<endl;
+	cout<<s->minWindow("cabwefgewcwaefgcf","cae")<<endl;
 
 
 	system("pause");

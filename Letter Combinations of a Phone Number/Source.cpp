@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     vector<string> res;
 	vector<string> letters;
@@ -44,12 +44,35 @@ public:
     }
 };
 
+//2nd pass: 2015-02-21
+class Solution {
+public:
+    unordered_map<char,string> letters;
+    void dfs(vector<string>&res,string now,string digits)
+    {
+        if(digits=="")
+        {
+            res.push_back(now);
+            return;
+        }
+        for(char c:letters[digits[0]]) dfs(res,now+c,digits.substr(1,digits.length()-1));
+    }
+    vector<string> letterCombinations(string digits) {
+        letters['2']="abc"; letters['3']="def"; letters['4']="ghi"; letters['5']="jkl";
+        letters['6']="mno"; letters['7']="pqrs"; letters['8']="tuv"; letters['9']="wxyz";
+		letters['0']=" "; letters['1']="";
+        vector<string> res;
+        dfs(res,"",digits);
+		return res;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
 
-	vector<string> res = s->letterCombinations("909");
-	for(int i=0;i<res.size();i++) cout<<res[i]<<" ";
+	vector<string> res = s->letterCombinations("929");
+	for(int i=0;i<res.size();i++) cout<<res[i]<<endl;
 	cout<<endl;
 
 	system("pause");

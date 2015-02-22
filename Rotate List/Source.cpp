@@ -74,7 +74,7 @@ public:
 
 //2nd pass: 2015-02-06
 
-class Solution {
+class Solution_2nd {
 public:
     ListNode *rotateRight(ListNode *head, int k) {
         if(head==NULL) return head;
@@ -104,6 +104,27 @@ public:
             p=p->next;
         }
         p->next=head;
+        return res;
+    }
+};
+
+//3rd pass: 2015-02-19
+class Solution {
+public:
+    ListNode *rotateRight(ListNode *head, int k) {
+        int cnt=1;
+        ListNode*p=head;
+        while(p->next)
+        {
+            cnt++;
+            p=p->next;
+        }
+        k=k%cnt;
+        p->next=head;
+        p=head;
+        for(int i=1;i<cnt-k;i++) p=p->next;
+        ListNode*res=p->next;
+        p->next=NULL;
         return res;
     }
 };

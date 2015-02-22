@@ -43,7 +43,7 @@ vector<int> inorderTraversal(TreeNode *root) {
 	return res;
 }
 
-class Solution {
+class Solution_old {
 public:
 	vector<TreeNode*> dfs(vector<int> numbers)
 	{
@@ -79,6 +79,37 @@ public:
 		vector<int> numbers;
 		for(int i=1;i<=n;i++)numbers.push_back(i);
 		return dfs(numbers);
+    }
+};
+
+//2nd pass: 2015-02-20
+class Solution {
+public:
+    vector<TreeNode*> dfs(int st,int ed)
+    {
+        vector<TreeNode*> res;
+        if(st>ed)
+        {
+            res.push_back(NULL);
+            return res;
+        }
+        for(int i=st;i<=ed;i++)
+        {
+            vector<TreeNode*> left=dfs(st,i-1);
+            vector<TreeNode*> right=dfs(i+1,ed);
+            for(TreeNode* l:left)
+                for(TreeNode* r:right)
+                {
+                    TreeNode* root=new TreeNode(i);
+                    root->left=l;
+                    root->right=r;
+                    res.push_back(root);
+                }
+        }
+        return res;
+    }
+    vector<TreeNode *> generateTrees(int n) {
+        return dfs(1,n);
     }
 };
 

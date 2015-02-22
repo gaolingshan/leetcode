@@ -21,7 +21,7 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-class Solution {
+class Solution_old {
 public:
 	int res;
 	int dfs(TreeNode *root)
@@ -41,9 +41,30 @@ public:
     }
 };
 
+//2nd pass: 2015-02-20
+class Solution {
+public:
+    int res;
+    int dfs(TreeNode *root)
+    {
+        if(root==NULL) return 0;
+        int left=max(0,dfs(root->left));
+        int right=max(0,dfs(root->right));
+        res=max(res,root->val+left+right);
+        return max(0,root->val+max(left,right));
+    }
+    int maxPathSum(TreeNode *root) {
+        res=INT_MIN;
+        return dfs(root);
+    }
+};
+
+
 int main()
 {
-	//Solution *s = new Solution();
+	Solution *s = new Solution();
+	TreeNode a(0);
+	cout<<s->maxPathSum(&a);
 
 
 	system("pause");

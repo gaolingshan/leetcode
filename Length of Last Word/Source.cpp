@@ -2,6 +2,7 @@
 //   Author: <name>
 //   Update: <date>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <map>
@@ -14,7 +15,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     int lengthOfLastWord(const char *s) {
         int now=0,last=0;
@@ -37,12 +38,31 @@ public:
     }
 };
 
+//2nd pass:
+class Solution {
+public:
+    int lengthOfLastWord(const char *s) {
+        int now=0,last=0;
+		while(*s!=0)
+		{
+			if(*s==' ') now=0;
+			else
+			{
+				now++;
+				last=now;
+			}
+			s++;
+		}
+		return last;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
 
-	cout<<s->lengthOfLastWord(" Hello World ")<<endl;;
-	cout<<s->lengthOfLastWord("b   a  ")<<endl;;
+	cout<<s->lengthOfLastWord("Hello World")<<endl;;
+	cout<<s->lengthOfLastWord("   b   a  ")<<endl;;
 
 
 	system("pause");

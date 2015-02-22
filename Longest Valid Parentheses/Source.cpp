@@ -13,7 +13,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     int longestValidParentheses(string s) {
         stack<int> st;
@@ -33,6 +33,27 @@ public:
 					i=j+1;		
 		}
 		return ans;
+    }
+};
+
+//2nd pass: 2015-02-21
+class Solution {
+public:
+    int longestValidParentheses(string s) {
+        stack<int> st;
+        int last=0,ans=0;
+        for(int i=0;i<s.length();i++)
+        {
+            if(s[i]=='(') st.push(i); else
+            {
+                if(st.empty()) last=i+1; else
+                {
+                    st.pop();
+                    if(st.empty()) ans=max(ans,i-last+1); else ans=max(ans,i-st.top());
+                }
+            }
+        }
+        return ans;
     }
 };
 

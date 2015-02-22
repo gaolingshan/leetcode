@@ -43,7 +43,7 @@ vector<int> inorderTraversal(TreeNode *root) {
 	return res;
 }
 
-class Solution {
+class Solution_old {
 public:
 	TreeNode* build(vector<int> &postorder, vector<int> &inorder, int l1,int r1, int l2, int r2)
 	{
@@ -63,6 +63,25 @@ public:
 		int len2=inorder.size();
 		if(len1 != len2) return NULL;
 		return build(postorder,inorder,0,len1-1,0,len2-1);        
+    }
+};
+
+class Solution {
+public:
+    TreeNode *build(vector<int> &inorder, vector<int> &postorder, int l1,int r1, int l2, int r2)
+    {
+        if(l1>r1 || l2>r2) return NULL;
+        TreeNode*root=new TreeNode(postorder[r2]);
+        //postorder:  l2~l2+idx-1-l1   l2+idx-l1~l2-l1+r1-1   r2
+        //inorder:    l1~idx-1  idx  idx+1~r1
+        int idx=l1;
+        while(inorder[idx]!=postorder[r2]) idx++;
+        root->left=build(inorder,postorder,l1,idx-1,l2,l2+idx-1-l1);
+        root->right=build(inorder,postorder,idx+1,r1,l2+idx-l1,l2-l1+r1-1);
+        return root;
+    }
+    TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
+        return build(inorder,postorder,0,inorder.size()-1,0,postorder.size()-1);
     }
 };
 

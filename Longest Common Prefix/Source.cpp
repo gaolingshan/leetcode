@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     string longestCommonPrefix(vector<string> &strs) {
         string res="";
@@ -41,6 +41,28 @@ public:
 			}
 		}
 		return res;
+    }
+};
+
+//2nd pass: 2015-02-21
+class Solution {
+public:
+    string longestCommonPrefix(vector<string> &strs) {
+		if(strs.size()==0) return "";
+        string res="";
+        int i=0;
+        while(1)
+        {
+            char c=0;
+            for(string str:strs)
+            {
+                if(str.length()<=i) return res;
+                if(c==0) c=str[i]; else if(c!=str[i]) return res;
+            }
+            res+=c;
+			i++;
+        }
+        return res;
     }
 };
 

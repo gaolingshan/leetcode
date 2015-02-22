@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	int f[10000];
     int numDecodings(string s) {
@@ -36,10 +36,42 @@ public:
     }
 };
 
+//2nd pass: 2015-02-21
+/*
+12 => AB, L
+0  => invalid
+10~26 => OK
+1~9 OK
+f[i]: 1~i decode ways
+f[0] = 1;
+f[i+1]+=f[i] , s[i+1] : 1~9
+f[i+2]+=f[i] , s[i+1~i+2] : 10~26
+res: f[n]
+*/
+class Solution {
+public:
+    int f[10000];
+    int numDecodings(string s) {
+		if(s=="") return 0;
+        f[0]=1;
+        for(int i=0;i<s.length();i++)
+        {
+            if(s[i]>='1' && s[i] <='9') f[i+1]+=f[i];
+            if(i+1<s.length())
+            {
+                int num=stoi(s.substr(i,2));
+                if(num>=10 && num<=26) f[i+2]+=f[i];
+            }
+        }
+        return f[s.length()];
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
-	cout << s->numDecodings("101") << endl;
+	//cout << s->numDecodings("101") << endl;
+	cout << s->numDecodings("12") << endl;
 
 
 	system("pause");

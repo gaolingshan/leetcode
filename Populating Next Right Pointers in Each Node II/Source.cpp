@@ -20,7 +20,7 @@ struct TreeLinkNode {
 	TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
 };
 
-class Solution {
+class Solution_old {
 public:
     void connect(TreeLinkNode *root) {
   		if(root==NULL) return;
@@ -66,6 +66,36 @@ public:
 			}
 			//move on to next level
 			Level_1_Start = Level_2_Start;
+		}
+    }
+};
+
+//2nd pass: 2015-02-20
+class Solution {
+public:
+    void connect(TreeLinkNode *root) {
+        TreeLinkNode *p=root, *q=NULL, *q_first=NULL;
+		while(p)
+		{
+			while(p) //相当于遍历p中的每个点，扩展出队列q
+			{
+				if(p->left)
+				{
+					if(q_first==NULL) q_first=p->left;
+					if(q)q->next=p->left;
+					q=p->left;
+				}
+				if(p->right)   
+				{
+					if(q_first==NULL) q_first=p->right;
+					if(q)q->next=p->right;
+					q=p->right;
+				}
+				p=p->next;
+			}
+			p=q_first;  //队列滚动！
+			q=NULL; q_first=NULL;
+
 		}
     }
 };

@@ -60,7 +60,7 @@ stack: 1 2
 if stack top has right && now != right -> now=right; else print stack top, pop
 
 */
-class Solution {
+class Solution_2nd {
 public:
     vector<int> preorderTraversal(TreeNode *root) {
 		vector<int> res;
@@ -85,6 +85,40 @@ public:
 	}
 };
 
+//3rd pass: 2015-02-20
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode *root) {
+        vector<int> res;
+        TreeNode *p=root;
+        while(p)
+        {
+            if(p->left==NULL)
+            {
+                res.push_back(p->val);
+                p=p->right;
+            }
+            else
+            {
+                auto prev=p->left;
+                while(prev->right && prev->right!=p) prev=prev->right;
+                if(prev->right==NULL)
+                {
+                    res.push_back(p->val);
+                    prev->right=p;
+                    p=p->left;
+                }
+                else
+                {
+                    prev->right=NULL;
+                    p=p->right;
+                }
+            }
+        }
+        return res;
+    }
+};
+
 
 int main()
 {
@@ -92,8 +126,8 @@ int main()
 	TreeNode a(1);
 	TreeNode b(2);
 	TreeNode c(3);
-	a.right=&b;
-	b.left=&c;
+	a.left=&b;
+	//b.left=&c;
 	vector<int> res = s->preorderTraversal(&a);
 	for(auto it:res) cout<<it<<" ";
 	cout<<endl;

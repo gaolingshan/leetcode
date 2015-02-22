@@ -33,7 +33,7 @@ int read4(char *buf)
 	}
 }
 
-class Solution {
+class Solution_old {
 public:
     /**
      * @param buf Destination buffer
@@ -92,6 +92,37 @@ public:
     }
 };
 
+//2nd pass: 2015-02-22
+class Solution {
+public:
+	char buffer[4];
+	int st,len;
+    int read(char *buf, int n) {
+        int cnt=0;
+		int read_len=min(len,n);
+        for(int i=0;i<read_len;i++)
+        {
+            buf[cnt++]=buffer[st++];
+            len--;
+        }
+        if(cnt==n) return cnt;
+        
+        while(1)
+        {
+            int tmp=read4(buffer);
+            if(cnt+tmp>=n)
+            {
+				int i=0;
+                for(i=0;cnt<n;i++) buf[cnt++]=buffer[i];
+                st=i; len=tmp-i;
+                return cnt;
+            }
+            for(int i=0;i<tmp;i++) buf[cnt++]=buffer[i];
+            if(tmp<4) return cnt;
+        }
+    }
+};
+
 void callRead(int n, Solution *s)
 {
 	char *res;	
@@ -106,16 +137,16 @@ int main()
 {
 	Solution *s = new Solution();
 	
+	//data="";
 	//data="a";
-	data="1234567";
+	//data="1234567";
 	//data="hGBfyEfMOCxdLIIBeHCScmXupglxlLPLWDkAxxOHPSzBzibLqypQRIiNgCzWsqATwvXYdwZnrqvsTjMnyvYmCoukwgOHHcWfAUvbRbWZnlhnmmIIulLrepgUXzaUHyAbmoBBZKIdKlTAoriOjwjUSsiJAiCwiKkodimbihRoNrGJeITllNYfmzfZljFhpBqjJeQQWJFvdkaULBNgKgVeQWXNxLROhfcTZqaqlngNYfHRjlldiHRBnMSZbiZBAzVaXOisJpItWWFiMUNndAThbfQUcLRoFPFfDwADDOKJcWTavTTOHwQNKPmjxNrpHuJyscxEsGVZYJdjlNnNJQGtrJtJYLVnzDouhhIrFRmUwNCaDQvuyTfjnlDLMvdUacWzzeeTrtNYHQqvwNwsIeNHfdlvXHziCroXHMeDZfKIoAulkYQYdwJTivzEveTNUCKnOVLiMPjecvZzvHGvfugnjIzaWXhqbMVGzvEzNkwoIPLUiwNhetnz";
-	
-	for(int i=0;i<8;i++) 
-		callRead(1,s);
+	data="abc";
+	//for(int i=0;i<8;i++)  callRead(1,s);
 
-	//callRead(0,s);
-	//callRead(1,s);
-	//callRead(2,s);
+	callRead(1,s);
+	callRead(2,s);
+	callRead(1,s);
 
 	system("pause");
 	return 0;

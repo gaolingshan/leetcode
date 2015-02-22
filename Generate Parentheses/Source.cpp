@@ -9,7 +9,7 @@
 #include <algorithm>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	void dfs(vector<string>& res, string& now, int l, int r)
 	{
@@ -40,11 +40,31 @@ public:
     }
 };
 
+//2nd pass: 2015-02-21
+class Solution {
+public:
+    void dfs(vector<string>&res, string now, int l, int r)
+    {
+        if(l==0 && r==0)
+        {
+            res.push_back(now);
+            return;
+        }
+        if(l>0) dfs(res,now+"(",l-1,r);
+        if(r>l) dfs(res,now+")",l,r-1);
+    }
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        dfs(res,"",n,n);
+        return res;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
 
-	vector<string> result = s->generateParenthesis(5);
+	vector<string> result = s->generateParenthesis(3);
 
 	for(int i=0;i<result.size();i++)
 	{

@@ -22,7 +22,7 @@ struct TreeNode {
 };
 
 
-class Solution {
+class Solution_1st {
 public:
     TreeNode *upsideDownBinaryTree(TreeNode *root) {
 		vector<vector<TreeNode* > > levelOrder;
@@ -66,6 +66,25 @@ public:
 			levelOrder[i][0]->right=(i>0)?levelOrder[i-1][0]:NULL;
 		}
 		return newRoot;
+    }
+};
+
+//2nd pass: 2015-02-20
+class Solution {
+public:
+    TreeNode *upsideDownBinaryTree(TreeNode *root) {
+        if(root==NULL) return root;
+		auto left=root->left, right=root->right;
+		root->left=NULL;
+		root->right=NULL;
+        if(left)
+        {
+            TreeNode* res=upsideDownBinaryTree(left);
+            left->left=right;
+            left->right=root;
+            return res;
+        }
+        return root;
     }
 };
 

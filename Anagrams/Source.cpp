@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_1st {
 public:
 	unordered_map<string,int> hashtable;
     vector<string> anagrams(vector<string> &strs) {
@@ -39,9 +39,28 @@ public:
     }
 };
 
+//2nd pass: 2015-02-21
+class Solution {
+public:
+    vector<string> anagrams(vector<string> &strs) {
+        unordered_map<string,vector<int>> table;
+        for(int i=0;i<strs.size();i++)
+        {
+            string str=strs[i];
+            sort(str.begin(),str.end());
+			table[str].push_back(i);
+        }
+        vector<string> res;
+        for(auto it:table)
+			if(it.second.size()>1)
+				for(int i:it.second) res.push_back(strs[i]);
+        return res;
+    }
+};
+
 int main()
 {
-	//Solution *s = new Solution();
+	Solution *s = new Solution();
 	/*
 	dan,adn
 	·µ»Ødan,adn
@@ -52,6 +71,11 @@ int main()
 	*
 	*
 	*/
+	string A[]={"rat","art","tar","facebook","bacefook","w"};
+	vector<string> data, res;
+	for(auto str:A) data.push_back(str);
+	res=s->anagrams(data);
+	for(auto str:res) cout<<str<<endl;
 
 	system("pause");
 	return 0;

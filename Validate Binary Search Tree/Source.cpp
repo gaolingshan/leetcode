@@ -22,7 +22,7 @@ struct TreeNode {
 };
 
 
-class Solution {
+class Solution_old {
 public:
     bool isValidBST(TreeNode *root) {
 		vector<int> res;        
@@ -48,14 +48,28 @@ public:
     }
 };
 
+//2nd pass:
+class Solution {
+public:
+    bool dfs(TreeNode*root, long long min, long long max)
+    {
+        if(root==NULL) return true;
+        if(root->val <= min || root->val >= max) return false;
+        return dfs(root->left,min,root->val) && dfs(root->right,root->val,max);
+    }
+    bool isValidBST(TreeNode *root) {
+        return dfs(root,LLONG_MIN, LLONG_MAX);
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
 	TreeNode a(1);
 	TreeNode b(2);
 	TreeNode c(3);
-	a.right=&b;
-	b.left=&c;
+	//a.right=&b;
+	//b.left=&c;
 	cout<<s->isValidBST(&a)<<endl;
 
 	system("pause");

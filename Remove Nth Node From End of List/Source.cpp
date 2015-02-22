@@ -54,7 +54,7 @@ public:
 };
 
 //2nd pass: 2015-02-06
-class Solution {
+class Solution_2nd {
 public:
     ListNode *removeNthFromEnd(ListNode *head, int n) {
         if(head==NULL) return head;
@@ -77,6 +77,25 @@ public:
         }
         prev->next=p->next;
         ListNode*res=newHead->next;
+        delete(newHead);
+        return res;
+    }
+};
+
+//3rd pass: 2015-02-19
+class Solution {
+public:
+    ListNode *removeNthFromEnd(ListNode *head, int n) {
+        ListNode* newHead=new ListNode(0), *slow=newHead, *fast=head;
+        newHead->next=head;
+        while(fast)
+        {
+            if(n==0)slow=slow->next;
+            if(n>0)n--;
+            fast=fast->next;
+        }
+        slow->next=slow->next->next;
+        ListNode* res=newHead->next;
         delete(newHead);
         return res;
     }

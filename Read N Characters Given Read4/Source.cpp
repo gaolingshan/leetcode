@@ -34,7 +34,7 @@ int read4(char *buf)
 	}
 }
 
-class Solution {
+class Solution_old {
 public:
     /**
      * @param buf Destination buffer
@@ -58,6 +58,31 @@ public:
 			for(int i=0;i<cnt;i++) buf[pos++]=buff[i];
 			return pos;
 		}
+    }
+};
+
+//2nd pass: 2015-02-22
+class Solution {
+public:
+    /**
+     * @param buf Destination buffer
+     * @param n   Maximum number of characters to read
+     * @return    The number of characters read
+     */
+    int read(char *buf, int n) {
+        int cnt=0;
+        char buffer[4];
+        while(1)
+        {
+            int tmp=read4(buffer);
+            if(cnt+tmp>=n)
+            {
+                for(int i=0;cnt<n;i++) buf[cnt++]=buffer[i];
+                return cnt;
+            }
+            for(int i=0;i<tmp;i++) buf[cnt++]=buffer[i];
+            if(tmp<4) return cnt;
+        }
     }
 };
 

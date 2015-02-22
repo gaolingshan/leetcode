@@ -21,7 +21,7 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-class Solution {
+class Solution_1st {
 public:
     vector<vector<int> > levelOrder(TreeNode *root) {
 		vector<vector<int> > res;
@@ -55,6 +55,34 @@ public:
 			head++;
 		}
 		return res;
+    }
+};
+
+//2nd pass: 2015-02-20
+class Solution {
+public:
+    vector<vector<int> > levelOrder(TreeNode *root) {
+        vector<vector<int>> res;
+        vector<int> now;
+        if(root==NULL) return res;
+        deque<TreeNode*> p,q;
+        p.push_back(root);
+        while(!p.empty())
+        {
+            auto head=p.front();
+            p.pop_front();
+            now.push_back(head->val);
+            if(head->left) q.push_back(head->left);
+            if(head->right) q.push_back(head->right);
+            if(p.empty())
+            {
+                res.push_back(now);
+                now.clear();
+                p=q;
+                q.clear();
+            }
+        }
+        return res;
     }
 };
 

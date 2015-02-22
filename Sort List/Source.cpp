@@ -102,7 +102,7 @@ void print(ListNode *l)
 }
 
 //2nd pass: 2015-02-05
-class Solution {
+class Solution_2nd {
 public:
     ListNode* move(ListNode* p, int pos)
     {
@@ -171,6 +171,55 @@ public:
         ListNode *res=newHead->next;
         delete(newHead);
         return res;
+    }
+};
+
+//3rd pass: 2015-02-19
+class Solution {
+public:
+    ListNode *split(ListNode* head)
+    {
+        ListNode *fast=head,*slow=head,*prev=NULL;
+        while(fast)
+        {
+            prev=slow;
+            slow=slow->next;
+            fast=(fast->next)?fast->next->next:NULL;
+        }
+        prev->next=NULL;
+        return slow;
+    }
+    ListNode *merge(ListNode *l1, ListNode *l2)
+    {
+        ListNode *newHead= new ListNode(0), *p=newHead;
+        while(l1 && l2)
+        {
+            if(l1->val < l2->val)
+            {
+                p->next=l1;
+                p=l1;
+                l1=l1->next;
+                p->next=NULL;
+            }
+            else
+            {
+                p->next=l2;
+                p=l2;
+                l2=l2->next;
+                p->next=NULL;
+            }
+        }
+        if(l1)p->next=l1; else p->next=l2;
+        ListNode*res=newHead->next;
+        delete(newHead);
+        return res;
+    }
+    ListNode *sortList(ListNode *head) {
+		if(head==NULL || head->next==NULL) return head;
+        ListNode *head2=split(head);
+        ListNode *l1=sortList(head);
+        ListNode *l2=sortList(head2);
+        return merge(l1,l2);
     }
 };
 

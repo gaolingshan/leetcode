@@ -39,7 +39,7 @@ TreeNode* build(string A[], int len)
 	return root;
 }
  
-class Solution {
+class Solution_stack {
 public:
     vector<int> inorderTraversal(TreeNode *root) {
 		vector<int> res;        
@@ -60,6 +60,40 @@ public:
 				now=now->left;
 			}
 		}
+		return res;
+    }
+};
+
+//2nd pass: 2015-02-20
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode *root) {
+        vector<int> res;
+        TreeNode *p=root;
+        while(p)
+        {
+            if(p->left==NULL)
+            {
+                res.push_back(p->val);
+                p=p->right;
+            }
+            else
+            {
+                TreeNode *prev=p->left;
+                while(prev->right && prev->right!=p) prev=prev->right;
+                if(prev->right==NULL)
+                {
+                    prev->right=p;
+                    p=p->left;
+                }
+                else
+                {
+                    res.push_back(p->val);
+                    prev->right=NULL;
+                    p=p->right;
+                }
+            }
+        }
 		return res;
     }
 };

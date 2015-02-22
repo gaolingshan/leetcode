@@ -97,7 +97,7 @@ public:
 };
 
 //2nd pass: 2015-02-04
-class Solution {
+class Solution_2nd {
 public:
     void recoverTree(TreeNode *root) {
         vector<TreeNode*> st;
@@ -137,6 +137,76 @@ public:
         }
         if(c==NULL) swap(a->val, b->val);
         else swap(a->val,c->val);
+    }
+};
+
+//3rd pass: 2015-02-20
+class Solution_3rd {
+public:
+    TreeNode *a, *b, *prev;
+    void dfs(TreeNode* root)
+    {
+        if(root==NULL) return;
+        dfs(root->left);
+        if(prev && prev->val > root->val)
+        {
+            if(a==NULL)
+            {
+                a=prev;
+                b=root;
+            }
+            else b=root;
+        }
+        prev=root;
+        dfs(root->right);
+    }
+    void recoverTree(TreeNode *root) {
+        dfs(root);
+        swap(a->val,b->val);
+    }
+};
+
+//4rd pass: 2015-02-20
+class Solution {
+public:
+    void recoverTree(TreeNode *root) {
+        TreeNode *a=NULL,*b=NULL,*prev=NULL,*p=root;
+        while(p)
+        {
+            if(p->left==NULL)
+            {
+                if(prev && prev->val > p->val)
+                {
+                    if(a==NULL) a= prev;
+                    b=p;
+                }
+                prev=p;
+                p=p->right;
+            }
+            else
+            {
+                auto pred=p->left;
+                while(pred->right && pred->right != p) pred=pred->right;
+                if(pred->right==NULL)
+                {
+                    pred->right=p;
+                    p=p->left;
+                }
+                else
+                {
+                    if(prev && prev->val > p->val)
+                    {
+                        if(a==NULL) a= prev;
+                        b=p;
+                    }
+                    prev=p;
+                    
+                    pred->right=NULL;
+                    p=p->right;
+                }
+            }
+        }
+        swap(a->val,b->val);
     }
 };
 

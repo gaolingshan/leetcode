@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     int romanToInt(string s) {
 		int len=s.length();
@@ -34,11 +34,29 @@ public:
     }
 };
 
+//2nd pass:
+class Solution {
+public:
+    int romanToInt(string s) {
+		unordered_map<char,int> table;
+		table['I']=1; table['V']=5; table['X']=10; table['L']=50; table['C']=100; table['D']=500; table['M']=1000;
+		int ans=0,prev=INT_MAX;
+		for(char c:s)
+		{
+		    int num=table[c];
+		    ans+=num;
+            if(prev<num) ans-=2*prev;
+            prev=num;
+		}
+        return ans;		
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
 
-	cout<<s->romanToInt("MX")<<endl;
+	cout<<s->romanToInt("XIV")<<endl;
 
 	system("pause");
 	return 0;

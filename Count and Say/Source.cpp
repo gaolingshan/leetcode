@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     string countAndSay(int n) {
         string res="1";
@@ -39,6 +39,32 @@ public:
 			res=next;
 		}
 		return res;
+    }
+};
+
+//2nd pass: 2015-02-21
+class Solution {
+public:
+    string countAndSay(int n) {
+        string res="1",next="";
+        for(int i=2;i<=n;i++)
+        {
+            next.clear();
+            int cnt=0, j=0;
+            while(j<res.size())
+            {
+                cnt=1;
+                while(j+1<res.size() && res[j]==res[j+1])
+                {
+                    cnt++;
+                    j++;
+                }
+                next+=to_string(cnt)+res[j];
+                j++;
+            }
+            res=next;
+        }
+        return res;
     }
 };
 
