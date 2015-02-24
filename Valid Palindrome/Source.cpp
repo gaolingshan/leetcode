@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     bool isPalindrome(string s) {
 		int len=s.length();
@@ -28,6 +28,26 @@ public:
 			if(tolower(s[left++])!=tolower(s[right--])) return false;
 		}
 		return true;
+    }
+};
+
+//2nd pass: 2015-02-22
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int left=0,right=s.length()-1;
+        while(left<=right)
+        {
+            while(left<s.length()&&!isalnum(s[left]))left++;
+            while(right>=0&&!isalnum(s[right]))right--;
+            if(left>=right) break;
+            if(tolower(s[left])==tolower(s[right])) 
+            {
+                left++; right--;
+            }
+            else return false;
+        }
+        return true;
     }
 };
 

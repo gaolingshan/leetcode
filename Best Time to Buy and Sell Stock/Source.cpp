@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     int maxProfit(vector<int> &prices) {
 		int buyPrice=INT_MAX;
@@ -26,6 +26,20 @@ public:
 		}
 		return res;
     }
+};
+
+//2nd pass: 2015-02-23
+class Solution {
+public:
+	int maxProfit(vector<int> &prices) {
+		int ans = 0, minBuyPrice = INT_MAX;
+		for (int i = 0; i<prices.size(); i++)
+		{
+			minBuyPrice = min(minBuyPrice, prices[i]);
+			ans = max(ans, prices[i] - minBuyPrice);
+		}
+		return ans;
+	}
 };
 
 int main()

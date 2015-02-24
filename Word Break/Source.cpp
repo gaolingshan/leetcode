@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	bool f[10240];
     bool wordBreak(string s, unordered_set<string> &dict) {
@@ -32,6 +32,25 @@ public:
 			}
 		return f[len];
     }
+};
+
+//2nd pass: 2015-02-23
+class Solution {
+public:
+	bool wordBreak(string s, unordered_set<string> &dict) {
+		vector<bool> f(s.length()+1, 0);
+		f[0] = true;
+		for (int i = 0; i < s.length(); i++) if (f[i])
+		{
+			for (auto word : dict)
+			{
+				if (i + word.length() > s.length()) continue;
+				string tmp = s.substr(i, word.length());
+				if (tmp == word) f[i + word.length()] = true;
+			}
+		}
+		return f[s.length()];
+	}
 };
 
 int main()

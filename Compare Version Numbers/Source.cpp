@@ -45,8 +45,8 @@ public:
 		string v1,v2;
 		while(1)
 		{
-			bool b1=getline(ss1,v1,'.');
-			bool b2=getline(ss2,v2,'.');
+			bool b1=(bool)getline(ss1,v1,'.');
+			bool b2=(bool)getline(ss2,v2,'.');
 			if(!b1 && !b2) return 0;
 			if(!b1) 
 			{
@@ -79,8 +79,8 @@ public:
         bool b1,b2;
         while(1)
         {
-            b1=getline(ss1,tmp1,'.');
-            b2=getline(ss2,tmp2,'.');
+            b1=(bool)getline(ss1,tmp1,'.');
+            b2=(bool)getline(ss2,tmp2,'.');
             if(b1&&b2)
             {
                 int num1=stoi(tmp1), num2=stoi(tmp2);

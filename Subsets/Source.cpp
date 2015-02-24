@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     vector<vector<int> > subsets(vector<int> &S) {
 		vector<vector<int> > res;
@@ -46,10 +46,29 @@ public:
     }
 };
 
+//2nd pass: 2015-02-23
+class Solution {
+public:
+	vector<vector<int> > subsets(vector<int> &S) {
+		vector<vector<int>> res;
+		vector<int> now;
+		int len = S.size();
+		for (long long flag = 0; flag<(1 << len); flag++)
+		{
+			now.clear();
+			for (int i = 0; i<len; i++)
+				if (flag & (1 << i)) now.push_back(S[i]);
+			sort(now.begin(), now.end());
+			res.push_back(now);
+		}
+		return res;
+	}
+};
+
 int main()
 {
 	Solution *s = new Solution();
-	int A[]={1,2,2};
+	int A[]={1,2,3};
 	vector<int> data(A,A+sizeof(A)/sizeof(int));
 
 	vector<vector<int> > res = s->subsets(data);

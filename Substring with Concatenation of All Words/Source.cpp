@@ -52,7 +52,7 @@ public:
 };
 
 //168ms! -> 148ms!
-class Solution {
+class Solution_old {
 public:
 	unordered_map<string,int> dictionary;
     vector<int> findSubstring(string S, vector<string> &L) {
@@ -95,6 +95,31 @@ public:
 		}
 
 		return result;
+    }
+};
+
+//2nd pass: 2015-02-22
+class Solution {
+public:
+    vector<int> findSubstring(string S, vector<string> &L) {
+        vector<int> res;
+        unordered_map<string,int> dict;
+        int lenS=S.length(), lenL=L.size();
+        if(lenS==0 || lenL==0) return res;
+        int lenWord=L[0].size();
+        for(auto s:L) dict[s]++;
+        for(int i=0;i<=lenS-lenWord*lenL;i++)
+        {
+            unordered_map<string,int> table;
+            for(int j=0;j<lenL;j++)
+            {
+                string tmp=S.substr(i+j*lenWord,lenWord);
+                if(dict.count(tmp)==0) break;
+                if(++table[tmp]>dict[tmp]) break;
+                if(j==lenL-1) res.push_back(i);
+            }
+        }
+        return res;
     }
 };
 

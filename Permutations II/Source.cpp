@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     vector<vector<int> > permuteUnique(vector<int> &num) {
 		vector<vector<int> > res;
@@ -35,6 +35,27 @@ public:
 		return res;
 
     }
+};
+
+//2nd pass: 2015-02-24
+class Solution {
+public:
+	vector<vector<int> > permuteUnique(vector<int> &num) {
+		vector<vector<int>> res;
+		sort(num.begin(), num.end());
+		res.push_back(num);
+		while (1)
+		{
+			int i = num.size() - 2, j = num.size() - 1;
+			while (i >= 0 && num[i] >= num[i + 1])i--;
+			if (i<0)break;
+			while (j>i && num[j] <= num[i]) j--;
+			swap(num[i], num[j]);
+			reverse(num.begin() + i + 1, num.end());
+			res.push_back(num);
+		}
+		return res;
+	}
 };
 
 

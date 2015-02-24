@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     vector<vector<int> > permute(vector<int> &num) {
 		vector<vector<int> > res;
@@ -37,12 +37,37 @@ public:
     }
 };
 
+//2nd pass: 2015-02-24
+class Solution {
+public:
+	vector<vector<int>> res;
+	void dfs(int i, vector<int> &now)
+	{
+		if (i == now.size())
+		{
+			res.push_back(now);
+			return;
+		}
+		for (int j = i; j<now.size(); j++)
+		{
+			swap(now[i], now[j]);
+			dfs(i + 1, now);
+			swap(now[i], now[j]);
+		}
+	}
+	vector<vector<int> > permute(vector<int> &num) {
+		sort(num.begin(), num.end());
+		dfs(0, num);
+		return res;
+	}
+};
+
 
 int main()
 {
 	Solution *s = new Solution();
 
-	int A[] = {1,1,2};
+	int A[] = {1,2,3};
 	vector<int> data(A,A+sizeof(A)/sizeof(int));
 
 	vector<vector<int> > res = s->permute(data);

@@ -21,7 +21,7 @@ struct Interval {
     Interval(int s, int e) : start(s), end(e) {}
 };
 
-class Solution {
+class Solution_old {
 public:
 	struct cmp_struct
 	{
@@ -55,16 +55,61 @@ public:
     }
 };
 
+//2nd pass: 2015-02-22
+class Solution_2nd {
+public:
+	vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
+		vector<Interval> res;
+		int i = 0, len = intervals.size();
+		while (i<len && intervals[i].end < newInterval.start) res.push_back(intervals[i++]);
+		while (i<len && newInterval.end >= intervals[i].start)
+		{
+			newInterval.start = min(newInterval.start, intervals[i].start);
+			newInterval.end = max(newInterval.end, intervals[i].end);
+			i++;
+		}
+		res.push_back(newInterval);
+		while (i<len) res.push_back(intervals[i++]);
+		return res;
+	}
+};
+
+//3rd pass: 2015-02-22
+class Solution {
+public:
+	vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
+		auto it = intervals.begin();
+		for (; it != intervals.end(); it++) if (it->start >= newInterval.start) break;
+		intervals.insert(it, newInterval);
+		vector<Interval> res;
+		int len = intervals.size(), start = intervals[0].start, end = intervals[0].end;
+		for (int i = 1; i<len; i++)
+		{
+			auto now = intervals[i];
+			if (now.start > end)
+			{
+				res.emplace_back(start, end);
+				start = now.start;
+				end = now.end;
+			}
+			else
+				end = max(end, now.end);
+		}
+		res.emplace_back(start, end);
+		return res;
+	}
+};
+
 int main()
 {
 	Solution *s = new Solution();
 	vector<Interval> intervals,res;
-	intervals.push_back(Interval(1,3));
-	intervals.push_back(Interval(6,9));
-	//intervals.push_back(Interval(2,6));
-	//intervals.push_back(Interval(8,10));
-	//intervals.push_back(Interval(15,18));
-	res=s->insert(intervals,Interval(2,5));
+	intervals.push_back(Interval(1,2));
+	intervals.push_back(Interval(3,5));
+	intervals.push_back(Interval(6,7));
+	intervals.push_back(Interval(8,10));
+	intervals.push_back(Interval(15,18));
+	res=s->insert(intervals,Interval(4,9));
 	for(int i=0;i<res.size();i++)  cout<<res[i].start<<","<<res[i].end<<endl;
 
 	system("pause");

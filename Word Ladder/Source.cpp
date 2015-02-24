@@ -113,7 +113,7 @@ public:
 
 
 //2nd pass
-class Solution {
+class Solution_2nd {
 public:
     inline bool checkWord(string s1, string s2)
     {
@@ -160,6 +160,29 @@ public:
     }
 };
 
+//3rd pass: 2015-02-22
+class Solution {
+public:
+    int ladderLength(string start, string end, unordered_set<string> &dict) {
+        queue<pair<string,int>> q;
+        q.push(make_pair(start,1));
+		while(!q.empty())
+        {
+            auto head=q.front();
+            q.pop();
+			if(head.first==end) return head.second;
+			for(int i=0;i<head.first.length();i++)
+                for(char c='a';c<='z';c++) if(c!=head.first[i])
+                {
+					string tmp=head.first; tmp[i]=c;
+					if(tmp==end) return head.second+1;
+					if(dict.count(tmp)!=0) { q.push(make_pair(tmp,head.second+1)); dict.erase(tmp);}
+                }
+        }
+        return 0;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
@@ -173,12 +196,12 @@ int main()
 	//cout<<s->ladderLength("qa","sq",dict)<<endl;
 
 
-	dict.insert("hot");
-	dict.insert("dot");
-	dict.insert("dog");
-	dict.insert("lot");
-	dict.insert("log");
-	cout<<s->ladderLength("hit","cog",dict)<<endl;
+	//dict.insert("hot");
+	//dict.insert("dot");
+	//dict.insert("dog");
+	//dict.insert("lot");
+	//dict.insert("log");
+	//cout<<s->ladderLength("hit","cog",dict)<<endl;
 	//cout<<s->ladderLength("hit","zzz",dict)<<endl;
 	//cout<<s->ladderLength("hit","hot",dict)<<endl;
 	system("pause");

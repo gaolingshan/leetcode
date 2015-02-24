@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	void dfs(vector<vector<int> > &res, vector<int> &now, vector<int> &num, int pos, int target)
 	{
@@ -44,6 +44,34 @@ public:
 		result.resize(distance(result.begin(),it));
 		return result;
     }
+};
+
+//2nd pass: 2015-02-23
+class Solution {
+public:
+	vector<int> now;
+	vector<vector<int>> res;
+	void dfs(int i, int target, vector<int> &num)
+	{
+		if (target == 0)
+		{
+			res.push_back(now);
+			return;
+		}
+		if (i == num.size()) return;
+		dfs(i + 1, target, num);
+		if (target>=num[i])
+		{
+			now.push_back(num[i]);
+			dfs(i, target - num[i], num);
+			now.pop_back();
+		}
+	}
+	vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
+		sort(candidates.begin(), candidates.end());
+		dfs(0, target, candidates);
+		return res;
+	}
 };
 
 int main()

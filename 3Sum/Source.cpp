@@ -7,7 +7,7 @@
 #include <algorithm>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 
 	vector<int> data;
@@ -58,6 +58,27 @@ public:
 		auto it = unique(result.begin(),result.end());
 		result.resize(distance(result.begin(),it));
 		return result;
+	}
+};
+
+//2nd pass: 2015-02-22
+class Solution {
+public:
+	vector<vector<int> > threeSum(vector<int> &num) {
+		sort(num.begin(), num.end());
+		vector<vector<int>> res;
+		for (int i = 0; i<num.size(); i++)
+		{
+			if (i>0 && num[i] == num[i - 1]) continue;
+			for (int left = i + 1, right = num.size() - 1; left<right && left<num.size() && right >= 0;)
+			{
+				int sum = num[i] + num[left] + num[right];
+				if (sum == 0) res.push_back({ num[i], num[left++], num[right--] });
+				else if (sum > 0) right--; else left++;
+			}
+		}
+		res.resize(distance(res.begin(), unique(res.begin(), res.end())));
+		return res;
 	}
 };
 

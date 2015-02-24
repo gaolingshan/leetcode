@@ -10,7 +10,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     int removeDuplicates(int A[], int n) {
 		int cnt=0;
@@ -23,12 +23,23 @@ public:
     }
 };
 
+//2nd pass: 2015-02-22
+class Solution {
+public:
+	int removeDuplicates(int A[], int n) {
+		int left = -1;
+		for (int i = 0; i < n; i++) 
+			if (left==-1 || A[i] != A[left]) A[++left] = A[i];
+		return left+1;
+	}
+};
+
 int main()
 {
 	Solution *s = new Solution();
-	int arr[] = {2, 2, 11, 11};
-
-	for(int i=0;i<s->removeDuplicates(arr,4);i++)
+	int arr[] = {2, 2, 11, 11, 13,13,13,15};
+	int len = s->removeDuplicates(arr, sizeof(arr) / sizeof(int));
+	for(int i=0;i<len;i++)
 		cout<<arr[i]<<" ";
 	cout<<endl;
 

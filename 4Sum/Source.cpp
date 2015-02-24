@@ -8,7 +8,7 @@
 #include <algorithm>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 
 	vector<int> data;
@@ -86,6 +86,29 @@ public:
 		result.resize(distance(result.begin(),it));
 		return result;
 	}
+};
+
+//2nd pass: 2015-02-22
+class Solution {
+public:
+    vector<vector<int> > fourSum(vector<int> &num, int target) {
+        sort(num.begin(),num.end());
+        vector<vector<int>> res;
+        for(int i=0;i<num.size();i++)
+        {
+            if(i>0 && num[i]==num[i-1]) continue;
+            for(int j=i+1;j<num.size();j++)
+                for(int left=j+1,right=num.size()-1; left<right && left<num.size() && right>=0;)
+                {
+                    int sum=num[i]+num[j]+num[left]+num[right];
+                    if(sum==target) res.push_back({num[i],num[j],num[left++],num[right--]});
+                    else if(sum>target)right--;else left++;
+                }
+        }
+        sort(res.begin(),res.end());
+        res.resize(distance(res.begin(),unique(res.begin(),res.end())));
+        return res;
+    }
 };
 
 

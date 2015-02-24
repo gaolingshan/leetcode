@@ -8,7 +8,7 @@
 #include <algorithm>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	bool visited[10];
 	string getPermutation(int n, int k) {
@@ -35,6 +35,28 @@ public:
 				}
 			k %= factorial;
 			if(i!=n)factorial /= n-i;
+		}
+		return res;
+	}
+};
+
+
+//2nd pass:  2015-02-24
+class Solution {
+public:
+	string getPermutation(int n, int k) {
+		k--;
+		int total = 1;
+		for (int i = 2; i <= n; i++) total *= i;
+		string candidates = "", res = "";
+		for (int i = 1; i <= n; i++) candidates += to_string(i);
+		for (int i = 0; i<n; i++)
+		{
+			total /= (n - i);
+			int idx = k / total;
+			res += candidates[idx];
+			candidates.erase(idx, 1);
+			k %= total;
 		}
 		return res;
 	}

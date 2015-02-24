@@ -56,7 +56,7 @@ public:
 };
 
 //devide and conqure solution, so slow 80ms. O(nlogn) actually
-class Solution {
+class Solution_old {
 public:
 	int dfs(int A[], int L, int R)
 	{
@@ -91,6 +91,21 @@ public:
     }
 };
 
+
+//2nd pass: 2015-02-23
+class Solution {
+public:
+	int maxSubArray(int A[], int n) {
+		int sum = 0, ans = INT_MIN;
+		for (int i = 0; i<n; i++)
+		{
+			sum += A[i];
+			ans = max(ans, sum);
+			if (sum<0)sum = 0;
+		}
+		return ans;
+	}
+};
 
 int main()
 {

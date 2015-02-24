@@ -22,7 +22,7 @@ struct Interval {
 };
 
 
-class Solution {
+class Solution_old {
 public:
 	struct cmp
 	{
@@ -56,14 +56,45 @@ public:
     }
 };
 
+//2nd pass: 2015-02-22
+class Solution {
+public:
+	struct cmp
+	{
+		bool operator () (const Interval &a, const Interval &b)
+		{
+			return a.start<b.start;
+		}
+	}cmp_obj;
+	vector<Interval> merge(vector<Interval> &intervals) {
+		sort(intervals.begin(), intervals.end(), cmp_obj);
+		vector<Interval> res;
+		if (intervals.size() == 0) return res;
+		int start = intervals[0].start, end = intervals[0].end;
+		for (int i = 1; i<intervals.size(); i++)
+		{
+			if (intervals[i].start > end)
+			{
+				res.push_back(Interval(start, end));
+				start = intervals[i].start;
+				end = intervals[i].end;
+			}
+			else
+				end = max(end, intervals[i].end);
+		}
+		res.push_back(Interval(start, end));
+		return res;
+	}
+};
+
 int main()
 {
 	Solution *s = new Solution();
 	vector<Interval> intervals,res;
-	intervals.push_back(Interval(1,1));
-	//intervals.push_back(Interval(2,6));
-	//intervals.push_back(Interval(8,10));
-	//intervals.push_back(Interval(15,18));
+	intervals.push_back(Interval(1,2));
+	intervals.push_back(Interval(2,6));
+	intervals.push_back(Interval(8,10));
+	intervals.push_back(Interval(15,18));
 	res=s->merge(intervals);
 	for(int i=0;i<res.size();i++)  cout<<res[i].start<<","<<res[i].end<<endl;
 

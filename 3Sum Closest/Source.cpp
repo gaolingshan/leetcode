@@ -7,7 +7,7 @@
 #include <algorithm>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 
 	vector<int> data;
@@ -43,9 +43,34 @@ public:
 			int twoSumresult = twoSum(i+1,data.size()-1,target-data[i]);
 			if(abs(twoSumresult+data[i]-target) < abs(res-target)) res = twoSumresult+data[i];
 		}
-
 		return res;
 	}
+};
+
+//2nd pass:
+class Solution {
+public:
+    int threeSumClosest(vector<int> &num, int target) {
+        sort(num.begin(),num.end());
+        int ans=0,diff=INT_MAX;
+        for(int i=0;i<num.size();i++)
+        {
+            if(i>0 && num[i]==num[i-1]) continue;
+            int left=i+1,right=num.size()-1;
+            while(left<right && left<num.size() && right>=0)
+            {
+                int sum=num[i]+num[left]+num[right];
+                if(abs(sum-target)<diff)
+                {
+                    diff=abs(sum-target);
+                    ans=sum;
+                }
+                if(sum==target) return sum;
+                if(sum > target) right--; else left++;
+            }
+        }
+        return ans;
+    }
 };
 
 

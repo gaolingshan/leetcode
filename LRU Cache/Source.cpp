@@ -15,13 +15,13 @@
 #include <list>
 using namespace std;
 
-class LRUCache{
+class LRUCache_old{
 public:
 	list<pair<int,int>> KV_list;	
 	unordered_map<int,list<pair<int,int>>::iterator> key_map;
 	int cap;
 	
-    LRUCache(int capacity) {
+    LRUCache_old(int capacity) {
 		cap=capacity;
     }
     
@@ -62,19 +62,73 @@ public:
     }
 };
 
+//2nd pass: 2015-02-23
+class LRUCache{
+private:
+	int cap;
+	list<pair<int, int>> data;
+	unordered_map<int, list<pair<int, int>>::iterator> table;
+public:
+	LRUCache(int capacity) {
+		cap = capacity;
+		data.clear();
+		table.clear();
+	}
+
+	int get(int key) {
+		if (table.count(key) == 0) return -1;
+		auto it = table[key]; 
+		int val = it->second;
+		data.erase(it);
+		data.emplace_back(key,val);
+		table[key] = prev(data.end());
+		return data.back().second;
+	}
+
+	void set(int key, int value) {
+		if (table.count(key))  //exist, move to end
+		{
+			auto it = table[key];
+			data.erase(it);
+			data.emplace_back(key, value);
+			table[key] = prev(data.end());
+		}
+		else //non-exist, insert and 
+		{
+			if (data.size() >= cap) //invalid lru
+			{
+				table.erase(data.front().first);
+				data.erase(data.begin());
+			}
+			data.emplace_back(key, value);
+			table[key] = prev(data.end());
+		}
+	}
+};
+
 int main()
 {
 	LRUCache *s = new LRUCache(2);
-	cout<<s->get(1)<<endl;
-	s->set(1,10);
-	s->set(2,11);
-	s->set(3,12);
-	cout<<s->get(1)<<endl;
+	//cout<<s->get(1)<<endl;
+	//s->set(1,10);
+	//s->set(2,11);
+	//s->set(3,12);
+	//cout<<s->get(1)<<endl;
+	//cout<<s->get(3)<<endl;
+	//cout<<s->get(2)<<endl;
+	//s->set(4,13);
+	//cout<<s->get(3)<<endl;
+	//cout<<s->get(4)<<endl;
+
+	s->set(2, 1);
+	s->set(3, 2);
 	cout<<s->get(3)<<endl;
-	cout<<s->get(2)<<endl;
-	s->set(4,13);
-	cout<<s->get(3)<<endl;
-	cout<<s->get(4)<<endl;
+	cout << s->get(2) << endl;
+	s->set(4, 3);
+	cout << s->get(2) << endl;
+	cout << s->get(3) << endl;
+	cout << s->get(4) << endl;
+
 
 
 	system("pause");

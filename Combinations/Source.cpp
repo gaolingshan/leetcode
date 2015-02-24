@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	void dfs(vector<vector<int> > &res, vector<int> &now,int i, int n, int k)
 	{
@@ -42,10 +42,36 @@ public:
     }
 };
 
+//2nd pass: 2015-02-23
+class Solution {
+public:
+	void dfs(vector<vector<int>> &res, vector<int> &now, int n, int k)
+	{
+		if (k == 0)
+		{
+			auto tmp = now;
+			reverse(tmp.begin(), tmp.end());
+			res.push_back(tmp);
+			return;
+		}
+		if (n == 0) return;
+		now.push_back(n);
+		dfs(res,now,n - 1, k - 1);
+		now.pop_back();
+		dfs(res,now,n - 1, k);
+	}
+	vector<vector<int> > combine(int n, int k) {
+		vector<vector<int>> res;
+		vector<int> now;
+		dfs(res, now, n, k);
+		return res;
+	}
+};
+
 int main()
 {
 	Solution *s = new Solution();
-	vector<vector<int> > res = s->combine(4,0);
+	vector<vector<int> > res = s->combine(4,4);
 	for(auto it : res)
 	{
 		for(auto it2 : it) cout<<it2<<" ";

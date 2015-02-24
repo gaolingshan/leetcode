@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     int maxProfit(vector<int> &prices) {
 		int len=prices.size();
@@ -39,6 +39,33 @@ public:
 		for(int i=0;i<len;i++) res=max(res,f[i]+g[i]);
 		return res;
     }
+};
+
+//2nd pass: 2015-02-23
+class Solution {
+public:
+	int maxProfit(vector<int> &prices) {
+		int len = prices.size();
+		if (len <= 1) return 0;
+		vector<int> f(len, 0), g(len, 0);
+		int low = INT_MAX, high = 0, ans = 0;
+		for (int i = 0; i<len; i++)
+		{
+			low = min(low, prices[i]);
+			ans = max(ans, prices[i] - low);
+			f[i] = ans;
+		}
+		ans = 0;
+		for (int i = len - 1; i >= 0; i--)
+		{
+			high = max(high, prices[i]);
+			ans = max(ans, high - prices[i]);
+			g[i] = ans;
+		}
+		ans = 0;
+		for (int i = 0; i<len; i++) ans = max(ans, f[i] + g[i]);
+		return ans;
+	}
 };
 
 int main()

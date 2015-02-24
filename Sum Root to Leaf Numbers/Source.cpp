@@ -34,7 +34,6 @@ public:
 		}
 		if(root->left != NULL)dfs(root->left,now);
 		if(root->right != NULL)dfs(root->right,now);
-		//now=now/10;  now这里没有pass reference，是临时变量，所以不用回溯
 	}
     int sumNumbers(TreeNode *root) {
 		if(root==NULL) return 0;

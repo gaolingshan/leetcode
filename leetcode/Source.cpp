@@ -1,9 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <unordered_map>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	vector<int> twoSum(vector<int> &numbers, int target) {
 		vector<int> res;
@@ -23,6 +24,26 @@ public:
 		}
 		return res;
 	}
+};
+
+//2nd pass: 2015-02-22
+class Solution {
+public:
+    vector<int> twoSum(vector<int> &numbers, int target) {
+        unordered_map<int,int> table;
+        vector<int> res;
+        for(int i=0;i<numbers.size();i++) table[numbers[i]]=i;
+        for(int i=0;i<numbers.size();i++) 
+        {
+            int num=target-numbers[i];
+            if(table.count(num)!=0 && table[num]>i)
+            {
+                res.push_back(i);
+                res.push_back(table[num]);
+                return res;
+            }
+        }
+    }
 };
 
 int main()

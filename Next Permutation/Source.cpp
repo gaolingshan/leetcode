@@ -13,7 +13,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     void nextPermutation(vector<int> &num) {
 		if(num.size() == 1) return;
@@ -50,15 +50,30 @@ public:
     }
 };
 
+//2nd pass: 2015-02-24
+class Solution {
+public:
+	void nextPermutation(vector<int> &num) {
+		if (num.size() <= 1) return;
+		int i = num.size() - 2, j = num.size() - 1;
+		while (i >= 0 && num[i]>=num[i + 1]) i--;
+		if (i < 0)
+		{
+			reverse(num.begin(), num.end());
+			return;
+		}
+		while (j>i && num[j]<=num[i])j--;
+		swap(num[i], num[j]);
+		reverse(num.begin() + i + 1, num.end());
+		return;
+	}
+};
+
 int main()
 {
 	Solution *s = new Solution();
 
-	vector<int> num;
-	num.push_back(5);
-	num.push_back(1);
-	num.push_back(1);
-	num.push_back(1);
+	vector<int> num = { 5,1, 1 };
 
 	s->nextPermutation(num);
 

@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     bool canJump(int A[], int n) {
 		if(n==1) return true;
@@ -31,6 +31,20 @@ public:
 			now=next;
 		}        
     }
+};
+
+//2nd pass: 2015-02-23
+class Solution {
+public:
+	bool canJump(int A[], int n) {
+		int now = 0;
+		for (int i = 0; i<n; i++)
+		{
+			if (now<i) return false;
+			now = max(now, i + A[i]);
+		}
+		return now >= n - 1;
+	}
 };
 
 int main()
