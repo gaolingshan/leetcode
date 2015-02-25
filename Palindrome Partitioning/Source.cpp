@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     bool isPalindrome(string s) {
 		int len=s.length();
@@ -53,6 +53,36 @@ public:
 		dfs(res,now,s,0);
 		return res;
     }
+};
+
+//2nd pass: 2015-02-25
+class Solution {
+public:
+	bool isPalindrome(string s){
+		int left = 0, right = s.length() - 1;
+		while (left<right) if (s[left++] != s[right--]) return false;
+		return true;
+	}
+	vector<vector<string>> res;
+	void dfs(int i, vector<string> &now, string &s){
+		if (i == s.length()){
+			res.push_back(now);
+			return;
+		}
+		for (int len = 1; i + len - 1<s.length(); len++){
+			string tmp = s.substr(i, len);
+			if (isPalindrome(tmp)){
+				now.push_back(tmp);
+				dfs(i + len, now, s);
+				now.pop_back();
+			}
+		}
+	}
+	vector<vector<string>> partition(string s) {
+		vector<string> now;
+		dfs(0, now, s);
+		return res;
+	}
 };
 
 int main()

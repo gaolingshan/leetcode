@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	bool check(vector<vector<char> > &board, int x,int y)
 	{
@@ -81,6 +81,50 @@ public:
 		finish=false;
 		dfs(0,0,board);
     }
+};
+
+//2nd pass: 2015-02-25
+class Solution {
+public:
+	bool rows[9][9], cols[9][9], blocks[9][9];
+	bool isFinish;
+	bool isValid(int i, int j, int num) {
+		int block = 3 * (i / 3) + j / 3;
+		if (rows[i][num] || cols[j][num] || blocks[block][num]) return false;
+		else return true;
+	}
+	void setNum(int i, int j, int num, bool flag){
+		int block = 3 * (i / 3) + j / 3;
+		rows[i][num] = cols[j][num] = blocks[block][num] = flag;
+	}
+	void dfs(vector<vector<char>> &board, int i, int j){
+		if (i == 9) { isFinish = true; return; }
+		if (board[i][j] != '.'){
+			if (j != 8) dfs(board, i, j + 1); else dfs(board, i + 1, 0);
+		}
+		else{
+			for (int num = 0; num<9; num++){
+				if (isValid(i, j, num)){
+					board[i][j] = num + '1';
+					setNum(i, j, num, true);
+					if (j != 8) dfs(board, i, j + 1); else dfs(board, i + 1, 0);
+					if (isFinish) return;
+					setNum(i, j, num, false);
+					board[i][j] = '.';
+				}
+			}
+		}
+	}
+	void solveSudoku(vector<vector<char> > &board) {
+		memset(rows, 0, sizeof(rows));
+		memset(cols, 0, sizeof(cols));
+		memset(blocks, 0, sizeof(cols));
+		for (int i = 0; i<9; i++)
+			for (int j = 0; j<9; j++)
+				if (board[i][j] != '.') setNum(i, j, board[i][j] - '1', true);
+		isFinish = false;
+		dfs(board, 0, 0);
+	}
 };
 
 int main()

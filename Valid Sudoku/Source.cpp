@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	bool check(vector<vector<char> > &board, int x,int y)
 	{
@@ -46,6 +46,26 @@ public:
 				if(!check(board,i,j)) return false;
 		return true;
     }
+};
+
+//2nd pass: 2015-02-25
+class Solution {
+public:
+	bool rows[9][9], cols[9][9], blocks[9][9];
+	bool isValidSudoku(vector<vector<char> > &board) {
+		memset(rows, 0, sizeof(rows));
+		memset(cols, 0, sizeof(cols));
+		memset(blocks, 0, sizeof(cols));
+		for (int i = 0; i<9; i++)
+			for (int j = 0; j<9; j++)
+				if (board[i][j] != '.'){
+					int num = board[i][j] - '1';
+					int block = 3 * (i / 3) + j / 3;
+					if (rows[i][num] || cols[j][num] || blocks[block][num]) return false;
+					rows[i][num] = cols[j][num] = blocks[block][num] = true;
+				}
+		return true;
+	}
 };
 
 int main()

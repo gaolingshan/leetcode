@@ -15,7 +15,7 @@
 using namespace std;
 
 //only 8ms! Not reversing the digits!
-class Solution {
+class Solution_old {
 public:
     vector<int> plusOne(vector<int> &digits) {
 		if(digits.empty())
@@ -45,6 +45,38 @@ public:
 		}
 		return digits;
     }
+};
+
+//2nd pass: 2015-02-25
+class Solution {
+public:
+	int add(int a, int b){
+		while (b){
+			int sum = a^b;
+			int carry = (a&b) << 1;
+			a = sum;
+			b = carry;
+		}
+		return a;
+	}
+	vector<int> plusOne(vector<int> &digits) {
+		int len = digits.size();
+		if (len == 0) return vector<int>(1, 1);
+
+		int i = len - 1, carry = 1;
+		while (1){
+			int sum = (digits[i] + carry) % 10;
+			carry = (digits[i] + carry) / 10;
+			digits[i] = sum;
+			if (carry == 0) break;
+			if (i == 0){
+				digits.insert(digits.begin(), carry);
+				break;
+			}
+			i--;
+		}
+		return digits;
+	}
 };
 
 int main()
