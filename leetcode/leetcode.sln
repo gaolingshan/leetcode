@@ -377,6 +377,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "First Bad Version", "..\Fir
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rotate Array", "..\Rotate Array\Rotate Array.vcxproj", "{DFC4008A-A627-4A6E-98CA-2F9BA7F051B9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Implement Vector", "..\Implement Vector\Implement Vector.vcxproj", "{2C0F1F06-869C-4E69-A836-F019A45F51C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2257,6 +2259,16 @@ Global
 		{DFC4008A-A627-4A6E-98CA-2F9BA7F051B9}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{DFC4008A-A627-4A6E-98CA-2F9BA7F051B9}.Release|Win32.ActiveCfg = Release|Win32
 		{DFC4008A-A627-4A6E-98CA-2F9BA7F051B9}.Release|Win32.Build.0 = Release|Win32
+		{2C0F1F06-869C-4E69-A836-F019A45F51C4}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{2C0F1F06-869C-4E69-A836-F019A45F51C4}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{2C0F1F06-869C-4E69-A836-F019A45F51C4}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{2C0F1F06-869C-4E69-A836-F019A45F51C4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2C0F1F06-869C-4E69-A836-F019A45F51C4}.Debug|Win32.Build.0 = Debug|Win32
+		{2C0F1F06-869C-4E69-A836-F019A45F51C4}.Release|Any CPU.ActiveCfg = Release|Win32
+		{2C0F1F06-869C-4E69-A836-F019A45F51C4}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{2C0F1F06-869C-4E69-A836-F019A45F51C4}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{2C0F1F06-869C-4E69-A836-F019A45F51C4}.Release|Win32.ActiveCfg = Release|Win32
+		{2C0F1F06-869C-4E69-A836-F019A45F51C4}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
