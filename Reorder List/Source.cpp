@@ -135,7 +135,7 @@ public:
 };
 
 //3rd pass: 2015-02-19
-class Solution {
+class Solution_3rd {
 public:
     void reorderList(ListNode *head) {
         if(head==NULL) return;
@@ -172,6 +172,44 @@ public:
             q=q_next;
         }
     }
+};
+
+//4rd pass: 2015-02-26
+class Solution {
+public:
+	ListNode* split(ListNode *head){
+		ListNode *slow = head, *fast = head, *prev = NULL;
+		while (fast){
+			prev = slow;
+			slow = slow->next;
+			fast = (fast->next) ? fast->next->next : NULL;
+		}
+		prev->next = NULL;
+		return slow;
+	}
+	ListNode *reverse(ListNode *head){
+		ListNode *p = head, *prev = NULL;
+		while (p){
+			ListNode *p_next = p->next;
+			p->next = prev;
+			prev = p;
+			p = p_next;
+		}
+		return prev;
+	}
+	void reorderList(ListNode *head) {
+		if (head == NULL) return;
+		ListNode *head2 = split(head);
+		head2 = reverse(head2);
+		ListNode *p = head, *p2 = head2, *prev = p;
+		while (p2){
+			ListNode* p_next = p->next, *p2_next = p2->next;
+			p->next = p2;
+			p2->next = p_next;
+			p = p_next;
+			p2 = p2_next;
+		}
+	}
 };
 
 

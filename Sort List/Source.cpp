@@ -175,7 +175,7 @@ public:
 };
 
 //3rd pass: 2015-02-19
-class Solution {
+class Solution_recursion {
 public:
     ListNode *split(ListNode* head)
     {
@@ -221,6 +221,72 @@ public:
         ListNode *l2=sortList(head2);
         return merge(l1,l2);
     }
+};
+
+//4th pass: 2015-02-26
+class Solution {
+public:
+	ListNode *move(ListNode *head, int step){
+		ListNode *p = head;
+		while (p && step){
+			p = p->next;
+			step--;
+		}
+		return p;
+	}
+	ListNode *sortList(ListNode *head) {
+		int len = 0;
+		ListNode *p = head;
+		while (p){
+			len++;
+			p = p->next;
+		}
+		ListNode *newHead = new ListNode(0);
+		newHead->next = head;
+		for (int step = 1; step < len; step *= 2){
+			ListNode *slow = newHead->next, *fast = newHead->next, *prev = newHead;
+			while (slow){
+				int slowCnt = 1, fastCnt = 1;
+				fast = move(fast, step);
+				if (fast == NULL) break;
+				while (slowCnt <= step && slow && fastCnt <= step && fast){
+					if (slow->val < fast->val){
+						prev->next = slow;
+						prev = slow;
+						slow = slow->next;
+						prev->next = NULL;
+						slowCnt++;
+					}
+					else{
+						prev->next = fast;
+						prev = fast;
+						fast = fast->next;
+						prev->next = NULL;
+						fastCnt++;
+					}
+				}
+				while (slowCnt <= step && slow){
+					prev->next = slow;
+					prev = slow;
+					slow = slow->next;
+					prev->next = NULL;
+					slowCnt++;
+				}
+				while (fastCnt <= step && fast){
+					prev->next = fast;
+					prev = fast;
+					fast = fast->next;
+					prev->next = NULL;
+					fastCnt++;
+				}
+				prev->next=fast;
+				slow = fast;
+			}
+		}
+		auto res = newHead->next;
+		delete(newHead);
+		return res;
+	}
 };
 
 int main()
