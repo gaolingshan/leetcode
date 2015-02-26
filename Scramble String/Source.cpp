@@ -16,7 +16,7 @@ using namespace std;
 
 //with memorize 1012ms.. so slow
 //w/o memorize only 72ms! so interesting. don't know why
-class Solution {
+class Solution_old {
 public:
 	//int f[100][100][100];
 	string S1,S2;
@@ -82,6 +82,31 @@ public:
 		//memset(f,-1,sizeof(f));
 		return dfs(0,0,len1);
     }
+};
+
+//2nd pass: 2015-02-26
+class Solution {
+public:
+	bool isScramble(string s1, string s2) {
+		int len1 = s1.length(), len2 = s2.length();
+		if (len1 != len2) return false;
+		int table[256] = {0};
+		for (int i = 0; i<len1; i++){
+			table[s1[i]]++;
+			table[s2[i]]--;
+		}
+		for (int i = 0; i<256; i++)
+			if (table[i] != 0) return false;
+		if (len1 <= 3) return true;
+		for (int len = 1; len<len1; len++){
+			bool result = isScramble(s1.substr(0, len), s2.substr(0, len))
+				&& isScramble(s1.substr(len, len1 - len), s2.substr(len, len1 - len));
+			result |= isScramble(s1.substr(0, len), s2.substr(len1 - len, len))
+				&& isScramble(s1.substr(len, len1 - len), s2.substr(0, len1 - len));
+			if (result) return true;
+		}
+		return false;
+	}
 };
 
 int main()

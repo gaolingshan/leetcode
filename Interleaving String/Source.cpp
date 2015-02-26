@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	bool f[1010][1010];
     bool isInterleave(string s1, string s2, string s3) {
@@ -45,6 +45,29 @@ public:
 				}
 		return f[len1][len2];
     }
+};
+
+//2nd pass: 2015-02-26
+/*
+f[i][j]  s1:1~i, s2:1~j match s3:1~i+j
+f[i][j] -> f[i+1][j]  s1[i+1]==s3[i+j+1]
+f[i][j+1]  s2[j+1]==s3[i+j+1]
+
+*/
+class Solution {
+public:
+	bool isInterleave(string s1, string s2, string s3) {
+		int len1 = s1.length(), len2 = s2.length();
+		if (len1+len2 != s3.length()) return false;
+		vector<vector<bool>> f(len1+1, vector<bool>(len2+1, false));
+		f[0][0] = true;
+		for (int i = 0; i<=len1; i++)
+			for (int j = 0; j<=len2; j++) if (f[i][j]){
+				if (i+1<=len1 && s1[i] == s3[i+j]) f[i+1][j] = true;
+				if (j+1<=len2 && s2[j] == s3[i+j]) f[i][j+1] = true;
+			}
+		return f[len1][len2];
+	}
 };
 
 int main()

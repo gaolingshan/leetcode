@@ -4,7 +4,7 @@
 #include <map>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	int reverse(int x) {
 		long long int res = 0;
@@ -22,6 +22,24 @@ public:
 		}
 
 		return res;
+	}
+};
+
+//2nd pass: 2015-02-26
+class Solution {
+public:
+	int reverse(int x) {
+		if (x == 0) return 0;
+		bool isPositive = (x>0);
+		x = abs(x);
+		long long res = 0;
+		while (x)
+		{
+			res = res * 10 + x % 10;
+			x /= 10;
+		}
+		if (isPositive) return (res>INT_MAX) ? 0: res;
+		else return (-res<INT_MIN) ? 0: -res;
 	}
 };
 

@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	bool finished;
 	int dx[4];
@@ -72,6 +72,45 @@ public:
 
 		return false;
     }
+};
+
+//2nd pass: 2015-02-26
+class Solution {
+public:
+	bool isFinish{ false };
+	void dfs(int x, int y, string word, vector<vector<bool>> &visited, vector<vector<char> > &board){
+		if (isFinish) return;
+		if (word == ""){
+			isFinish = true;
+			return;
+		}
+		visited[x][y] = true;
+		int dx[4] = { 0, 1, 0, -1 };
+		int dy[4] = { 1, 0, -1, 0 };
+		for (int i = 0; i<4; i++){
+			int newx = x + dx[i], newy = y + dy[i];
+			if (newx<0 || newx >= m || newy<0 || newy >= n) continue;
+			if (!visited[newx][newy] && board[newx][newy] == word.front())
+				dfs(newx, newy, word.substr(1, word.length() - 1), visited, board);
+		}
+		visited[x][y] = false;
+	}
+	int m, n;
+	bool exist(vector<vector<char> > &board, string word) {
+		if (word == "") return true;
+		m = board.size();
+		if (m == 0) return false;
+		n = board[0].size();
+		if (n == 0) return false;
+		isFinish = false;
+		vector<vector<bool>> visited(m, vector<bool>(n, false));
+		for (int i = 0; i < m; i++)
+			for (int j = 0; j < n; j++) if (board[i][j] == word[0]){
+				dfs(i, j, word.substr(1,word.length()-1), visited, board);
+				if (isFinish) return true;
+			}
+		return false;
+	}
 };
 
 int main()
