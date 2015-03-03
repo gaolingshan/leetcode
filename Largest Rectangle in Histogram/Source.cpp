@@ -82,7 +82,7 @@ public:
 
 
 //2nd pass: 2015-02-04
-class Solution {
+class Solution_2nd {
 public:
     int largestRectangleArea(vector<int> &height) {
         vector<int> st;
@@ -111,11 +111,50 @@ public:
     }
 };
 
+//3rd pass: 2015-02-27
+/*
+[2,1,5,6,2,3]
+   .
+  ..
+  ..
+  .. .
+. ....
+......
+
+keep non-desending (<=) order in the stack
+1. stack==empty || new number >= stack top, just push. else
+2.    height=stack top, pop stack,
+len = stack.top()+1(or 0 if stack empty) ~ i-1, area = height*len
+keep pop stack if stack is not empty && new height < stack top
+3. finally push i into stack
+
+*/
+class Solution {
+public:
+	int largestRectangleArea(vector<int> &height) {
+		stack<int> st;
+		int ans = 0;
+		height.push_back(0);
+		for (int i = 0; i<height.size(); i++){
+			if (st.empty() || height[i] >= height[st.top()]) st.push(i); else{
+				do{
+					int h = height[st.top()];
+					st.pop();
+					int len = i - (st.empty() ? 0 : st.top() + 1);
+					ans = max(ans, len*h);
+				} while (!st.empty() && height[i] < height[st.top()]);
+				st.push(i);
+			}
+		}
+		return ans;
+	}
+};
+
 int main()
 {
 	Solution *s = new Solution();
-	//int A[] = {2,1,5,6,2,3};
-	int A[] = {2,1,2};
+	int A[] = {2,1,5,6,2,3};
+	//int A[] = {2,1,2};
 	vector<int> data(A,A+sizeof(A)/sizeof(int));
 
 	cout<<s->largestRectangleArea(data)<<endl;

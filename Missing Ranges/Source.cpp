@@ -40,7 +40,7 @@ public:
 };
 
 //2nd pass: 2015-02-05
-class Solution {
+class Solution_2nd {
 public:
     vector<string> findMissingRanges(int A[], int n, int lower, int upper) {
         vector<string> res;
@@ -70,6 +70,24 @@ public:
         }
         return res;
     }
+};
+
+//3rd pass: 2015-02-27
+class Solution {
+public:
+	vector<string> findMissingRanges(int A[], int n, int lower, int upper) {
+		int x = lower;
+		vector<string> res;
+		for (int i = 0; i <= n; i++){
+			int num=(i==n)?upper+1:A[i];
+			if (x==num) x++; else{
+				if (x==num-1) res.push_back(to_string(x));
+				else res.push_back(to_string(x) + "->"+to_string(num-1));
+				x = num + 1;
+			}
+		}
+		return res;
+	}
 };
 
 int main()

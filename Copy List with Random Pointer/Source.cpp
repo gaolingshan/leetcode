@@ -55,7 +55,7 @@ public:
  *     RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
  * };
  */
-class Solution {
+class Solution_3pass {
 public:
     RandomListNode *copyRandomList(RandomListNode *head) {
         if(head==NULL) return head;
@@ -94,6 +94,29 @@ public:
         }
         return res;
     }
+};
+
+//3rd pass: 2015-02-26
+class Solution {
+public:
+	unordered_map<RandomListNode*, RandomListNode*> table;
+	RandomListNode *copyRandomList(RandomListNode *head) {
+		if (head == NULL) return NULL;
+		RandomListNode* p = head, *prev = NULL;
+		while (p){
+			RandomListNode* newNode = new RandomListNode(p->label);
+			if (prev) prev->next = newNode;
+			prev = newNode;
+			table[p] = newNode;
+			p = p->next;
+		}
+		p = head;
+		while (p){
+			table[p]->random = table[p->random];
+			p = p->next;
+		}
+		return table[head];
+	}
 };
 
 int main()

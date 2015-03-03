@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     int maxProduct(int A[], int n) {
 		if(n==0) return 0;
@@ -53,6 +53,28 @@ public:
 			if(tmp==0) tmp=1;
 		}
 		return ans;
+    }
+};
+
+//2nd pass: 2015-02-27
+/*
+maintain minVal and maxVal ending at this index so far, while updaing ans with maxVal
+
+new num A[i]
+maxVal = max(A[i],A[i]*maxVal_prev,minVal*A[i]);
+minVal = min(A[i],A[i]*maxVal_prev,minVal*A[i]);
+*/
+class Solution {
+public:
+    int maxProduct(int A[], int n) {
+        int minVal=A[0],maxVal=A[0],ans=A[0];
+        for(int i=1;i<n;i++){
+            int maxVal_prev=maxVal;
+            maxVal=max(minVal*A[i],max(A[i],maxVal_prev*A[i]));
+            minVal=min(A[i],min(A[i]*maxVal_prev,minVal*A[i]));
+            ans=max(ans,maxVal);
+        }
+        return ans;
     }
 };
 

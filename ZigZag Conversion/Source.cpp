@@ -4,7 +4,7 @@
 #include <map>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	string convert(string s, int nRows) {
 		vector<vector<char>> data;
@@ -25,11 +25,31 @@ public:
 	}
 };
 
+//2nd pass: 2015-03-03
+class Solution {
+public:
+    string convert(string s, int nRows) {
+		if (nRows==1) return s;
+        vector<string> rows(nRows,"");
+        bool isGoingDown=true;
+        int i=0;
+        for(char c:s){
+            if(i==nRows-1) isGoingDown=false;
+            if(i==0) isGoingDown=true;
+            rows[i]+=c;
+            i=(isGoingDown)?i+1:i-1;
+        }
+        string res;
+        for(auto str:rows)res+=str;
+        return res;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
 
-	cout << s->convert("PAYPALISHIRING",1) << endl;
+	cout << s->convert("PAYPALISHIRING",3) << endl;
 	system("pause");
 	return 0;
 }

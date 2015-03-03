@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     string multiply(string num1, string num2) {
 		string res="";
@@ -50,11 +50,34 @@ public:
     }
 };
 
+//2nd pass: 2015-03-03
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+        int n1=num1.size(), n2=num2.size(), n=n1+n2;
+        vector<int> numbers(n,0);
+        string res="";
+        for(int i=0;i<n1;i++)
+            for(int j=0;j<n2;j++)
+                numbers[i+j+1]+=(num1[i]-'0')*(num2[j]-'0');
+        for(int i=n-1;i>=0;i--){
+            if(i>0) numbers[i-1]+=numbers[i]/10;
+            numbers[i]%=10;
+            res+=('0'+numbers[i]);
+        }
+        reverse(res.begin(),res.end());
+		res.erase(0,res.find_first_not_of('0'));
+		return (res == "") ? "0":res;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
 
-	cout<<s->multiply("3","456")<<endl;
+	//cout<<s->multiply("3","456")<<endl;
+	//cout<<s->multiply("123","456")<<endl;
+	cout<<s->multiply("123","0")<<endl;
 
 
 	system("pause");

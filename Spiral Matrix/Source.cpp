@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     vector<int> spiralOrder(vector<vector<int> > &matrix) {
         //dir: 0¡ú 1¡ý 2¡û 3¡ü
@@ -85,12 +85,37 @@ public:
     }
 };
 
+
+//2nd pass: 2015-03-04
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int> > &matrix) {
+        vector<int> res;
+        int m=matrix.size();
+        if(m==0) return res;
+        int n=matrix[0].size();
+        if(n==0) return res;
+        int beginX=0,endX=n-1, beginY=0, endY=m-1;
+        while(1){
+            for(int i=beginX;i<=endX;i++) res.push_back(matrix[beginY][i]);
+            if(++beginY>endY) break;
+            for(int i=beginY;i<=endY;i++) res.push_back(matrix[i][endX]);
+            if(--endX<beginX) break;
+            for(int i=endX;i>=beginX;i--) res.push_back(matrix[endY][i]);
+            if(--endY<beginY) break;
+            for(int i=endY;i>=beginY;i--) res.push_back(matrix[i][beginX]);
+            if(++beginX>endX) break;
+        }
+        return res;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
 
 	vector<vector<int> > matrix;
-/*
+
 	int A[][3]={{1,2,3},
 				{4,5,6},
 				{7,8,9}};
@@ -99,13 +124,13 @@ int main()
 		vector<int> row(A[i],A[i]+sizeof(A[i])/sizeof(int));
 		matrix.push_back(row);
 	}
-*/
-	int A[][2]={{1,2}};
-	for(int i=0;i<1;i++)
-	{
-		vector<int> row(A[i],A[i]+sizeof(A[i])/sizeof(int));
-		matrix.push_back(row);
-	}
+
+	//int A[][2]={{1,2}};
+	//for(int i=0;i<1;i++)
+	//{
+	//	vector<int> row(A[i],A[i]+sizeof(A[i])/sizeof(int));
+	//	matrix.push_back(row);
+	//}
 	vector<int> res= s->spiralOrder(matrix);
 	for(int i=0;i<res.size();i++) cout<<res[i]<<" ";
 	cout<<endl;

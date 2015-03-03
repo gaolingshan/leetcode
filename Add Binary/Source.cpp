@@ -48,7 +48,7 @@ public:
 
 //Need improve, more compact
 //2nd Pass: 2015-02-04
-class Solution {
+class Solution_2nd {
 public:
     string addBinary(string a, string b) {
         string res="";
@@ -72,6 +72,23 @@ public:
         }
         if(numC!=0) res.insert(res.begin(),'0'+numC);
         return res;
+    }
+};
+
+//3rd pass: 2015-02-27
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        if(a.length()<b.length()) swap(a,b);
+        int lenA=a.length(), lenB=b.length(), carry=0;
+        for(int i=lenA-1,j=lenB-1;i>=0;i--,j--){
+            int numA=a[i]-'0', numB=(j>=0)?(b[j]-'0'):0;
+            int num=numA+numB+carry;
+            a[i]='0'+num%2;
+            carry=num/2;
+        }
+        if(carry!=0) a.insert(a.begin(),'0'+carry);
+        return a;
     }
 };
 

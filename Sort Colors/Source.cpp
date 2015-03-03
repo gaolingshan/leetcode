@@ -78,7 +78,7 @@ public:
 };
 
 //3rd pass: 2015-02-09
-class Solution {
+class Solution_3rd {
 public:
     void sortColors(int A[], int n) {
         int i=0,left=0,right=n-1;
@@ -103,6 +103,19 @@ public:
             }
         }
     }
+};
+
+//4rd pass: 2015-02-27
+class Solution {
+public:
+	void sortColors(int A[], int n) {
+		int left = 0, right = n - 1, i = 0;
+		while (i <= right){
+			if (A[i] == 0) swap(A[left++], A[i++]); else
+			if (A[i] == 1) i++; else
+			swap(A[right--], A[i]);
+		}
+	}
 };
 
 

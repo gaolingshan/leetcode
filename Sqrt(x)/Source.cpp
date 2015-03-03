@@ -48,15 +48,35 @@ public:
         }
         return right;
     }
+
+	double eps = 1e-6;
+	int dblcmp(double x){
+
+		if (abs(x) < eps) return 0;
+		return (x > eps) ? 1 : -1;
+	}
+	double sqrt(double x) {
+		double left = 0, right = (dblcmp(x-1)>0)?x:1;
+		double tmp, mid;
+		while (dblcmp(left-right) <= 0)
+		{
+			mid = (left + right)/2;
+			tmp = mid*mid;
+			if (dblcmp(tmp-x) == 0) return mid;
+			if (dblcmp(tmp-x)>0) right = mid - eps;
+			if (dblcmp(tmp-x)<0) left = mid + eps;
+		}
+		return right;
+	}
 };
 
 int main()
 {
 	Solution *s = new Solution();
-	cout<<s->sqrt(2)<<endl;
-	cout<<s->sqrt(4)<<endl;
-	cout<<s->sqrt(2147483647)<<endl;
-
+	//cout<<s->sqrt(2)<<endl;
+	//cout<<s->sqrt(4)<<endl;
+	//cout<<s->sqrt(2147483647)<<endl;
+	cout << s->sqrt(0.64) << endl;
 
 	system("pause");
 	return 0;

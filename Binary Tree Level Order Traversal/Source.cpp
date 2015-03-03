@@ -59,7 +59,7 @@ public:
 };
 
 //2nd pass: 2015-02-20
-class Solution {
+class Solution_bfs {
 public:
     vector<vector<int> > levelOrder(TreeNode *root) {
         vector<vector<int>> res;
@@ -81,6 +81,35 @@ public:
                 p=q;
                 q.clear();
             }
+        }
+        return res;
+    }
+};
+
+//3rd pass: 2015-02-27
+class Solution {
+public:
+    int maxDepth(TreeNode *root){
+        if(root==NULL) return 0;
+        return max(maxDepth(root->left),maxDepth(root->right))+1;
+    }
+    void dfs(TreeNode *root, vector<int> &now, int depth){
+		if (root==NULL) return;
+        if(depth==1){
+            now.push_back(root->val);
+            return;
+        }
+        dfs(root->left,now,depth-1);
+        dfs(root->right,now,depth-1);
+    }
+    vector<vector<int> > levelOrder(TreeNode *root) {
+        int depth=maxDepth(root);
+        vector<vector<int>> res;
+        if(depth==0) return res;
+        for(int level=1;level<=depth;level++){
+            vector<int> now;
+            dfs(root,now,level);
+            res.push_back(now);
         }
         return res;
     }

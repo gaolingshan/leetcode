@@ -87,7 +87,7 @@ public:
 };
 
 //2nd pass: 2015-02-04
-class Solution {
+class Solution_2nd {
 public:
     int trap(int A[], int n) {
         vector<int> st;
@@ -119,14 +119,49 @@ public:
     }
 };
 
+//3rd pass: 2015-02-27
+/*
+keep the stack in non-ascending order(in >= order)
+1. if stack empty || new num <= stack top, just push
+2. then now new num > stack top,
+old_h=stack top, pop stack
+if stack empty(i.e. reach left bound, cannot trap) just break;
+len=stack top+1 ~ i-1
+height=min(i,stack top)-old_h;
+area+=len*height;
+loop until stack empty || new num<= stack top;
+3. finaly push i
+*/
+class Solution {
+public:
+	int trap(int A[], int n) {
+		stack<int> st;
+		int ans = 0;
+		for (int i = 0; i<n; i++){
+			if (st.empty() || A[i] <= A[st.top()]) st.push(i); else{
+				do{
+					int old_h = A[st.top()];
+					st.pop();
+					if (st.empty()) break;
+					int len = i - st.top() - 1;
+					int height = min(A[i], A[st.top()]) - old_h;
+					ans += len*height;
+				} while (!st.empty() && A[i]>A[st.top()]);
+				st.push(i);
+			}
+		}
+		return ans;
+	}
+};
+
 int main()
 {
 	Solution *s = new Solution();
 
-	//int A[] = {0,1,0,2,1,0,1,3,2,1,2,1};
+	int A[] = {0,1,0,2,1,0,1,3,2,1,2,1};
 	//int A[] = {2,1,0,2};
 	//int A[] = {1,0,2};
-	int A[] = {4,2,3};
+	//int A[] = {4,2,3};
 
 	cout<<s->trap(A,sizeof(A)/sizeof(int))<<endl;
 

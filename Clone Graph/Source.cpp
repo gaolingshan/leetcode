@@ -20,7 +20,7 @@ struct UndirectedGraphNode {
     UndirectedGraphNode(int x) : label(x) {};
 };
 
-class Solution {
+class Solution_old {
 public:
 	unordered_map<int, UndirectedGraphNode*> visited;
     UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
@@ -58,6 +58,25 @@ public:
 		//}
 		return res;
     }
+};
+
+//2nd pass: 2015-02-26
+class Solution {
+public:
+	unordered_map<UndirectedGraphNode*, UndirectedGraphNode*> table;
+	UndirectedGraphNode *copy(UndirectedGraphNode* node){
+		if (node == NULL) return NULL;
+		if (table.count(node)) return table[node];
+		UndirectedGraphNode* newNode = new UndirectedGraphNode(node->label);
+		table[node] = newNode;
+		for (auto nei : node->neighbors){
+			newNode->neighbors.push_back(copy(nei));
+		}
+		return newNode;
+	}
+	UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
+		return copy(node);
+	}
 };
 
 int main()
