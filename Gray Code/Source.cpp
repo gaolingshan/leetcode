@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	set<int> visited;
 	int N,newNum;
@@ -36,10 +36,40 @@ public:
     }
 };
 
+//2nd pass: 2015-03-04
+class Solution_dfs {
+public:
+    void dfs(vector<int> &res, int now, int flag, int i, int n){
+        if(i==n){
+            res.push_back(now);
+            return;
+        }
+		dfs(res,(now<<1)+flag,0,i+1,n);
+		dfs(res,(now<<1)+!flag,1,i+1,n);
+    }
+    vector<int> grayCode(int n) {
+        vector<int> res;
+        dfs(res,0,0,0,n);
+        return res;
+    }
+};
+
+class Solution {
+public:
+    vector<int> grayCode(int n) {
+        vector<int> res(1,0);
+        for(int i=0;i<n;i++){
+            int num=1<<i, len=res.size();
+            for(int j=len-1;j>=0;j--) res.push_back(num+res[j]);
+        }
+        return res;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
-	vector<int> res = s->grayCode(0);
+	vector<int> res = s->grayCode(3);
 	for(auto it:res) cout<<it<<" ";
 	cout<<endl;
 

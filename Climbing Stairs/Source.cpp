@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     int climbStairs(int n) {
         int a=1,b=1,c=0;
@@ -32,10 +32,25 @@ public:
     }
 };
 
+//2nd pass: 2015-03-04
+class Solution {
+public:
+    int climbStairs(int n) {
+        int a=1,b=1,c=0;
+        if(n==0) return 1;
+        for(int i=1;i<n;i++){
+            c=a+b;
+            a=b;
+            b=c;
+        }
+        return b;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
-	cout << s->climbStairs(2) << endl;
+	cout << s->climbStairs(5) << endl;
 
 
 	system("pause");

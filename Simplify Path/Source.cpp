@@ -2,6 +2,7 @@
 //   Author: flashhack
 //   Update: 2014-12-17
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <map>
@@ -14,7 +15,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     string simplifyPath(string path) {
         vector<string> st;
@@ -54,6 +55,25 @@ public:
 		if(st.size()==0) res="/";
 		return res;
 
+    }
+};
+
+//2nd pass: 2015-03-04
+class Solution {
+public:
+    string simplifyPath(string path) {
+        istringstream ss(path);
+        vector<string> st;
+        string tmp,res;
+        while(getline(ss,tmp,'/')){
+			if(tmp==".."){
+				if(!st.empty()) st.pop_back();
+			} 
+			else
+				if(tmp!="." && tmp!="") st.push_back(tmp);
+        }
+        for(auto str:st) res+="/"+str;
+        return (res=="")?"/":res;
     }
 };
 
