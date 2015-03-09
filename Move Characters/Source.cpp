@@ -33,8 +33,8 @@ int main()
 {
 	Solution *s = new Solution();
 	char str[8] = "a b   c";
-	s->moveThem(str);
-	//s->moveRight(str);
+	//s->moveThem(str);
+	s->moveLeft(str);
 	cout << str << endl;
 
 	system("pause");
