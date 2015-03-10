@@ -401,6 +401,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Reservior Sampling", "..\Re
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReadFile", "..\ReadFile\ReadFile.vcxproj", "{E888227B-31B1-46AC-9F1D-651FFFCF85C4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Longest Increasing Subsequence(LIS)", "..\Longest Increasing Subsequence(LIS)\Longest Increasing Subsequence(LIS).vcxproj", "{0F5DD59B-C623-4169-93A6-1D19BE250D60}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Reverse Bits", "..\Reverse Bits\Reverse Bits.vcxproj", "{A5DD99D3-6C66-4D50-92E8-7621D32D0B85}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Number of 1 Bits", "..\Number of 1 Bits\Number of 1 Bits.vcxproj", "{DAC28F61-EA39-454C-A54E-688CA9366650}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2401,6 +2407,36 @@ Global
 		{E888227B-31B1-46AC-9F1D-651FFFCF85C4}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{E888227B-31B1-46AC-9F1D-651FFFCF85C4}.Release|Win32.ActiveCfg = Release|Win32
 		{E888227B-31B1-46AC-9F1D-651FFFCF85C4}.Release|Win32.Build.0 = Release|Win32
+		{0F5DD59B-C623-4169-93A6-1D19BE250D60}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{0F5DD59B-C623-4169-93A6-1D19BE250D60}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{0F5DD59B-C623-4169-93A6-1D19BE250D60}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{0F5DD59B-C623-4169-93A6-1D19BE250D60}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0F5DD59B-C623-4169-93A6-1D19BE250D60}.Debug|Win32.Build.0 = Debug|Win32
+		{0F5DD59B-C623-4169-93A6-1D19BE250D60}.Release|Any CPU.ActiveCfg = Release|Win32
+		{0F5DD59B-C623-4169-93A6-1D19BE250D60}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{0F5DD59B-C623-4169-93A6-1D19BE250D60}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{0F5DD59B-C623-4169-93A6-1D19BE250D60}.Release|Win32.ActiveCfg = Release|Win32
+		{0F5DD59B-C623-4169-93A6-1D19BE250D60}.Release|Win32.Build.0 = Release|Win32
+		{A5DD99D3-6C66-4D50-92E8-7621D32D0B85}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{A5DD99D3-6C66-4D50-92E8-7621D32D0B85}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{A5DD99D3-6C66-4D50-92E8-7621D32D0B85}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{A5DD99D3-6C66-4D50-92E8-7621D32D0B85}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A5DD99D3-6C66-4D50-92E8-7621D32D0B85}.Debug|Win32.Build.0 = Debug|Win32
+		{A5DD99D3-6C66-4D50-92E8-7621D32D0B85}.Release|Any CPU.ActiveCfg = Release|Win32
+		{A5DD99D3-6C66-4D50-92E8-7621D32D0B85}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{A5DD99D3-6C66-4D50-92E8-7621D32D0B85}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{A5DD99D3-6C66-4D50-92E8-7621D32D0B85}.Release|Win32.ActiveCfg = Release|Win32
+		{A5DD99D3-6C66-4D50-92E8-7621D32D0B85}.Release|Win32.Build.0 = Release|Win32
+		{DAC28F61-EA39-454C-A54E-688CA9366650}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{DAC28F61-EA39-454C-A54E-688CA9366650}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{DAC28F61-EA39-454C-A54E-688CA9366650}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{DAC28F61-EA39-454C-A54E-688CA9366650}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DAC28F61-EA39-454C-A54E-688CA9366650}.Debug|Win32.Build.0 = Debug|Win32
+		{DAC28F61-EA39-454C-A54E-688CA9366650}.Release|Any CPU.ActiveCfg = Release|Win32
+		{DAC28F61-EA39-454C-A54E-688CA9366650}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{DAC28F61-EA39-454C-A54E-688CA9366650}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{DAC28F61-EA39-454C-A54E-688CA9366650}.Release|Win32.ActiveCfg = Release|Win32
+		{DAC28F61-EA39-454C-A54E-688CA9366650}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	void dfs(vector<string> &res, string &now,int pos, int left, string &s)
 	{
@@ -66,6 +66,46 @@ public:
 		string now="";
 		dfs(res,now,0,3,s);
 		return res;
+    }
+};
+
+//2nd pass: 2015-03-10
+class Solution {
+public:
+	/*
+	len_s must >= 4 && <= 12
+	
+	dfs
+	1. 0 -> 1digits other-> 3digits. i+j<=len_s
+	2. num <= 255
+	i==len_s && now_len == 4 find!
+	*/
+    void dfs(vector<string> &res, int i,vector<int>& now, string &s){
+		if(now.size() > 4) return;
+        if(i==s.length() && now.size()==4){
+            string tmp="";
+            for(int v:now) tmp+=to_string(v)+".";
+            tmp.pop_back();
+            res.push_back(tmp);
+            return;
+        }
+        int len=(s[i]=='0')?1:3;
+        for(int j=1;j<=len && i+j<=s.length();j++){
+            string tmp=s.substr(i,j);
+            int num=stoi(tmp);
+            if(num<=255){
+                now.push_back(num);
+                dfs(res,i+j,now,s);
+                now.pop_back();
+            }
+        }
+    }
+    vector<string> restoreIpAddresses(string s) {
+        vector<string> res;
+        if(s.length()<4 || s.length()>12) return res;
+        vector<int> now;
+        dfs(res,0,now,s);
+        return res;
     }
 };
 
