@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 
     int calculateMinimumHP(vector<vector<int> > &dungeon) {
@@ -33,6 +33,34 @@ public:
 				f[j]=max(min(a,b)-dungeon[i][j],1);
 			}
 		return f[0];
+    }
+};
+
+/*
+dp from end to begin
+f[i][j]: from i,j reach end, init health
+f[i][j]=max(1,min(f[i+1][j],f[i][j+1])-grid[i][j])
+f[m-1][n-1]=max(1,-grid[m-1][n-1])
+i:m-1~0
+j:n-1~0
+Time: O(n^2)
+Space: O(n)
+*/
+class Solution {
+public:
+    int calculateMinimumHP(vector<vector<int> > &dungeon) {
+        if(dungeon.empty() || dungeon[0].empty()) return 0;
+        int m=dungeon.size(), n=dungeon[0].size();
+        vector<vector<int>> f(m,vector<int>(n,0));
+        for(int i=m-1;i>=0;--i){
+            for(int j=n-1;j>=0;--j){
+                int a=(i+1<m)?f[i+1][j]:INT_MAX;
+                int b=(j+1<n)?f[i][j+1]:INT_MAX;
+                int c=(a==b && a==INT_MAX)?1:min(a,b);
+                f[i][j]=max(1,c-dungeon[i][j]);
+            }
+        }
+        return f[0][0];
     }
 };
 

@@ -42,6 +42,13 @@ public:
 };
 
 //2nd pass: 2015-02-23
+/*
+f[i]: buy stock 1~i
+	record min, update max profit
+g[i]: sell stock n~i
+	from n to i, record max, update max profit
+ans=max(f[i]+g[i])
+*/
 class Solution {
 public:
 	int maxProfit(vector<int> &prices) {

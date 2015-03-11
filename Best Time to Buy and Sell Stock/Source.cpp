@@ -29,6 +29,11 @@ public:
 };
 
 //2nd pass: 2015-02-23
+/*
+record min, buy at there, update max profit
+Time: O(n)
+Space: O(1)
+*/
 class Solution {
 public:
 	int maxProfit(vector<int> &prices) {

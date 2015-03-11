@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	int DNAToInt(string s)
 	{
@@ -75,10 +75,43 @@ public:
     }
 };
 
+//2nd pass: 2015-03-11
+/*
+A-00-0
+C-01-1
+G-10-2
+T-11-3
+20bits for a string
+hash: 2^20 OK!
+mask: 0xFFFFF
+1 pass the string and add to table, when cnt==2 output
+Time:O(n)
+Space:O(2^20)
+*/
+class Solution {
+public:
+    vector<string> findRepeatedDnaSequences(string s) {
+        unordered_map<int,int> table;
+        vector<string> res;
+        int val=0;
+        for(int i=0;i<s.length();++i) {
+            val<<=2;
+            if(s[i]=='C') val|=1;
+            if(s[i]=='G') val|=2;
+            if(s[i]=='T') val|=3;
+            val&=0xFFFFF;
+            if(i>=9) table[val]++;
+            if(table[val]==2) 
+				res.push_back(s.substr(i-9,10));
+        }
+        return res;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
-	//vector<string> res = s->findRepeatedDnaSequences("AAAAACCCCCAAAAACCCCCAAAAAGGGTTT");
+	//vector<string> res = s->findRepeatedDnaSequences("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT");
 	vector<string> res = s->findRepeatedDnaSequences("AAAAAAAAAAA");
 	for(auto str:res)cout<<str<<endl;
 
