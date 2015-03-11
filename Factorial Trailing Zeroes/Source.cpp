@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     int trailingZeroes(int n) {
         int base=5,ans=0;
@@ -24,6 +24,23 @@ public:
 			if(base<INT_MAX/5) base*=5; else break;
 		}
 		return ans;
+    }
+};
+
+/*
+2*5=10, 5 fewer than 2, count multiples of 5s
+5, 25, 625 ...
+*/
+class Solution {
+public:
+    int trailingZeroes(int n) {
+        int ans=0;
+        long long base=5;
+        while(n>=base){
+            ans+=n/base;
+            base*=5;
+        }
+        return ans;
     }
 };
 

@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	struct cmp
 	{
@@ -43,12 +43,41 @@ public:
     }
 };
 
+//2nd pass: 2015-03-11
+/*
+sort numbers: xy VS. yx
+1. x==0 || y==0, do log10 careful
+2. all zeros
+*/
+class Solution {
+public:
+	struct cmp_struct{
+		bool operator () (int x, int y){
+			int lenX=(x==0)?1:log10(x)+1, lenY=(y==0)?1:log10(y)+1;
+			//100 -> 2, 1000->3
+			long long xy=x*pow(10,lenY)+y, yx=y*pow(10,lenX)+x;
+			return xy > yx;		
+		}
+	}cmp_obj;
+    string largestNumber(vector<int> &num) {
+        sort(num.begin(),num.end(),cmp_obj);
+        string res="";
+		bool notZero=false;
+		for(int v:num){
+			if(v!=0) notZero=true;
+			if(v!=0 || notZero)res+=to_string(v);
+		}
+        return (res=="")?"0":res;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
 	//int A[] = {3, 30, 34, 5, 9};
 	//int A[] = {121, 12};
-	int A[] = {0,1};
+	//int A[] = {0,1};
+	int A[] = {0};
 	vector<int> data(A,A+sizeof(A)/sizeof(int));
 	cout<<s->largestNumber(data)<<endl;
 

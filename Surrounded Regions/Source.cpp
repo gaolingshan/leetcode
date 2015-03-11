@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	vector<vector<bool>> needFlip,visited;
 	int lenX,lenY;
@@ -66,6 +66,53 @@ public:
     }
 };
 
+//2nd pass: 2015-03-10
+/*
+bfs, start from boarder. turn these Os to Ts. 
+T use as visited flag
+after: 
+	1. if O turn to X
+	2. if T turn to O
+*/
+class Solution {
+public:
+    int m,n;
+    void bfs(int x, int y, vector<vector<char>> &board){
+        queue<pair<int,int>> q;
+        q.push(make_pair(x,y));
+		board[x][y]='T';
+        int dx[4]={1,0,-1,0};
+        int dy[4]={0,1,0,-1};
+        while(!q.empty()){
+            auto head=q.front(); q.pop();
+            int x=head.first, y=head.second, newx=0,newy=0;
+            for(int i=0;i<4;++i){
+                newx=x+dx[i]; newy=y+dy[i];
+                if(newx>=0 && newx<m && newy>=0 && newy<n && board[newx][newy]=='O'){
+					q.push(make_pair(newx,newy));
+					board[newx][newy]='T';
+				}
+            }
+        }
+    }
+    void solve(vector<vector<char>> &board) {
+        if(board.empty() || board[0].empty()) return;
+        m=board.size(); n=board[0].size();
+        for(int i=0;i<m;++i) {
+            if(board[i][0]=='O') bfs(i,0,board);
+            if(board[i][n-1]=='O') bfs(i,n-1,board);
+        }
+        for(int i=0;i<n;++i){
+            if(board[0][i]=='O') bfs(0,i,board);
+            if(board[m-1][i]=='O') bfs(m-1,i,board);
+        }
+        for(int i=0;i<m;i++)
+            for(int j=0;j<n;j++)
+                if(board[i][j]=='O') board[i][j]='X';
+				else if(board[i][j]=='T') board[i][j]='O';
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
@@ -82,7 +129,7 @@ int main()
 	s->solve(matrix);
 	for(auto c1:matrix)
 	{
-		for(auto c2:c1) cout<<c2<<" ";
+		for(auto c2:c1) cout<<c2;
 		cout<<endl;
 	}
 

@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     int singleNumber(int A[], int n) {
 		int t1=0,t2=0,new_t1=0,new_t2=0;
@@ -26,6 +26,24 @@ public:
 			t2=new_t2;
 		}
 		return t2;
+    }
+};
+
+//2nd pass: 2015-03-11
+/*
+count by bit, occurance %3=final bit
+*/
+class Solution {
+public:
+    int singleNumber(int A[], int n) {
+        int ans=0;
+        for(int i=0;i<32;i++){
+            int cnt=0;
+            for(int j=0;j<n;j++)
+                cnt+=((A[j]>>i)&1);
+            if(cnt%3) ans|=(1<<i);
+        }
+        return ans;
     }
 };
 

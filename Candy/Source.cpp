@@ -12,9 +12,10 @@
 #include <algorithm>
 #include <queue>
 #include <stack>
+#include <numeric>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     int candy(vector<int> &ratings) {
 		int len=ratings.size();
@@ -37,6 +38,26 @@ public:
 			res+=max(left[i],right[i]);
 		}
 		return res;
+    }
+};
+
+//2nd pass: 2015-03-11
+/*
+1 2 5 4 3 2 1
+1 2 3 1 1 1 1
+1 2 5 4 3 2 1
+1. from left to right, if rate[i]>rate[i-1], num[i]=num[i-1]+1;
+2. from right to left, if rate[i]>rate[i+1], num[i]=max(num[i],num[i+1]+1);
+*/
+class Solution {
+public:
+    int candy(vector<int> &ratings) {
+        int n=ratings.size();
+        if(n==0) return 0;
+        vector<int> num(n,1);
+        for(int i=1;i<n;++i) if(ratings[i]>ratings[i-1]) num[i]=num[i-1]+1;
+        for(int i=n-2;i>=0;--i) if(ratings[i]>ratings[i+1]) num[i]=max(num[i],num[i+1]+1);
+        return accumulate(num.begin(), num.end(), 0);
     }
 };
 

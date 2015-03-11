@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
 	int f[1000];
     int minimumTotal(vector<vector<int> > &triangle) {
@@ -27,6 +27,34 @@ public:
 				f[j]=triangle[i][j]+min(f[j],f[j+1]);
 		}
 		return f[0];
+    }
+};
+
+//2nd pass: 2015-03-10
+/*
+2
+3 4
+6 5 7
+4 1 8 3
+f[i][j]=min{f[i+1][j],f[i+1][j+1]}+num[i][j]
+f[j]=min{g[j],g[j+1]}+num[i][j]
+i:n-2~0
+j:0~i
+*/
+class Solution {
+public:
+    int minimumTotal(vector<vector<int> > &triangle) {
+        if(triangle.empty() || triangle[0].empty()) return 0;
+        int n=triangle.size();
+        vector<int> f,g;
+        g=triangle[n-1];
+        for(int i=n-2;i>=0;--i){
+            f.clear();
+            for(int j=0;j<=i;++j)
+                f.push_back(min(g[j],g[j+1])+triangle[i][j]);
+            g=f;
+        }
+        return g[0];
     }
 };
 

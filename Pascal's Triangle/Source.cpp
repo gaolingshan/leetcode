@@ -14,7 +14,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     vector<vector<int> > generate(int numRows) {
         vector<vector<int> > res;
@@ -35,6 +35,34 @@ public:
 			res.push_back(now);
 		}
 		return res;
+    }
+};
+
+//2nd pass: 2015-03-10
+/*
+1
+1 1
+1 2 1
+1 3 3 1
+f[i][j]=f[i-1][j]+f[i-1][j-1]
+j&j-1 need to be >=0 && <f[i-1].size(). otherwise 0
+*/
+class Solution {
+public:
+    vector<vector<int> > generate(int numRows) {
+        vector<vector<int>> res;
+        if(numRows==0) return res;
+        res.push_back({1});
+        for(int i=1;i<numRows;++i){
+            vector<int> now;
+            for(int j=0;j<=i;j++){
+                int a=(j-1>=0)?res[i-1][j-1]:0;
+                int b=(j<res[i-1].size())?res[i-1][j]:0;
+                now.push_back(a+b);
+            }
+            res.push_back(now);
+        }
+        return res;
     }
 };
 

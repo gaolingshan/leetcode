@@ -2,6 +2,7 @@
 //   Author: flashhack
 //   Update: 2015-01-12
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <map>
@@ -14,7 +15,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution_old {
 public:
     void reverseWords(string &s) {
 	    char* data = (char *)s.c_str();
@@ -32,10 +33,31 @@ public:
     }
 };
 
+/*
+1. reverse whole
+2. split by space, reverse word, append to res
+*/
+class Solution {
+public:
+    void reverseWords(string &s) {
+		reverse(s.begin(),s.end());
+        string res="",tmp;
+        istringstream ss(s);
+        while(getline(ss,tmp,' ')){
+			if(tmp!="") {
+				reverse(tmp.begin(),tmp.end());
+				res+=tmp+" ";
+			}
+        }
+        if(!res.empty()) res.pop_back();
+        s=res;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
-	string data = "the sky is blue";
+	string data = "  the  sky    is blue  ";
 	s->reverseWords(data);
 	cout<<data<<endl;
 
