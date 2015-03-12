@@ -150,7 +150,7 @@ public:
             int space=(isLast)?1:(nS==0)?0:(S/nS + ((i<(S%nS))?1:0));
             res+=words[begin+i];
             if(i!=nS)res.append(space,' ');
-        }
+        }	
         if(res.size()<L)res.append(L-res.size(),' ');
         return res;
     }
