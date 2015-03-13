@@ -63,13 +63,13 @@ public:
 };
 
 //2nd pass: 2015-02-23
-class LRUCache{
+class LRUCache_2nd{
 private:
 	int cap;
 	list<pair<int, int>> data;
 	unordered_map<int, list<pair<int, int>>::iterator> table;
 public:
-	LRUCache(int capacity) {
+	LRUCache_2nd(int capacity) {
 		cap = capacity;
 		data.clear();
 		table.clear();
@@ -104,6 +104,59 @@ public:
 			table[key] = prev(data.end());
 		}
 	}
+};
+
+//3rd pass: 2015-03-12
+/*
+list store K-V, hashtable store K-iter in list
+set:
+1. K not in table, need insert
+    1.1 capacity full, invalid list head, delete this Key in table
+    1.2 append at list end, insert this key in table
+2. K in table, need update
+    2.1 delete this key in list(use iter) & table
+    2.2 add this key at list end, with new value
+    
+get:
+1 K not in table, -1
+2.K in table
+    2.1 delete this key in list(use iter) & table
+    2.2 add this key at list end, with old value
+*/
+class LRUCache{
+private:
+    int cap;
+    list<pair<int,int>> data;
+    unordered_map<int,list<pair<int,int>>::iterator> table;
+public:
+    LRUCache(int capacity) {
+        cap=capacity;
+        data.clear();
+        table.clear();
+    }
+    int get(int key) {
+        if(table.count(key)==0) return -1;
+        int value=table[key]->second;
+        data.erase(table[key]);
+        data.emplace_back(key,value);
+        table[key]=prev(data.end());
+		return value;
+    }
+    void set(int key, int value) {
+        if(table.count(key)==0){
+            if(data.size()==cap){
+                int headKey=data.front().first;
+                data.pop_front();
+                table.erase(headKey);
+            }
+            data.emplace_back(key,value);
+            table[key]=prev(data.end());
+        }else{
+            data.erase(table[key]);
+            data.emplace_back(key,value);
+            table[key]=prev(data.end());
+        }
+    }
 };
 
 int main()

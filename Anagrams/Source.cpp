@@ -40,7 +40,7 @@ public:
 };
 
 //2nd pass: 2015-02-21
-class Solution {
+class Solution_2nd {
 public:
     vector<string> anagrams(vector<string> &strs) {
         unordered_map<string,vector<int>> table;
@@ -54,6 +54,28 @@ public:
         for(auto it:table)
 			if(it.second.size()>1)
 				for(int i:it.second) res.push_back(strs[i]);
+        return res;
+    }
+};
+
+//3rd pass: 2015-03-13
+/*
+hashtable K:sorted str, V:occur idxs
+1st sweep add
+2nd sweep print
+*/
+class Solution {
+public:
+    vector<string> anagrams(vector<string> &strs) {
+        vector<string> res;
+        unordered_map<string,vector<int>> table;
+        for(int i=0;i<strs.size();++i){
+            auto str=strs[i];
+            sort(str.begin(),str.end());
+            table[str].push_back(i);
+        }
+        for(auto it:table) if(it.second.size()>1) 
+        for(int idx:it.second) res.push_back(strs[idx]);
         return res;
     }
 };

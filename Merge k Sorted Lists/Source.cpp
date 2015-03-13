@@ -63,7 +63,7 @@ void print(ListNode *l)
 }
 
 //2nd pass: 2015-02-07
-class Solution {
+class Solution_2nd {
 public:
     struct cmp
     {
@@ -88,6 +88,35 @@ public:
         ListNode* res=newHead->next;
         delete(newHead);
         return res;
+    }
+};
+
+//3rd pass: 2015-03-13
+/*
+pq: min heap store ListNode. pq originally is maxHeap, need overwrite cmp.
+prev: end of merged list
+head: head of merged list
+every step: point prev next, proceed prev, push new node in pq
+*/
+class Solution {
+public:
+    struct cmp_struct{
+        bool operator () (const ListNode* a, const ListNode *b) const{
+            return a->val > b->val;
+        }
+    };
+    ListNode *mergeKLists(vector<ListNode *> &lists) {
+        ListNode *prev=NULL, *head=NULL;
+        priority_queue<ListNode*, vector<ListNode*>, cmp_struct> pq;
+        for(auto p:lists) if(p) pq.push(p);
+        while(!pq.empty()){
+            auto node=pq.top(); pq.pop();
+            if(head==NULL) head=node;
+            if(prev) prev->next=node;
+            prev=node;
+            if(node->next) pq.push(node->next);
+        }
+        return head;
     }
 };
 

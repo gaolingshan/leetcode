@@ -57,7 +57,7 @@ public:
 };
 
 //2nd pass: 2015-02-22
-class Solution {
+class Solution_2nd {
 public:
 	struct cmp
 	{
@@ -85,6 +85,39 @@ public:
 		res.push_back(Interval(start, end));
 		return res;
 	}
+};
+
+//3rd pass: 2015-03-12
+/*
+1. sort intervals with start
+2. set st,ed = 1st interval
+3. traverse from 2~n intervals
+3.1 ed>=i.st , need merge ed=max(ed,i.end), i++
+3.2 ed<i.st, [st,ed] is a new one, set st,ed to interval i
+4. finally insert [st,ed]
+*/
+class Solution {
+public:
+    struct cmp_struct{
+        bool operator () (const Interval &a, const Interval &b) const{
+            return a.start < b.start;
+        }
+    }cmp_obj;
+    vector<Interval> merge(vector<Interval> &intervals) {
+        vector<Interval> res;
+        if(intervals.empty()) return res;
+        sort(intervals.begin(),intervals.end(),cmp_obj);
+        int st=intervals[0].start, ed=intervals[0].end;
+        for(int i=1;i<intervals.size();i++){
+            if(ed>=intervals[i].start) ed=max(ed,intervals[i].end); else{
+                res.emplace_back(st,ed);
+                st=intervals[i].start;
+                ed=intervals[i].end;
+            }
+        }
+        res.emplace_back(st,ed);
+        return res;
+    }
 };
 
 int main()

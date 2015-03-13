@@ -167,7 +167,7 @@ public:
     }
 };
 
-class Solution {
+class Solution_3rd {
 public:
     ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
         ListNode* newHead=new ListNode(0), *p=newHead;
@@ -192,6 +192,49 @@ public:
         ListNode *res=newHead->next;
         delete(newHead);
         return res;
+    }
+};
+
+//4rd pass: 2015-03-13
+/*
+prev : end of merged list
+head : start of merged list
+every step: prev proceed to end of list(no need to put NULL)
+
+until one list NULL, concat prev-> non empty list
+*/
+class Solution {
+public:
+    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+        if(l1==NULL || l2==NULL) return (l1)?l1:l2;
+        ListNode* prev=NULL, *head=NULL;
+        while(l1 && l2){
+            if(head==NULL) head=(l1->val < l2->val)?l1:l2;
+            if(l1->val < l2->val){
+                if(prev) prev->next=l1;
+				prev=l1;
+                l1=l1->next;
+            }else{
+                if(prev) prev->next=l2;
+				prev=l2;
+                l2=l2->next;
+            }
+        }
+        prev->next=(l1)?l1:l2;
+        return head;
+    }
+};
+class Solution_Recur {
+public:
+    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+        if(l1==NULL || l2==NULL) return (l1)?l1:l2;
+        if(l1->val < l2->val){
+            l1->next=mergeTwoLists(l1->next,l2);
+            return l1;
+        }else{
+            l2->next=mergeTwoLists(l1,l2->next);
+            return l2;
+        }
     }
 };
 

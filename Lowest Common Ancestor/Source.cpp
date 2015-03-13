@@ -21,13 +21,16 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+
+/*
+1. A||B is root -> LCA found
+2. l=LCA(left), r=LCA(right)
+    2.1 l,r both non NULL, root is LCA
+    2.1 l||r==NULL, LCA is non NULL one
+    2.3 l,r both NULL, return NULL
+*/
 class Solution {
 public:
-    /**
-     * @param root: The root of the binary search tree.
-     * @param A and B: two nodes in a Binary.
-     * @return: Return the least common ancestor(LCA) of the two nodes.
-     */
     TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *A, TreeNode *B) {
         if(!root) return NULL;
         if(root==A || root==B) return root;

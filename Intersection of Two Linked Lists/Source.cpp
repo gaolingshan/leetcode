@@ -57,7 +57,7 @@ public:
 };
 
 //2nd pass: 2015-02-18
-class Solution {
+class Solution_2nd {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         int lenA=0,lenB=0;
@@ -85,6 +85,39 @@ public:
             if(p==q) return p;
             p=p->next; q=q->next;
         }
+    }
+};
+
+//3rd pass: 2015-03-12
+/*
+1. get lenA && lenB
+2. swap(A,B), A be the longer one
+3. A move forward lenA-lenB step
+4. AB move together until same
+5. not same in the end, NULL
+*/
+class Solution {
+public:
+    int getLen(ListNode* head){
+        int cnt=0;
+        auto p=head;
+        while(p){ cnt++; p=p->next; }
+		return cnt;
+    }
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        int lenA=getLen(headA), lenB=getLen(headB);
+        if(lenA<lenB){
+            swap(headA,headB);
+            swap(lenA,lenB);
+        }
+        auto p=headA,q=headB;
+        for(int i=0;i<lenA-lenB;i++) p=p->next;
+        while(p){
+            if(p==q) return p;
+            p=p->next;
+            q=q->next;
+        }
+        return NULL;
     }
 };
 

@@ -32,7 +32,7 @@ public:
 };
 
 //2nd pass: 2015-02-22
-class Solution {
+class Solution_2nd {
 public:
     bool isPalindrome(string s) {
         int left=0,right=s.length()-1;
@@ -46,6 +46,28 @@ public:
                 left++; right--;
             }
             else return false;
+        }
+        return true;
+    }
+};
+
+//3rd pass: 2015-03-12
+/*
+two pointers l&r
+1. proceed l&r if not alnum
+2. make sure l<r
+3. compare tolower(s[l])==tolower(s[r])
+4. l++, r--
+*/
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int l=0,r=s.length();
+        while(1){
+            while(l<s.length() && !isalnum(s[l])) ++l;
+            while(r>=0 && !isalnum(s[r])) --r;
+            if(l>=r) break;
+            if(tolower(s[l++])!=tolower(s[r--])) return false;
         }
         return true;
     }

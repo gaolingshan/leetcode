@@ -61,7 +61,7 @@ public:
 };
 
 //2nd pass: 2015-02-26
-class Solution {
+class Solution_2nd {
 public:
 	unordered_map<UndirectedGraphNode*, UndirectedGraphNode*> table;
 	UndirectedGraphNode *copy(UndirectedGraphNode* node){
@@ -77,6 +77,33 @@ public:
 	UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
 		return copy(node);
 	}
+};
+
+//3rd pass: 2015-03-12
+/*
+dfs traverse
+1.use hashtable to map old node to new node, old <- new
+2. during dfs
+	2.0 NULL just return
+    2.1 node found in table, just return
+    2.2 node not found
+        2.2.1 create new node, insert into table
+        2.2.2 create neibours of this node, use dfs.
+*/
+class Solution {
+public:
+    unordered_map<UndirectedGraphNode *, UndirectedGraphNode *> table;
+    UndirectedGraphNode * dfs(UndirectedGraphNode *node){
+        if(node==NULL) return NULL;
+        if(table.count(node)!=0) return table[node];
+        UndirectedGraphNode * newNode=new UndirectedGraphNode(node->label);
+        table[node]=newNode;
+        for(auto nei:node->neighbors) newNode->neighbors.push_back(dfs(nei));
+        return newNode;
+    }
+    UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
+        return dfs(node);
+    }
 };
 
 int main()
