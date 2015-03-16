@@ -59,6 +59,11 @@ public:
 };
 
 //2nd pass: 2015-02-20
+/*
+use bfs, two qeueus p&q. p is current level, q is next level
+use now to record current level res
+when found q empty, swap p,q and output result
+*/
 class Solution_bfs {
 public:
     vector<vector<int> > levelOrder(TreeNode *root) {

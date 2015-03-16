@@ -50,11 +50,10 @@ res: f[n]
 */
 class Solution {
 public:
-    int f[10000];
     int numDecodings(string s) {
 		if(s=="") return 0;
-        f[0]=1;
-        for(int i=0;i<s.length();i++)
+		vector<int> f(s.length()+1,0);
+		for(int i=0;i<s.length();i++)
         {
             if(s[i]>='1' && s[i] <='9') f[i+1]+=f[i];
             if(i+1<s.length())

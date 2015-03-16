@@ -421,6 +421,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Median", "..\Median\Median.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Median II", "..\Median II\Median II.vcxproj", "{BBA87D72-9BE3-45AD-BE21-FBB30BEEF81B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Reverse Linked List", "..\Reverse Linked List\Reverse Linked List.vcxproj", "{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2521,6 +2523,16 @@ Global
 		{BBA87D72-9BE3-45AD-BE21-FBB30BEEF81B}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{BBA87D72-9BE3-45AD-BE21-FBB30BEEF81B}.Release|Win32.ActiveCfg = Release|Win32
 		{BBA87D72-9BE3-45AD-BE21-FBB30BEEF81B}.Release|Win32.Build.0 = Release|Win32
+		{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}.Debug|Win32.Build.0 = Debug|Win32
+		{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}.Release|Any CPU.ActiveCfg = Release|Win32
+		{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}.Release|Win32.ActiveCfg = Release|Win32
+		{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

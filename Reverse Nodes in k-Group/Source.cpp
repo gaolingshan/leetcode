@@ -102,7 +102,7 @@ public:
 };
 
 //3rd pass: 2015-02-06
-class Solution {
+class Solution_3rd {
 public:
     pair<ListNode*, ListNode*> reverse(ListNode* head)
     {
@@ -158,6 +158,52 @@ void print(ListNode *l)
 	cout<<endl;
 }
 
+//4th pass: 2015-03-13
+/*
+need dummy head
+prev-> [q... p] ->next
+         k cnt
+            keep p->next non NULL
+every step: 1. move p, add cnt till cnt % k == 0
+            2. mark q, next, break p_next
+            3. reverse q..p
+            4. prev->[p,q]->next
+            5. prev=q,p=q
+  1 2 3 4 5
+  q p
+*/
+class Solution {
+public:
+    void reverse(ListNode *head){
+        ListNode *prev=NULL, *p=head;
+        while(p){
+            auto p_next=p->next;
+            p->next=prev;
+            prev=p;
+            p=p_next;
+        }
+    }
+    ListNode *reverseKGroup(ListNode *head, int k) {
+        ListNode *newHead=new ListNode(0); newHead->next=head;
+        ListNode *prev=newHead, *p=newHead, *q=head, *next=NULL;
+        int cnt=0;
+        while(p->next){
+            p=p->next; 
+            if(++cnt % k == 0){
+                q=prev->next;
+                next=p->next;
+                p->next=NULL;
+                reverse(q);
+                prev->next=p;
+                q->next=next;
+                prev=q; p=q;
+            }
+        }
+        auto res=newHead->next;
+        delete(newHead);
+        return res;
+    }
+};
 
 int main()
 {
@@ -175,7 +221,7 @@ int main()
 	d.next = &e;
 	e.next = &f;
 
-	print(s->reverseKGroup(&a, 4));
+	print(s->reverseKGroup(&a, 3));
 	
 	system("pause");
 	return 0;

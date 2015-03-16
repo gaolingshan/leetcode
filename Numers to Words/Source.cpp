@@ -29,20 +29,21 @@ skip zero don't output
 
 corners:
 1. num==zero, just output
-2. negative number: minus xxx
+2. after mod, zero, don't output
+3. negative number: minus xxx
 */
 
 string convert(int num){
 	string res="";
 	if(num<0) return "minus "+convert(abs(num));
 	if(num==0) return "zero";
-	if(num>=1000000000) return convert(num/1000000000)+" billion " + convert(num%1000000000);
-	if(num>=1000000) return convert(num/1000000)+" million " + convert(num%1000000);
-	if(num>=1000) return convert(num/1000)+" thousand " + convert(num%1000);
+    if(num>=1000000000) return convert(num/1000000000) + " billion" + ((num%1000000000)?(" "+convert(num%1000000000)):"");
+    if(num>=1000000) return convert(num/1000000) + " million" + ((num%1000000)?(" "+convert(num%1000000)):"");
+    if(num>=1000) return convert(num/1000) + " thousand" + ((num%1000)?(" "+convert(num%1000)):"");
 	string units[]={"","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen",
 					"forteen","fifteen","sixteen","seventeen","eighteen","nineteen"};
 	string tens[]={"","ten","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"};
-	if(num>=100) return units[num/100] + " hundred " + convert(num%100);
+    if(num>=100) return units[num/100] + " hundred" + ((num%100)?(" "+convert(num%100)):"");
 	if(num<20) return units[num];
 	return tens[num/10] + " " + units[num%10];
 }

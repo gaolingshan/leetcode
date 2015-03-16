@@ -73,7 +73,7 @@ public:
  *     }
  * }
  */
-class Solution {
+class Solution_2nd {
 public:
     /**
      * @param head: The head of linked list.
@@ -135,6 +135,48 @@ public:
     }
 };
 
+//3rd pass: 2015-03-13
+/*
+dummy head node needed
+1.prev->[slow...fast]->next
+2.fast next break
+3.reverse [slow...fast]
+4.prev->fast  slow->next
+1 2 3 4 5, m=2, n=4
+p s   f
+*/
+class Solution {
+public:
+    void reverse(ListNode* head){
+        ListNode *prev=NULL, *p=head;
+        while(p){
+            auto p_next=p->next;
+            p->next=prev;
+            prev=p;
+            p=p_next;
+        }
+    }
+    ListNode *reverseBetween(ListNode *head, int m, int n) {
+        ListNode *newHead=new ListNode(0); newHead->next=head;
+        ListNode *prev=newHead,*slow=head,*fast=head,*next=NULL;
+        while(n>1){
+            if(m>1){
+                prev=slow;
+                slow=slow->next;
+                --m;
+            }
+            fast=fast->next;
+            --n;
+        }
+        next=fast->next;
+        fast->next=NULL;
+        reverse(slow);
+        prev->next=fast; slow->next=next;
+        auto ans=newHead->next;
+        delete(newHead);
+        return ans;
+    }
+};
 
 
 int main()
@@ -154,7 +196,7 @@ int main()
 	e.next = &f;
 
 	print(&a);
-	print(s->reverseBetween(&a,6,6));
+	print(s->reverseBetween(&a,1,6));
 
 
 	system("pause");

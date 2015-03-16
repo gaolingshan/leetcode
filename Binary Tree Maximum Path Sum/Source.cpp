@@ -42,7 +42,7 @@ public:
 };
 
 //2nd pass: 2015-02-20
-class Solution {
+class Solution_2nd {
 public:
     int res;
     int dfs(TreeNode *root)
@@ -59,6 +59,30 @@ public:
     }
 };
 
+//3rd pass: 2015-03-13
+/*
+use dfs, meanwhile maintain maxsum out side
+dfs get the max path sum from this node(include) to bottom of tree(no need be leaf)
+l=max(0,dfs(left))
+r=max(0,dfs(right));
+ans=max(ans,root->val + l + r)
+return root->val + max(l,r);
+*/
+class Solution {
+public:
+    int ans={INT_MIN};
+    int dfs(TreeNode *root){
+        if(root==NULL) return 0;
+        int l=max(0,dfs(root->left));
+        int r=max(0,dfs(root->right));
+        ans=max(ans,root->val+l+r);
+        return root->val + max(l,r);
+    }
+    int maxPathSum(TreeNode *root) {
+        dfs(root);
+        return ans;
+    }
+};
 
 int main()
 {
