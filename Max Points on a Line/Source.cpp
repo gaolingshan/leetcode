@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <queue>
 #include <stack>
+#include <functional>
 using namespace std;
 
 struct Point {
@@ -64,7 +65,7 @@ public:
 };
 
 //2nd pass: 2015-02-07
-class Solution {
+class Solution_2nd {
 public:
     int maxPoints(vector<Point> &points) {
         unordered_map<double,int> table;
@@ -97,12 +98,48 @@ public:
     }
 };
 
+//3rd pass: 2015-03-16
+/*
+chose a point as origin on by one : O(n)
+calc slope with all other points, hash the slope and count. Same slope means on a line.
+corner case:
+1. same points: after counting, local max += same point count
+2. use pair int to do hash instead of double. Use gcd.
+*/
+class Solution {
+public:
+    int gcd(int a, int b){
+        if(b==0) return a; else return gcd(b, a%b);
+    }
+	struct pairhash{
+		size_t operator () (const pair<int,int> &p){
+			return (~hash<int>() (p.first)) ^ hash<int>() (p.second);
+		}
+	};
+    int maxPoints(vector<Point> &points) {
+        int ans=0;
+        for(int i=0;i<points.size();i++){
+            int sameCnt=0, now=0;
+            //map<pair<int,int>,int> table;
+			unordered_map<pair<int,int>,int,pairhash> table;
+            for(int j=0;j<points.size();j++) {
+                int x=points[j].x-points[i].x;
+                int y=points[j].y-points[i].y;
+                int g=gcd(x,y);
+                if(g) now=max(now,++table[make_pair(x/g,y/g)]); else ++sameCnt;
+            }
+            ans=max(ans,now+sameCnt);
+        }
+        return ans;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();
-	//Point A[] = {Point(0,0),Point(1,0)};
+	Point A[] = {Point(0,0),Point(1,0)};
 	//Point A[] = {Point(1,1),Point(1,1),Point(2,2),Point(2,2)};
-	Point A[] = {Point(84,250),Point(0,0),Point(1,0),Point(0,-70),Point(0,-70),Point(1,-1),Point(21,10),Point(42,90),Point(-42,-230)};
+	//Point A[] = {Point(84,250),Point(0,0),Point(1,0),Point(0,-70),Point(0,-70),Point(1,-1),Point(21,10),Point(42,90),Point(-42,-230)};
 	vector<Point> data;
 	for(auto it:A) data.push_back(it);
 	cout<<s->maxPoints(data)<<endl;

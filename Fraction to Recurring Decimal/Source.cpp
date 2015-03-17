@@ -98,7 +98,7 @@ public:
 
 
 //3rd pass: 2015-02-07
-class Solution {
+class Solution_3rd {
 public:
     string fractionToDecimal(int numerator, int denominator) {
         if(numerator==0) return "0";
@@ -136,6 +136,41 @@ public:
             digits.push_back(a/b);
             a=a%b;
         }
+    }
+};
+
+//4th pass: 2015-03-17
+/*
+num*10 / den = current digit
+num*10 % den = next num
+
+num reoccur <- find repeating. use hashtable store pos
+insert ( at pos, append ) at end
+
+corner:
+1. negative sign, use long long, then abs
+2. int part
+*/
+class Solution {
+public:
+    string fractionToDecimal(int numerator, int denominator) {
+        long long num=numerator, den=denominator;
+        string res=(num*den < 0)?"-":"";
+        num=abs(num); den=abs(den);
+        res+=to_string(num/den);
+        num%=den;
+        if(num) res+=".";
+        unordered_map<long long, int> table;
+        while(num && table.count(num)==0){
+            table[num]=(int)res.size();
+            res+=to_string(num*10/den);
+            num=(num*10)%den;
+        }
+        if(num){
+            res.insert(res.begin()+table[num],'(');
+            res+=")";
+        }
+        return res;
     }
 };
 

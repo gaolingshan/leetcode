@@ -47,7 +47,7 @@ num%26 ~ A..Z
          0  25
              
 */
-class Solution {
+class Solution_2nd {
 public:
     string convertToTitle(int n) {
         n--;
@@ -58,6 +58,23 @@ public:
             n=n/26-1;
         }
 		reverse(res.begin(),res.end());
+        return res;
+    }
+};
+
+//3rd pass: 2015-03-17
+/*
+num-1 % 26 + 'A'   right mose letter
+num= num-1/26
+*/
+class Solution {
+public:
+    string convertToTitle(int n) {
+        string res;
+        while(n){
+            res=string(1,'A'+(n-1)%26) + res;
+            n=(n-1)/26;
+        }
         return res;
     }
 };

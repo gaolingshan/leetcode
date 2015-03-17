@@ -70,7 +70,7 @@ public:
 };
 
 //2nd pass: 2015-02-07
-class Solution {
+class Solution_2nd {
 public:
     int compareVersion(string version1, string version2) {
         istringstream ss1(version1);
@@ -105,6 +105,36 @@ public:
                 continue;            
             }
             break;
+        }
+        return 0;
+    }
+};
+
+//3rd pass: 2015-03-17
+/*
+partition by '.'
+
+corner case:
+1.0.0.0.0.0
+1.0
+if one finish, other must all be 0.
+*/
+class Solution {
+public:
+    int compareVersion(string version1, string version2) {
+        istringstream ss1(version1),ss2(version2);
+        string tmp1, tmp2;
+        while(1){
+            bool b1=(bool)getline(ss1,tmp1,'.');
+            bool b2=(bool)getline(ss2,tmp2,'.');
+            if(!b1 && !b2) break;
+            if(b1 && b2){
+                if(stoi(tmp1) > stoi(tmp2)) return 1;
+                if(stoi(tmp1) < stoi(tmp2)) return -1;
+                continue;
+            }
+            if(b1 && stoi(tmp1)!=0) return 1;
+            if(b2 && stoi(tmp2)!=0) return -1;
         }
         return 0;
     }

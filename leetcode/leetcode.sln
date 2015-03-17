@@ -423,6 +423,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Median II", "..\Median II\M
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Reverse Linked List", "..\Reverse Linked List\Reverse Linked List.vcxproj", "{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Palindrome Append", "..\Palindrome Append\Palindrome Append.vcxproj", "{A07B387D-CB24-4D90-837A-68F733A7B08A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2533,6 +2535,16 @@ Global
 		{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}.Release|Win32.ActiveCfg = Release|Win32
 		{690C9ECE-D248-4E3E-A0DB-2C2AB38289D5}.Release|Win32.Build.0 = Release|Win32
+		{A07B387D-CB24-4D90-837A-68F733A7B08A}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{A07B387D-CB24-4D90-837A-68F733A7B08A}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{A07B387D-CB24-4D90-837A-68F733A7B08A}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{A07B387D-CB24-4D90-837A-68F733A7B08A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A07B387D-CB24-4D90-837A-68F733A7B08A}.Debug|Win32.Build.0 = Debug|Win32
+		{A07B387D-CB24-4D90-837A-68F733A7B08A}.Release|Any CPU.ActiveCfg = Release|Win32
+		{A07B387D-CB24-4D90-837A-68F733A7B08A}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{A07B387D-CB24-4D90-837A-68F733A7B08A}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{A07B387D-CB24-4D90-837A-68F733A7B08A}.Release|Win32.ActiveCfg = Release|Win32
+		{A07B387D-CB24-4D90-837A-68F733A7B08A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

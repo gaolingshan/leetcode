@@ -43,7 +43,7 @@ public:
 };
 
 //2nd pass: 2015-02-07
-class MinStack {
+class MinStack_2nd {
 public:
     stack<int> main_stack;
     stack<int> min_stack;
@@ -67,6 +67,43 @@ public:
     int getMin() {
         if(min_stack.empty()) return 0;
         return min_stack.top();
+    }
+};
+
+//3rd pass: 2015-03-17
+/*
+two stack. main stack & min stack
+push:
+    1. push into main stack
+    2. min stack empty || num<=min stack top, push
+pop:
+    check if main stack empty
+    1. min stack not empty && main stack top == min stack top, pop min stack
+    2. pop main stack
+top: main stack top
+min: min stack top
+*/
+class MinStack {
+private:
+    stack<int> mainSt, minSt;
+public:
+    void push(int x) {
+        mainSt.push(x);
+        if(minSt.empty() || x<=minSt.top()) minSt.push(x);
+    }
+
+    void pop() {
+        if(mainSt.empty()) return;
+        if(!minSt.empty() && mainSt.top()==minSt.top()) minSt.pop();
+        mainSt.pop();
+    }
+
+    int top() {
+        return (mainSt.empty())?0:mainSt.top();
+    }
+
+    int getMin() {
+        return (minSt.empty())?0:minSt.top();
     }
 };
 

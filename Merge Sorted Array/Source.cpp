@@ -42,7 +42,7 @@ public:
 
 
 //2nd pass: 2015-03-04
-class Solution {
+class Solution_2nd {
 public:
     void merge(int A[], int m, int B[], int n) {
         int i=m-1,j=n-1,k=m+n-1;
@@ -51,6 +51,21 @@ public:
         }
         if(i<0) while(j>=0) A[k--]=B[j--];
         if(j<0) while(i>=0) A[k--]=A[i--];
+    }
+};
+
+//3rd pass: 2015-03-16
+/*
+put number from large to small, at the back of A
+i=m-1, j=n-1, k=m+n-1, pick larger one
+*/
+class Solution {
+public:
+    void merge(int A[], int m, int B[], int n) {
+        int i=m-1,j=n-1,k=m+n-1;
+        while(i>=0 && j>=0) A[k--]=(A[i]>B[j])?A[i--]:B[j--];
+        while(i>=0) A[k--]=A[i--];
+        while(j>=0) A[k--]=B[j--];
     }
 };
 
