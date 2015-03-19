@@ -59,6 +59,30 @@ public:
 	}
 };
 
+//3rd pass: 2015-03-18
+/*
+l pointer: where to place next number
+cnt: count of A[l-1]
+traverse i:[1,n), cnt=1
+1. A[i]!=A[l-1], A[l++]=A[i]; cnt=1;
+2. A[i]==A[l-1] && cnt==1, A[l++]=A[i], cnt=2;
+3. A[i]==A[l-1] && cnt==2, not put
+
+corner case, n==0;
+*/
+class Solution {
+public:
+    int removeDuplicates(int A[], int n) {
+        if(n==0) return 0;
+        int l=1,cnt=1;
+        for(int i=1;i<n;++i){
+            if(A[i]!=A[l-1]){ A[l++]=A[i]; cnt=1;}
+			else if(cnt==1){ A[l++]=A[i]; cnt=2;}
+        }
+        return l;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();

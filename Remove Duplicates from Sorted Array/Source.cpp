@@ -24,7 +24,7 @@ public:
 };
 
 //2nd pass: 2015-02-22
-class Solution {
+class Solution_2nd {
 public:
 	int removeDuplicates(int A[], int n) {
 		int left = -1;
@@ -32,6 +32,21 @@ public:
 			if (left==-1 || A[i] != A[left]) A[++left] = A[i];
 		return left+1;
 	}
+};
+
+//3rd pass: 2015-03-18
+/*
+l pointer: where to place next number
+traverse i:[0,n)
+1. l==0 || A[i]!=A[l-1], A[l++]=A[i];
+*/
+class Solution {
+public:
+    int removeDuplicates(int A[], int n) {
+        int l=0;
+        for(int i=0;i<n;++i) if(l==0 || A[i]!=A[l-1]) A[l++]=A[i];
+        return l;
+    }
 };
 
 int main()

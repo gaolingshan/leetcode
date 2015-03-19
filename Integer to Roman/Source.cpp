@@ -56,7 +56,7 @@ public:
 };
 
 //2nd pass: 2015-02-21
-class Solution {
+class Solution_2nd {
 public:
     string intToRoman(int num) {
 		int numbers[] = {1,4,5,9,10,40,50,90,100,400,500,900,1000};
@@ -72,6 +72,28 @@ public:
                     num-=numbers[i];
                 }
                 break;
+            }
+        }
+        return res;
+    }
+};
+
+//3rd pass: 2015-03-18
+/*
+avoid 4 consecutive. make list
+I IV V IX  X XL  L XC   C  CD   D  CM    M
+1  4 5  9 10 40 50 90 100 400 500 900 1000
+*/
+class Solution {
+public:
+    string intToRoman(int num) {
+        string romans[]={"I","IV","V","IX","X","XL","L","XC","C","CD","D","CM","M"};
+        vector<int> numbers={1,4,5,9,10,40,50,90,100,400,500,900,1000};
+        string res;
+        for(int i=numbers.size()-1;num;--i){
+            if(num>=numbers[i]){
+                for(int j=0;j<num/numbers[i];++j) res+=romans[i];
+                num%=numbers[i];
             }
         }
         return res;

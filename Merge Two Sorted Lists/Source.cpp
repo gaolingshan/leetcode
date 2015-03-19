@@ -202,6 +202,7 @@ head : start of merged list
 every step: prev proceed to end of list(no need to put NULL)
 
 until one list NULL, concat prev-> non empty list
+corner case: one list is NULL at the beginning. just return
 */
 class Solution {
 public:

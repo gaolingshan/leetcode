@@ -41,6 +41,15 @@ public:
 };
 
 //2nd pass: 2015-02-21
+//3rd pass: 2015-03-18
+/*
+1. left bra, just push
+2. right bra
+    2.1 check stack NULL, false
+    2.2 check stack top, if not correspond, false
+    2.3 pop
+3. check stack NULL at the end
+*/
 class Solution {
 public:
     bool isValid(string s) {
@@ -60,6 +69,7 @@ public:
         return st.empty();
     }
 };
+
 
 int main()
 {

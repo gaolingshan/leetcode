@@ -33,11 +33,43 @@ public:
 	}
 };
 
+//3rd pass: 2015-03-18
+/*
+1. trim leading white space
+2. optional +-
+3. only num, as many as possible. 
+    3.1 not num, return
+    3.2 if > INT_MAX or < INT_MIN return;
+return res
+
+about deal with overflow: 
+1. use long long
+2.  num>INT_MAX/10,
+    num==INT_MAX/10, next digit > 7(+) 8(-) 
+*/
+int myAtoi(char *str) {
+    bool isPositive=true;
+    int ans=0;
+    while(*str==' ') ++str;
+	if(*str=='-' || *str=='+') {
+		if(*str=='-') isPositive=false;
+		++str;
+	}
+    while(*str>='0' && *str<='9'){
+        int digit=*str-'0';
+        if(ans>INT_MAX/10 || (ans==INT_MAX/10 && digit > (isPositive?7:8))) return isPositive?INT_MAX:INT_MIN;
+        ans=ans*10+digit;          
+		++str;
+    }
+    return isPositive?ans:-ans;
+}
+
 int main()
 {
 	Solution *s = new Solution();
 
 	cout << s->atoi("  - 1231a313123abc") << endl;
+	cout << myAtoi("  - 1231a313123abc") << endl;
 	system("pause");
 	return 0;
 }

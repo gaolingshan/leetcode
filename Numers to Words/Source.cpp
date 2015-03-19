@@ -48,10 +48,25 @@ string convert(int num){
 	return tens[num/10] + " " + units[num%10];
 }
 
+/*
+12345 -> 12,345
+n%1000 + res
+then n/=1000
+*/
+string convert2(int num){
+	string res=(num<0)?"-":"";
+	long long n=abs(num);
+	while(n){
+		res = ((n/1000)?",":"") + to_string(n%1000) + res;
+		n/=1000;
+	}
+	return res;
+}
+
 int main()
 {
-	cout<<convert(1123456789)<<endl;
-
+	//cout<<convert(1123456789)<<endl;
+	cout<<convert2(123456789)<<endl;
 	system("pause");
 	return 0;
 }

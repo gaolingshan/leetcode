@@ -23,6 +23,12 @@ public:
 };
 
 //2nd pass: 2015-02-22
+/*
+check high and low digits from two sides
+x%high/10 per loop
+high/100 per loop
+until x turn to zero
+*/
 class Solution {
 public:
     bool isPalindrome(int x) {
