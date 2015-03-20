@@ -97,6 +97,14 @@ public:
 };
 
 //3rd pass: 2015-02-26
+/*
+use hashtable<old,new>
+1st pass: 
+1.create new, insert into table
+2.connect next pointer between new nodes
+
+2nd pass: connect rd pointer between new nodes
+*/
 class Solution {
 public:
 	unordered_map<RandomListNode*, RandomListNode*> table;

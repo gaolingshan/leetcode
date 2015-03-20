@@ -73,11 +73,79 @@ public:
     }
 };
 
+struct ListNode {
+	int val;
+	ListNode *next;
+	ListNode(int x) : val(x), next(NULL) {}
+};
+
+/*
+1. split list in two
+2. reverse second list
+3. compare two lists one by one, until one reach end.
+4. reverse back 2nd list and append
+*/
+ListNode* reverse(ListNode* head){
+	ListNode *p=head, *prev=NULL;
+	while(p){
+		auto p_next=p->next;
+		p->next=prev;
+		prev=p;
+		p=p_next;
+	}
+	return prev;
+}
+bool isPalindrome(ListNode *head){
+	ListNode *slow=head, *prev=head, *fast=head;
+	while(fast){
+		prev=slow;
+		slow=slow->next;
+		fast=(fast->next)?fast->next->next:NULL;
+	}
+	prev->next=NULL;
+	auto p=head, q=reverse(slow), tmp=q;
+	bool res=true;
+	while(p&&q){
+		if(p->val!=q->val) {
+			res=false;
+			break;
+		}
+		p=p->next; q=q->next;
+	}
+	prev->next=reverse(tmp);
+	return res;
+}
+
+void print(ListNode *l)
+{
+	while(l!=NULL)
+	{
+		cout<<l->val<<endl;
+		l=l->next;
+	}
+	cout<<endl;
+}
+
 int main()
 {
 	Solution *s = new Solution();
-	cout<<s->isPalindrome("A man, a plan, a canal: Panama")<<endl;
-	cout<<s->isPalindrome("race a car")<<endl;
+	//cout<<s->isPalindrome("A man, a plan, a canal: Panama")<<endl;
+	//cout<<s->isPalindrome("race a car")<<endl;
+
+	ListNode a(1);
+	ListNode b(2);
+	ListNode c(4);
+	ListNode d(2);
+	ListNode e(1);
+	ListNode f(1);
+	a.next = &b;
+	b.next = &c;
+	c.next = &d;
+	d.next = &e;
+	//e.next = &f;
+
+	print(&a);
+	cout<<isPalindrome(&a)<<endl;
 
 
 	system("pause");

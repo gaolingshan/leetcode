@@ -43,7 +43,7 @@ public:
 };
 
 //2nd pass: 2015-02-22
-class Solution {
+class Solution_2nd {
 public:
 	int removeDuplicates(int A[], int n) {
 		int left = -1, cnt = 0;

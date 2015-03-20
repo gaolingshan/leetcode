@@ -53,9 +53,7 @@ next[i+1]=k+1
 
 int solve2(string s){
 	int len=s.length();
-	string tmp=s;
-	reverse(tmp.begin(),tmp.end());
-	tmp+="$"+s;
+	string tmp=string(s.rbegin(),s.rend()) + "$" + s;
 	vector<int> next(tmp.length()+1,-1);
 	for(int i=0;i<tmp.length();++i){
 		int k=next[i];

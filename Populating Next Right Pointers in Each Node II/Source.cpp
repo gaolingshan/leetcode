@@ -71,7 +71,7 @@ public:
 };
 
 //2nd pass: 2015-02-20
-class Solution {
+class Solution_2nd {
 public:
     void connect(TreeLinkNode *root) {
         TreeLinkNode *p=root, *q=NULL, *q_first=NULL;
@@ -97,6 +97,38 @@ public:
 			q=NULL; q_first=NULL;
 
 		}
+    }
+};
+
+//3rd pass: 2015-03-20
+/*
+level order traverse
+p: current level
+q: next level current, q_first: next level head
+
+after p done, p=q_first, q=q_first=NULL;
+*/
+class Solution {
+public:
+    void connect(TreeLinkNode *root) {
+        TreeLinkNode *p=root, *q_first=NULL, *q=NULL;
+        while(p){
+            if(p->left){
+                if(q_first==NULL) q_first=p->left;
+                if(q) q->next=p->left;
+                q=p->left;
+            }
+            if(p->right){
+                if(q_first==NULL) q_first=p->right;
+                if(q) q->next=p->right;
+                q=p->right;
+            }
+            p=p->next;
+            if(p==NULL){
+                p=q_first;
+                q_first=q=NULL;
+            }
+        }
     }
 };
 
