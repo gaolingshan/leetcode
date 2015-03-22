@@ -70,7 +70,7 @@ public:
 };
 
 //2nd pass: 2015-02-20
-class Solution {
+class Solution_2nd {
 public:
     TreeNode *upsideDownBinaryTree(TreeNode *root) {
         if(root==NULL) return root;
@@ -85,6 +85,65 @@ public:
             return res;
         }
         return root;
+    }
+};
+
+//3rd pass: 2015-03-21
+/*
+    root
+left    right   
+1. recurse on left
+2. turn to
+    left
+right   root    
+3.boudary: no left child, just return itself.
+*/
+class Solution_Recur {
+public:
+    TreeNode *upsideDownBinaryTree(TreeNode *root) {
+        if(root==NULL) return root;
+        auto left=root->left, right=root->right;
+        root->left=NULL; root->right=NULL;
+        if(left) {
+            auto res=upsideDownBinaryTree(left);
+            left->left=right; left->right=root;   
+            return res;
+        }else return root;
+    }
+};
+
+/*
+iterative way, top down, simillar to reverse linked list
+left child in flipped tree can be treated as a seperate linked list!!!!
+    1
+   / \
+  2   3
+ / \
+4   5	
+turn to
+		   4   <-p
+		  / \
+right -> 5   2  <- prev  
+			/ \
+		   3   1  
+
+prev: head of reversed list, right: head of parallel list!!
+in reverse linked list, buffer p_next(p->left), here also need buffer right_next(p->right)
+p->right=prev;  // same as reverse linked list
+p->left=right;  // connect the paralled linked list to the main list!!
+*/
+class Solution {
+public:
+    TreeNode *upsideDownBinaryTree(TreeNode *root) {
+        TreeNode* prev=NULL, *p=root, *right=NULL;
+        while(p){
+            auto p_next=p->left, right_next=p->right;
+            p->right=prev; p->left=right;
+            prev=p;
+            p=p_next;
+            right=right_next;
+        }
+        return prev;
     }
 };
 

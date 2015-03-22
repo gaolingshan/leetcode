@@ -30,6 +30,23 @@ public:
     }
 };
 
+class Solution_iter {
+public:
+    int maxDepth(TreeNode *root) {
+	    stack<pair<TreeNode*,int>> st;
+        int ans=0;
+        if(root) st.push(make_pair(root,1));
+        while(!st.empty()){
+            auto head=st.top();
+            st.pop();
+            ans=max(ans,head.second);
+            if(head.first->left) st.push(make_pair(head.first->left,head.second+1));
+            if(head.first->right) st.push(make_pair(head.first->right,head.second+1));
+        }
+        return ans;
+    }
+};
+
 int main()
 {
 	Solution *s = new Solution();

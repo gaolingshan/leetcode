@@ -93,6 +93,10 @@ public:
 
 
 //2nd pass: 2015-02-23
+/*
+traverse i:
+sum<0?sum=0;
+*/
 class Solution {
 public:
 	int maxSubArray(int A[], int n) {

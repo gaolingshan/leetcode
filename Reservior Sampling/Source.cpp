@@ -27,13 +27,12 @@ int main()
 	srand(time(NULL));
 	int A[]={1,2,3,4,5,6,7,8,9,10};
 	int n=sizeof(A)/sizeof(int);
-	int k=0;
-	for(int i=0;i<n;i++){
+	int k=5;
+	for(int i=k-1;i<n;i++){
 		int j=rand()%(i+1);
-		//if(j<k) 
-		swap(A[j],A[i]);
+		if(j<k) swap(A[j],A[i]);
 	}
-	for(int i=0;i<n;i++) cout<<A[i]<<" ";
+	for(int i=0;i<5;i++) cout<<A[i]<<" ";
 	cout<<endl;
 	system("pause");
 	return 0;
