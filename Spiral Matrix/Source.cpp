@@ -87,7 +87,7 @@ public:
 
 
 //2nd pass: 2015-03-04
-class Solution {
+class Solution_2nd {
 public:
     vector<int> spiralOrder(vector<vector<int> > &matrix) {
         vector<int> res;
@@ -105,6 +105,37 @@ public:
             if(--endY<beginY) break;
             for(int i=endY;i>=beginY;i--) res.push_back(matrix[i][beginX]);
             if(++beginX>endX) break;
+        }
+        return res;
+    }
+};
+
+//3rd pass: 2015-03-22
+/*
+m*n
+beginX=0, endX=n-1, beginY=0, endY=m-1
+(x,y) always go according to beginX/Y, endX/Y
+adjust next start point after one way finish
+1. y:[beginY,endY], ++beginX
+2. x:[beginX,endX], --endY
+3. y:[endY,beginY], --endX
+4. x:[endX,beginX], ++beginY
+*/
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int> > &matrix) {
+        if(matrix.empty() || matrix[0].empty()) return {};
+        vector<int> res;
+        int beginX=0,endX=matrix.size()-1,beginY=0,endY=matrix[0].size()-1,x=0,y=0;
+        while(1){
+            for(y=beginY;y<=endY;++y) res.push_back(matrix[beginX][y]);
+            if(++beginX>endX) break;
+            for(x=beginX;x<=endX;++x) res.push_back(matrix[x][endY]);
+            if(--endY<beginY) break;
+            for(y=endY;y>=beginY;--y) res.push_back(matrix[endX][y]);
+            if(--endX<beginX) break;
+            for(x=endX;x>=beginX;--x) res.push_back(matrix[x][beginY]);
+            if(++beginY>endY) break;
         }
         return res;
     }

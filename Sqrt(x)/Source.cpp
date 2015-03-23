@@ -33,7 +33,7 @@ public:
 };
 
 //2nd pass: 2015-02-07
-class Solution {
+class Solution_2nd {
 public:
     int sqrt(int x) {
         int left=0,right=x;
@@ -49,7 +49,7 @@ public:
         return right;
     }
 
-	double eps = 1e-6;
+	double eps = 1e-8;
 	int dblcmp(double x){
 
 		if (abs(x) < eps) return 0;
@@ -70,13 +70,50 @@ public:
 	}
 };
 
+//3rd pass: 2015-03-22
+/*
+newton method solution for sqrt and cbrt:
+check a==0(stable point, not gonna converge), then start at a
+sqrt: x=(x+a/x)/2
+cbrt: x=(a/x/x + 2x)/3
+*/
+class Solution {
+public:
+	double eps = 1e-8;
+	int dblcmp(double x){
+		if (abs(x) < eps) return 0;
+		return (x > eps) ? 1 : -1;
+	}
+    double sqrt(double x) {
+		if(dblcmp(x)==0) return 0;
+		double ans=x, tmp=0;
+		while(1){
+			tmp=(ans+x/ans)/2;
+			if(dblcmp(ans-tmp)==0)break;
+			ans=tmp;
+		}
+		return ans;        
+    }
+	double cbrt(double x){
+		if(dblcmp(x)==0) return 0;
+		double ans=x, tmp=0;
+		while(1){
+			tmp=(x/ans/ans+2*ans)/3;
+			if(dblcmp(ans-tmp)==0)break;
+			ans=tmp;
+		}
+		return ans;
+	}
+};
+
 int main()
 {
 	Solution *s = new Solution();
 	//cout<<s->sqrt(2)<<endl;
 	//cout<<s->sqrt(4)<<endl;
 	//cout<<s->sqrt(2147483647)<<endl;
-	cout << s->sqrt(0.64) << endl;
+	cout << s->sqrt(64) << endl;
+	//cout << s->cbrt(-64) << endl;
 
 	system("pause");
 	return 0;

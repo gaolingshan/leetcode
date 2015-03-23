@@ -27,6 +27,16 @@ public:
 };
 
 //2nd pass: 2015-02-18
+//3rd pass: 2015-03-23
+/*
+boundary: Alen==0, B[k-1]; Blen==0, A[k-1]; k==1, min(A[0],B[0]);
+partition k to Amid&Bmid use Alen&Blen
+Amid=k*Alen/(Alen+Blen)-1
+Bmid=k-Amid-2;
+1. A[Amid]==B[Bmid] just return
+2. A[Amid]<B[Bmid], kth can be Bmid but cannot be Amid, so search[Amid+1,Alen-1] [0,Bmid]
+3. B[Bmid]<A[Amid], kth can be Amid but cannot be Bmid, so search[0,Amid] [Bmid+1,Blen-1]
+*/
 class Solution {
 public:
     int findKth(int A[], int Alen, int B[], int Blen, int k)

@@ -21,11 +21,11 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-class BSTIterator {
+class BSTIterator_old {
 public:
 	vector<TreeNode*> stack;
 	TreeNode* now;
-    BSTIterator(TreeNode *root) {
+    BSTIterator_old(TreeNode *root) {
         now=root;
     }
 
@@ -51,6 +51,42 @@ public:
 				return tmp;
 			}
 		}
+    }
+};
+
+//2nd pass: 2015-03-22
+/*
+ 1
+2 3
+   4
+st: 1 2
+output:2 1 3 4
+has p, push stack, p = p->left
+no p, pop stack, p=stack.top->right
+*/
+class BSTIterator {
+private:
+    stack<TreeNode*> st;
+    TreeNode *p;
+public:
+    BSTIterator(TreeNode *root) {
+        p=root;
+    }
+    bool hasNext() {
+        if(p!=NULL || !st.empty()) return true; else return false;
+    }
+    int next() {
+        while(p!=NULL || !st.empty()){
+            if(p){
+                st.push(p);
+                p=p->left;
+            }else{
+                int ans=st.top()->val;
+                p=st.top()->right;
+                st.pop();
+                return ans;
+            }       
+        }
     }
 };
 

@@ -38,7 +38,7 @@ public:
 };
 
 //2nd pass: 2015-02-24
-class Solution {
+class Solution_2nd {
 public:
 	vector<vector<int>> res;
 	void dfs(int i, vector<int> &now)
@@ -60,6 +60,27 @@ public:
 		dfs(0, num);
 		return res;
 	}
+};
+
+//3rd pass: 2015-03-22
+class Solution {
+public:
+    void dfs(vector<vector<int>> &res, vector<int> &now, int i){
+        if(i==now.size()){
+            res.push_back(now);
+            return;
+        }
+        for(int j=i;j<now.size();++j){
+            swap(now[i],now[j]);
+            dfs(res,now,i+1);
+            swap(now[i],now[j]);
+        }
+    }
+    vector<vector<int> > permute(vector<int> &num) {
+        vector<vector<int>> res;
+        dfs(res,num,0);
+        return res;
+    }
 };
 
 

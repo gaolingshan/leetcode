@@ -46,7 +46,7 @@ public:
 };
 
 //2nd pass: 2015-02-19
-class Solution {
+class Solution_2nd {
 public:
     ListNode *detectCycle(ListNode *head) {
         if(head==NULL) return NULL;
@@ -64,6 +64,48 @@ public:
             fast=fast->next;
         }
         return slow;
+    }
+};
+
+//3rd pass: 2015-03-22
+/*
+slow/fast pointer
+1. fast reach end, return NULL
+2. slow==fast, has cycle
+put fast at head, if(slow==fast) return slow
+
+prove:
+x: head to cycle start
+a: cycle start to meeting point
+r: cycle length
+L: list length
+
+slow: x+a=s
+fast: x+nr=2s
+s=nr=x+a
+
+fast go back to head
+x+pr=r-a+qr
+x+a=(q-p+1)r
+if p==0, q=n-1, fast&slow must meet at start of cycle
+*/
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        auto slow=head, fast=head;
+        while(fast && fast->next){
+            fast=fast->next->next;
+            slow=slow->next;
+            if(slow==fast){
+                fast=head;
+                while(slow!=fast){
+                    slow=slow->next;
+                    fast=fast->next;
+                }
+                return slow;
+            }
+        }
+        return NULL;
     }
 };
 

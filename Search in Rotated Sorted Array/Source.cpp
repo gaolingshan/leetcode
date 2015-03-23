@@ -109,8 +109,7 @@ public:
 
 
 //3rd pass: 2015-02-18
-
-class Solution {
+class Solution_3rd {
 public:
     int search(int A[], int n, int target) {
         int left=0,right=n-1,mid=0;
@@ -127,6 +126,35 @@ public:
             {
                 if(A[mid]<target && target <= A[right]) left=mid+1;
                 else right=mid-1;
+            }
+        }
+        return -1;
+    }
+};
+
+//4th pass: 2015-03-22
+/*
+left    mid     right
+A[mid]==target, just return
+A[left]<=A[mid]  left part sorted; else right part sorted
+1. left part sorted
+A[left]<=target<A[mid], right=mid-1; else left=mid+1
+2. right part sorted
+A[mid]<target<=A[right], left=mid+1; else right=mid-1;
+left<=right
+not found -1
+*/
+class Solution {
+public:
+    int search(int A[], int n, int target) {
+        int left=0,right=n-1,mid;
+        while(left<=right){
+            mid=left+((right-left)>>1);
+            if(target==A[mid]) return mid;
+            if(A[left]<=A[mid]){
+                if(A[left]<=target && target<A[mid]) right=mid; else left=mid+1;    
+            }else{
+                if(A[mid]<target && target<=A[right]) left=mid+1; else right=mid-1;
             }
         }
         return -1;

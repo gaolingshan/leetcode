@@ -63,7 +63,7 @@ public:
 };
 
 //3rd pass: 2015-02-18
-class Solution {
+class Solution_3rd {
 public:
     int findPeakElement(const vector<int> &num) {
         int len=num.size();
@@ -78,6 +78,25 @@ public:
 			//if(mid!=len-1 && num[mid]<num[mid+1]) left=mid+1;
 			//else right=mid-1;
         }
+    }
+};
+
+//4th pass: 2015-03-23
+/*
+mid-1   mid     mid+1
+1. mid==0, return mid, else num[mid]>num[mid-1] left=mid
+2. mid==n-1, return mid, else num[mid]>num[mid+1] right=mid
+*/
+class Solution {
+public:
+    int findPeakElement(const vector<int> &num) {
+        int n=num.size(),left=0,right=n-1,mid;
+        while(left+1<right){
+            mid=left+((right-left)>>1);
+            if(mid==0 || mid==n-1) return mid; 
+            if(num[mid]>num[mid-1]) left=mid; else right=mid;
+        }
+        return (num[left]>num[right])?left:right;
     }
 };
 

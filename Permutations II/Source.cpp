@@ -38,7 +38,7 @@ public:
 };
 
 //2nd pass: 2015-02-24
-class Solution {
+class Solution_2nd {
 public:
 	vector<vector<int> > permuteUnique(vector<int> &num) {
 		vector<vector<int>> res;
@@ -56,6 +56,18 @@ public:
 		}
 		return res;
 	}
+};
+
+//3rd pass: 2015-03-22
+class Solution {
+public:
+    vector<vector<int> > permuteUnique(vector<int> &num) {
+        vector<vector<int>> res;
+        sort(num.begin(),num.end());
+        res.push_back(num);
+        while(next_permutation(num.begin(),num.end())) res.push_back(num);
+        return res;
+    }
 };
 
 

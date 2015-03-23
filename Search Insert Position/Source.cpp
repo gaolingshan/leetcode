@@ -49,7 +49,7 @@ public:
 };
 
 //3rd pass: 2015-02-18
-class Solution {
+class Solution_3rd {
 public:
     int searchInsert(int A[], int n, int target) {
         int left=0,right=n-1,mid=0;
@@ -65,6 +65,28 @@ public:
     }
 };
 
+//4th pass: 2015-03-23
+/*
+search_ceiling, but if found, return idx
+left    mid     right
+1. target==mid, just return
+2. target < mid, right=mid
+3. target > mid, left=mid+1
+left<right
+A[left]>=target?left:left+1
+*/
+class Solution {
+public:
+    int searchInsert(int A[], int n, int target) {
+        int left=0,right=n-1,mid;
+        while(left<right){
+            mid=left+((right-left)>>1);
+            if(target==A[mid]) return mid;
+            if(target<A[mid]) right=mid; else left=mid+1;
+        }
+        return (A[left]>=target)?left:left+1;
+    }
+};
 
 int main()
 {

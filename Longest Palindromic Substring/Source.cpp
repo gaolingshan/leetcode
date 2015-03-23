@@ -79,6 +79,14 @@ public:
 };
 
 //3rd pass: 2015-02-21
+//4rd pass: 2015-03-22
+/*
+abba
+abb
+two kind of expand: i==j, i+1=j
+traverse i:
+do two expand, update max len
+*/
 class Solution {
 public:
     string expand(string s, int l, int r)

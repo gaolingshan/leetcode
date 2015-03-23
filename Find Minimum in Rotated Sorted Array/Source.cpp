@@ -116,7 +116,7 @@ public:
 };
 
 //5th pass: 2015-02-18
-class Solution {
+class Solution_5th {
 public:
     int findMin(vector<int> &num) {
         int left=0,right=num.size()-1,mid=0;
@@ -127,6 +127,29 @@ public:
             else left=mid;
         }
         return (num[left]<num[right])?num[left]:num[right];
+    }
+};
+
+//6th pass: 2015-03-22
+/*
+left    mid     right
+A[mid]<A[right]-> right part sorted
+1. right part sorted, min in left part(included mid)
+right=mid
+2. right part unsorted, min in right part
+left=mid+1
+
+left<right
+*/
+class Solution {
+public:
+    int findMin(vector<int> &num) {
+        int left=0,right=num.size()-1,mid;
+        while(left<right){
+            mid=left+((right-left)>>1);
+            if(num[mid]<num[right]) right=mid; else left=mid+1;
+        }
+        return num[left];
     }
 };
 

@@ -42,7 +42,7 @@ public:
 
 
 //2nd pass:  2015-02-24
-class Solution {
+class Solution_2nd {
 public:
 	string getPermutation(int n, int k) {
 		k--;
@@ -60,6 +60,33 @@ public:
 		}
 		return res;
 	}
+};
+
+//3rd pass: 2015-03-22
+/*
+n number has n! permutation
+loop until n==1
+num idx: k/(n-1)!
+k = k%(n-1)!
+*/
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+        --k;
+        int fac=1;
+        for(int i=2;i<n;++i) fac*=i;
+        string res,nums;
+        for(int i=1;i<=n;++i) nums.push_back('0'+i);
+        while(n>1){
+            int idx=k/fac;
+            res.push_back(nums[idx]);
+            nums.erase(nums.begin()+idx);
+            k=k%fac;
+            fac/=--n;
+        }
+        res.push_back(nums[0]);
+        return res;
+    }
 };
 
 int main()
