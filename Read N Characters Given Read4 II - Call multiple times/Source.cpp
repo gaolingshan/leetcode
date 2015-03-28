@@ -93,6 +93,20 @@ public:
 };
 
 //2nd pass: 2015-02-22
+//3rd pass: 2015-03-25
+/*
+buffer[4]
+st: where is the start point of residue buffer, len: how many chars in the residue buffer
+buf[cnt], cnt: where to put next char
+
+before read4
+1. read min(len,n) from residue buffer
+keep reading, until
+1. tmp+cnt >= n
+    1.1 when copying, --tmp
+    1.1 residue buffer len=tmp, st=i
+2. tmp < 4
+*/
 class Solution {
 public:
 	char buffer[4];
@@ -106,7 +120,6 @@ public:
             len--;
         }
         if(cnt==n) return cnt;
-        
         while(1)
         {
             int tmp=read4(buffer);

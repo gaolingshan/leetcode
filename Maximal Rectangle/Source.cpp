@@ -74,7 +74,7 @@ public:
 };
 
 //2nd pass 32ms: 2015-02-27
-class Solution {
+class Solution_2nd {
 public:
 	int largestRectangleArea(vector<int> height) {
 		stack<int> st;
@@ -111,6 +111,44 @@ public:
 		}
 		return ans;
 	}
+};
+
+//3rd pass: 2015-03-25
+/*
+compress to 1D problem.
+traverse row i, col j:
+1. height[j]==0, traverse k:[i~m-1], m[k][j]==1 ++ height, else break
+2. height[j]!=0, --hegiht
+*/
+class Solution {
+public:
+    int largestRectangleArea(vector<int> &height) {
+        stack<int> st;
+        int ans=0;
+        for(int i=0;i<height.size();++i){
+            if(st.empty() || height[i]>height[st.top()]) st.push(i); else{
+                while(!st.empty() && height[i]<=height[st.top()]){
+                    int h=height[st.top()]; st.pop();
+                    ans=max(ans,(i-(st.empty()?0:st.top()+1))*h);
+                }
+                st.push(i);
+            }
+        }
+        return ans;
+    }
+    int maximalRectangle(vector<vector<char> > &matrix) {
+        if(matrix.empty() || matrix[0].empty()) return 0;
+        int m=matrix.size(), n=matrix[0].size(), ans=0;
+        vector<int> height(n+1,0);
+        for(int i=0;i<m;++i){
+            for(int j=0;j<n;++j) 
+                if(height[j]==0){
+                    for(int k=i;k<m;++k) if(matrix[k][j]=='1') ++height[j]; else break;
+                }else --height[j];
+            ans=max(ans,largestRectangleArea(height));
+        }
+        return ans;
+    }
 };
 
 int main()

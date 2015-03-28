@@ -49,8 +49,7 @@ aim: put num to index num-1
 4. corner case: if all interger are there, return n+1
 [3 ,4,-1,1]
 */
-
-class Solution {
+class Solution_2nd {
 public:
 	int firstMissingPositive(int A[], int n) {
 		for (int i = 0; i<n;){
@@ -63,6 +62,23 @@ public:
 			if (A[i]!=i+1) return i+1;
 		return n+1;
 	}
+};
+
+//3rd pass: 2015-03-23
+/*
+A[i] to to A[A[i]-1] finally
+traverse i:
+1. A[i]=i+1, move on
+2. while(0<=A[i]-1<n && A[i] != A[A[i]-1]) swap A[i],A[A[i]-1]
+*/
+class Solution {
+public:
+    int firstMissingPositive(int A[], int n) {
+        for(int i=0;i<n;++i) if(A[i]!=i+1)
+            while(A[i]-1>=0 && A[i]-1<n && A[i]!=A[A[i]-1]) swap(A[i],A[A[i]-1]);
+        for(int i=0;i<n;++i) if(A[i]!=i+1) return i+1;
+        return n+1;
+    }
 };
 
 int main()

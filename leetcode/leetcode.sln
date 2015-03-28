@@ -441,6 +441,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Implement Memcpy", "..\Impl
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Joseph Cycle", "..\Joseph Cycle\Joseph Cycle.vcxproj", "{249BCE33-F14E-44F1-B567-45AC9BF4FD0E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Largest subarray with equal number of 0s and 1s", "..\Largest subarray with equal number of 0s and 1s\Largest subarray with equal number of 0s and 1s.vcxproj", "{19EA7CFC-3628-4C64-A635-207FC26412CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2641,6 +2643,16 @@ Global
 		{249BCE33-F14E-44F1-B567-45AC9BF4FD0E}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{249BCE33-F14E-44F1-B567-45AC9BF4FD0E}.Release|Win32.ActiveCfg = Release|Win32
 		{249BCE33-F14E-44F1-B567-45AC9BF4FD0E}.Release|Win32.Build.0 = Release|Win32
+		{19EA7CFC-3628-4C64-A635-207FC26412CC}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{19EA7CFC-3628-4C64-A635-207FC26412CC}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{19EA7CFC-3628-4C64-A635-207FC26412CC}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{19EA7CFC-3628-4C64-A635-207FC26412CC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{19EA7CFC-3628-4C64-A635-207FC26412CC}.Debug|Win32.Build.0 = Debug|Win32
+		{19EA7CFC-3628-4C64-A635-207FC26412CC}.Release|Any CPU.ActiveCfg = Release|Win32
+		{19EA7CFC-3628-4C64-A635-207FC26412CC}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{19EA7CFC-3628-4C64-A635-207FC26412CC}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{19EA7CFC-3628-4C64-A635-207FC26412CC}.Release|Win32.ActiveCfg = Release|Win32
+		{19EA7CFC-3628-4C64-A635-207FC26412CC}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -180,17 +180,87 @@ string solve4(string str){
 	return str;
 }
 
+/*
+2-4-5-6-7-10-13  ->  2,4-7,10,13
+token -
+traverse by token, maintian lower=upper=INT_MIN
+1. num > upper+1, save lower-upper, then update lower=upper=num
+	1.1 upper != lower, save in form lower-upper
+	1.2 otherwise, save lower
+2. otherwise, upper=num
+3. finnaly, save lower-upper
+*/
+string solve5(string str){
+	int lower=INT_MIN, upper=lower;
+	istringstream ss(str);
+	string tmp,res;
+	while(getline(ss,tmp,'-')){
+		int num=stoi(tmp);
+		if(num > upper+1){
+			if(upper!=INT_MIN){
+				if(upper==lower) res+=to_string(lower)+",";
+				else res+=to_string(lower)+"-"+to_string(upper)+",";
+			}
+			lower=upper=num;
+		}else upper=num;
+	}
+	if(upper!=INT_MIN){
+		if(upper==lower) res+=to_string(lower)+",";
+		else res+=to_string(lower)+"-"+to_string(upper)+",";
+	}
+	res.pop_back();
+	return res;
+}
+
+/*
+malloc 2D array, pass nD array as args
+*/
+void solv6_func(int A[], int m, int n){
+	for(int i=0;i<m;++i){
+		for(int j=0;j<n;++j) 
+			printf("%d ", *(A+i*n + j));
+			//printf("%d ", A[i][j]);
+			//printf("%d ", *(*(A+i)+j));
+		cout<<endl;
+	}
+}
+void solve6(){
+	int m=5,n=6;
+	int *A=(int*)malloc(m*n*sizeof(int));
+	//int **A=(int**)malloc(m*sizeof(int*));
+	//for(int i=0;i<m;++i) A[i]=(int*)malloc(n*sizeof(int));
+	//for(int i=0,cnt=0;i<m;++i) for(int j=0;j<n;++j) A[i][j]=++cnt;
+	for(int i=0,cnt=0;i<m;++i) for(int j=0;j<n;++j) *(A+i*n+j)=++cnt;
+	//for(int i=0;i<m;++i){
+	//	for(int j=0;j<n;++j) 
+	//		printf("%d ", A[i][j]);
+	//	cout<<endl;
+	//}
+	//solv6_func(A,m,n);
+
+	int B[][3]={{1,2,3},{4,5,6}};
+	solv6_func((int*)B,2,3);
+	B[0][0];
+	//for(int i=0;i<2;++i){
+	//	for(int j=0;j<3;++j) 
+	//		printf("%d ", B[i][j]);
+	//	cout<<endl;
+	//}
+}
+
 int main()
 {
 	//cout<<solve1("Old panda is a big fat panda and smart panda.","panda")<<endl;
 	//cout<<solve2("     the   sky is   blue    ")<<endl;
 
-/*
+
 	vector<Runner> data={Runner(1,"1"),Runner(2,"2"),Runner(3,"3"),Runner(4,"4"),Runner(5,"5")};
 	LeaderBoard LB(data,3);
 	LB.onMessage(1,1,10);
-	LB.onMessage(3,1,12);
-	LB.onMessage(5,1,13);
+	LB.onMessage(1,2,12);
+	LB.onMessage(1,3,13);
+	//LB.onMessage(3,1,12);
+	//LB.onMessage(5,1,13);
 	LB.PrintBoard();
 	LB.onMessage(4,1,15);
 	LB.onMessage(2,1,17);
@@ -198,10 +268,12 @@ int main()
 	LB.PrintBoard();
 	LB.onMessage(3,2,22);
 	LB.PrintBoard();
-*/
+
 	//cout<<solve3("a#13b#14cddf#24")<<endl;
 	//cout<<solve4("aaabbccccbaddd")<<endl;
 	//cout<<solve4("aaaaaaaaaaaaaaaaaaaaaaa")<<endl;
+	//cout<<solve5("2-4-5-6-7-10-13")<<endl;
+	//solve6();
 
 	system("pause");
 	return 0;

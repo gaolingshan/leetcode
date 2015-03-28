@@ -132,7 +132,7 @@ area+=len*height;
 loop until stack empty || new num<= stack top;
 3. finaly push i
 */
-class Solution {
+class Solution_3rd {
 public:
 	int trap(int A[], int n) {
 		stack<int> st;
@@ -152,6 +152,36 @@ public:
 		}
 		return ans;
 	}
+};
+
+//4th pass: 2015-03-23
+/*
+use stack. maintain stack in descending(>) order
+traverse i:
+1. stack empty || A[i]<stack top, just push
+2. while(!stack empty && A[i]>=stack top) keep poping
+    2.1 h=A[stack top], pop stack
+    2.2 stack empty, just break
+    2.3 volume += [stack.top+1 ~ i-1] * (min(A[stack.top],A[i])-h)
+3. finally push i
+*/
+class Solution {
+public:
+    int trap(int A[], int n) {
+        stack<int> st;
+        int ans=0;
+        for(int i=0;i<n;++i){
+            if(st.empty() || A[i]<A[st.top()]) st.push(i); else{
+                while(A[i]>=A[st.top()]){
+                    int h=A[st.top()]; st.pop();
+                    if(st.empty()) break;
+                    ans += (i-st.top()-1) * (min(A[st.top()],A[i])-h);
+                }
+                st.push(i);
+            }
+        }
+        return ans;
+    }
 };
 
 int main()

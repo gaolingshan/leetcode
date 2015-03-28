@@ -48,7 +48,7 @@ public:
 
 
 //2nd pass: 2015-02-23
-class Solution {
+class Solution_2nd {
 public:
 	vector<int> now;
 	vector<vector<int>> res;
@@ -75,6 +75,39 @@ public:
 		res.resize(distance(res.begin(),unique(res.begin(),res.end())));
 		return res;
 	}
+};
+
+//3rd pass: 2015-03-23
+/*
+1. get (num,cnt_num)
+2. same num can put up to cnt_num time
+*/
+class Solution {
+public:
+    void dfs(vector<vector<int>> &res, vector<int> &now, vector<pair<int,int>> &candidates, int i, int target){
+        if(target==0){
+            res.push_back(now);
+            return;
+        }
+        if(i==candidates.size()) return;
+        for(int j=1;j<=candidates[i].second;++j)
+            if(target>=j*candidates[i].first){
+                for(int k=0;k<j;++k) now.push_back(candidates[i].first);
+                dfs(res,now,candidates,i+1,target-j*candidates[i].first);
+                for(int k=0;k<j;++k) now.pop_back();
+            }else break;
+        if(target>=candidates[i].first) dfs(res,now,candidates,i+1,target);
+    }
+    vector<vector<int> > combinationSum2(vector<int> &num, int target) {
+        vector<vector<int>> res;
+        vector<int> now;
+        map<int,int> table;
+        for(int v:num) ++table[v];
+        vector<pair<int,int>> candidates;
+        for(auto kv:table) candidates.emplace_back(kv.first,kv.second);
+        dfs(res,now,candidates,0,target);
+        return res;        
+    }
 };
 
 int main()

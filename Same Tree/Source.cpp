@@ -21,6 +21,9 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+/*
+need to deal detaily with NULL case
+*/
 class Solution {
 public:
     bool isSameTree(TreeNode *p, TreeNode *q) {

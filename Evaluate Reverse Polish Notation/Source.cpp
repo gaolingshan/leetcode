@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <queue>
 #include <stack>
+#include <functional>
 using namespace std;
 
 class Solution_old {
@@ -69,7 +70,7 @@ public:
 };
 
 //2nd pass: 2015-02-27
-class Solution {
+class Solution_2nd {
 public:
     int evalRPN(vector<string> &tokens) {
         stack<int> st;
@@ -81,7 +82,7 @@ public:
                 st.pop();
                 st.push(num1+num2);
             }else
-            if(tokens[i]=="-"){
+            if(tokens[i]=="-"){	
                 int num2=st.top();
                 st.pop();
                 int num1=st.top();
@@ -105,6 +106,34 @@ public:
 				st.push(stoi(tokens[i]));
         }
         if(st.empty()) return 0; else return st.top();
+    }
+};
+
+//3rd pass: 2015-03-26
+/*
+use stack
+use operator table, K:operator, V:function
+num2 num1
+should push back num2 op num1
+*/
+class Solution {
+public:
+    int evalRPN(vector<string> &tokens) {
+        unordered_map<string,function<int(int,int)>> optable={
+            {"+",[](int a, int b){return a+b;}},
+            {"-",[](int a, int b){return a-b;}},
+            {"*",[](int a, int b){return a*b;}},
+            {"/",[](int a, int b){return a/b;}}
+        };
+        stack<int> st;
+        for(auto s:tokens){
+            if(optable.count(s)!=0){
+                int num1=st.top(); st.pop();
+                int num2=st.top(); st.pop();
+                st.push(optable[s](num2,num1));
+            }else st.push(stoi(s));
+        }
+        return st.top();
     }
 };
 

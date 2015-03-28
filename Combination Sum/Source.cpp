@@ -47,7 +47,7 @@ public:
 };
 
 //2nd pass: 2015-02-23
-class Solution {
+class Solution_2nd {
 public:
 	vector<int> now;
 	vector<vector<int>> res;
@@ -72,6 +72,31 @@ public:
 		dfs(0, target, candidates);
 		return res;
 	}
+};
+
+//3rd pass: 2015-03-23
+class Solution {
+public:
+    void dfs(vector<vector<int>> &res, vector<int> &now, vector<int> &candidates, int i, int target){
+        if(i==candidates.size()) return;
+        if(target==0){
+            res.push_back(now);
+            return;
+        }
+        if(target>=candidates[i]){
+            now.push_back(candidates[i]);
+            dfs(res,now,candidates,i,target-candidates[i]);
+            now.pop_back();
+        }
+        dfs(res,now,candidates,i+1,target);
+    }
+    vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
+        vector<vector<int>> res;
+        vector<int> now;
+        sort(candidates.begin(),candidates.end());
+        dfs(res,now,candidates,0,target);
+        return res;
+    }
 };
 
 int main()

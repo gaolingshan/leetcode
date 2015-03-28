@@ -129,7 +129,7 @@ keep pop stack if stack is not empty && new height < stack top
 3. finally push i into stack
 
 */
-class Solution {
+class Solution_3rd {
 public:
 	int largestRectangleArea(vector<int> &height) {
 		stack<int> st;
@@ -148,6 +148,35 @@ public:
 		}
 		return ans;
 	}
+};
+
+//4th pass: 2015-03-23
+/*
+use stack, maintain increasing(>)
+traverse i:
+1. st.emtpy || height[i]>height[st.top], just push
+2. while(!st.empty && h[i] <= h[st.top]) keep poping
+    2.1 h=st.top, pop st
+    2.2 area = st.empty?0:st.top+1 ~ i-1  *   h
+3. finally push i
+*/
+class Solution {
+public:
+    int largestRectangleArea(vector<int> &height) {
+        height.push_back(0);
+        stack<int> st;
+        int ans=0;
+        for(int i=0;i<height.size();++i){
+            if(st.empty() || height[i]>height[st.top()]) st.push(i); else{
+                while(!st.empty() && height[i]<=height[st.top()]){
+                    int h=height[st.top()]; st.pop();
+                    ans=max(ans,(i-(st.empty()?0:st.top()+1))*h);
+                }
+                st.push(i);
+            }
+        }
+        return ans;
+    }
 };
 
 int main()

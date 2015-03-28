@@ -62,6 +62,14 @@ public:
 };
 
 //2nd pass: 2015-02-22
+//3rd pass: 2015-03-25
+/*
+buffer[4]
+buf[cnt], cnt: where to put next char
+keep reading, until
+1. tmp+cnt >= n
+2. tmp < 4
+*/
 class Solution {
 public:
     int read(char *buf, int n) {
