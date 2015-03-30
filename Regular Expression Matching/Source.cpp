@@ -26,7 +26,7 @@ public:
 };
 
 //2nd pass: 2015-02-22
-class Solution {
+class Solution_2nd {
 public:
     bool isMatch(const char *s, const char *p) {
         if(*p=='\0') return (*s=='\0');
@@ -41,6 +41,27 @@ public:
         }
         else
             if(*s && (*s==*p||*p=='.')) return isMatch(s+1,p+1); else return false;
+    }
+};
+
+//3rd pass: 2015-03-29
+/*
+recursive 
+boundary: *p==0, *s==0 true
+1. *(p+1)=='*'
+    try (s,p+2), (s+1,p+2)...until s!=p || *s==0
+    (s+1,p+2)
+2. *s not end && *s==*p || *p=='.', (s+1,p+1)
+*/
+class Solution {
+public:
+    bool isMatch(const char *s, const char *p) {
+        if(*p==0) return (*s==0);
+        if(*(p+1)=='*'){
+            while(*s && (*s==*p || *p=='.')) if(isMatch(s,p+2)) return true; else ++s;
+            return isMatch(s,p+2);
+        }
+        if(*s && (*s==*p || *p=='.')) return isMatch(s+1,p+1); else return false;
     }
 };
 

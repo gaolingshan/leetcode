@@ -68,7 +68,7 @@ public:
 };
 
 //2nd pass: 2015-03-04
-class Solution {
+class Solution_2nd {
 public:
     void setZeroes(vector<vector<int> > &matrix) {
 		int m=matrix.size();
@@ -91,6 +91,32 @@ public:
 		        for(int i=0;i<m;i++) matrix[i][j]=0;
 		if(set1stRow) for(int j=0;j<n;j++) matrix[0][j]=0;
 		if(set1stCol) for(int i=0;i<m;i++) matrix[i][0]=0;
+    }
+};
+
+//3rd pass: 2015-03-30
+/*
+two flags: set 1st row & set 1st col
+use 1st row & 1st col as flag to set the col/row
+
+set steps:
+row:2~m, set by col 1
+col:2~n, set by row 1
+fianlly set row1 & col1
+*/
+class Solution {
+public:
+    void setZeroes(vector<vector<int> > &matrix) {
+        if(matrix.empty() || matrix[0].empty()) return;
+        int m=matrix.size(), n=matrix[0].size();
+        bool set1stRow=false, set1stCol=false;
+        for(int i=0;i<n;++i) if(matrix[0][i]==0) {set1stRow=true;break;}
+        for(int i=0;i<m;++i) if(matrix[i][0]==0) {set1stCol=true;break;}
+        for(int i=1;i<m;++i) for(int j=1;j<n;++j) if(matrix[i][j]==0){matrix[i][0]=0; matrix[0][j]=0;}
+        for(int i=1;i<m;++i) if(matrix[i][0]==0) for(int j=1;j<n;++j) matrix[i][j]=0;
+        for(int j=1;j<n;++j) if(matrix[0][j]==0) for(int i=1;i<m;++i) matrix[i][j]=0;
+        if(set1stRow) for(int i=0;i<n;++i) matrix[0][i]=0;
+        if(set1stCol) for(int i=0;i<m;++i) matrix[i][0]=0;
     }
 };
 

@@ -100,7 +100,7 @@ public:
 };
 
 //2nd pass: 2015-02-22
-class Solution {
+class Solution_2nd {
 public:
     bool isMatch(const char *s, const char *p) {
         const char *s_pos,*p_pos=NULL;
@@ -113,6 +113,30 @@ public:
         }
         while(*p=='*')p++;
         return (*p=='\0');
+    }
+};
+
+//3rd pass: 2015-03-28
+/*
+while loop *s
+1. *s == *p || *p == '?', ++s, ++p
+2. *p == '*', record s_pos and p_pos, ++p
+3. else means miss match
+    3.1 no p_pos, just false
+    3.2 s=++s_pos, p=p_pos+1
+done with while loop, *p must be '*' until end.
+*/
+class Solution {
+public:
+    bool isMatch(const char *s, const char *p) {
+        const char* s_pos=0, *p_pos=0;
+        while(*s){
+            if(*s==*p || *p=='?') {++s; ++p; continue;}
+            if(*p=='*') {s_pos=s; p_pos=p; ++p; continue;}
+            if(p_pos==0) return false; else {s=++s_pos; p=p_pos+1;}
+        }
+        while(*p) if(*p!='*') return false; else ++p;
+        return true;
     }
 };
 

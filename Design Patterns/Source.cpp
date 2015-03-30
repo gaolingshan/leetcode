@@ -65,12 +65,52 @@ class BlackJackGame : public CardGame{};
 CardGame* CardGame::createCardGame(string type){
 	if(type=="Poker") return new PokerGame();	
 	if(type=="BlackJack") return new BlackJackGame();
+};
+
+
+
+class Employee{
+public:
+	virtual void accept(class Visitor &v)=0;
+};
+
+class Trader: public Employee{
+public:
+	void accept(Visitor &v);
+};
+
+class Developer: public Employee{
+public:
+	void accept(Visitor &v);
+};
+
+class Visitor{
+public:
+	virtual void visit(Trader *p)=0;
+	virtual void visit(Developer *p)=0;
+};
+
+class EmployeeReader: public Visitor{
+	void visit(Trader *p){
+		//do something
+	}
+	// This will force user to implement newly added data class
+	void visit(Developer *p){
+		//do something
+	}
+};
+
+void Trader::accept(Visitor &v){
+	v.visit(this);
 }
+void Developer::accept(Visitor &v){
+	v.visit(this);
+}
+
 
 int main()
 {
-
-
+	EmployeeReader reader;
 	system("pause");
 	return 0;
 }
